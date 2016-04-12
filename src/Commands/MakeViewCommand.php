@@ -5,8 +5,6 @@ namespace Sven\Moretisan\Commands;
 use Sven\ArtisanView\View;
 use Illuminate\Console\Command;
 
-// use Sven\Moretisan\Components\MakeView\MakeView;
-
 class MakeViewCommand extends Command
 {
     /**
