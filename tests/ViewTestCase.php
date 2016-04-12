@@ -16,7 +16,7 @@ abstract class ViewTestCase extends AbstractPackageTestCase
      */
     protected function getServiceProviderClass($app)
     {
-        return MoretisanServiceProvider::class;
+        return ArtisanViewServiceProvider::class;
     }
 
     /**
