@@ -190,4 +190,20 @@ class ViewTest extends ViewTestCase
             file_exists(__DIR__.'/assets/index.blade.php')
         );
     }
+
+    /** @test */
+    public function it_scraps_a_view_with_dot_notation()
+    {
+        $this->view->create('pages.index');
+
+        $this->assertTrue(
+            file_exists(__DIR__.'/assets/pages/index.blade.php')
+        );
+
+        $this->view->scrap('pages.index');
+
+        $this->assertFalse(
+            file_exists(__DIR__.'/assets/pages/index.blade.php')
+        );
+    }
 }

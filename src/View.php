@@ -91,9 +91,22 @@ class View extends FileInteractor
      */
     public function scrap($name, $extension = '.blade.php')
     {
-        $filename = $this->parseName($name);
+        $filename = $this->clean()->parseName($name);
 
         $this->removeFile($filename, $extension);
+    }
+
+    /**
+     * Set paths back to their defaults.
+     *
+     * @return \Sven\ArtisanView\View
+     */
+    protected function clean()
+    {
+        $this->path = $this->base;
+        $this->file = '';
+
+        return $this;
     }
 
     /**

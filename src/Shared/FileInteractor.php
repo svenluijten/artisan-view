@@ -43,19 +43,6 @@ class FileInteractor
     }
 
     /**
-     * Set paths back to their defaults.
-     *
-     * @return \Sven\ArtisanView\Shared\FileInteractor
-     */
-    protected function clean()
-    {
-        $this->path = $this->base;
-        $this->file = '';
-
-        return $this;
-    }
-
-    /**
      * Normalize a string to an array.
      *
      * @param  string|array $value     The value to normalize.
