@@ -1,6 +1,6 @@
 <?php
 
-namespace Sven\Moretisan\Commands;
+namespace Sven\ArtisanView\Commands;
 
 use Sven\ArtisanView\View;
 use Illuminate\Console\Command;
