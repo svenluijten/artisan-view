@@ -1,4 +1,4 @@
-![package](https://cloud.githubusercontent.com/assets/11269635/14457826/a3bde82a-00ad-11e6-8161-0c218937156a.jpg)
+![artisan-view](https://cloud.githubusercontent.com/assets/11269635/14457826/a3bde82a-00ad-11e6-8161-0c218937156a.jpg)
 
 # Package
 
@@ -9,10 +9,6 @@
 [![Code Climate][ico-codeclimate]][link-codeclimate]
 [![Code Quality][ico-quality]][link-quality]
 [![SensioLabs Insight][ico-insight]][link-insight]
-
-Short description of the package. What does it do and why should people download
-it? Brag a bit but don't exaggerate. Talk about what's to come and tease small
-pieces of functionality.
 
 This package adds a couple of view-related commands to Artisan in your Laravel
 projects. It is super simple to use and easy to understand for everyone.
