@@ -96,11 +96,11 @@ welcomed. See the [contributors page](../../graphs/contributors) for all contrib
 [ico-travis]: https://img.shields.io/travis/svenluijten/artisan-view.svg?style=flat-square
 [ico-codeclimate]: https://img.shields.io/codeclimate/github/svenluijten/artisan-view.svg?style=flat-square
 [ico-quality]: https://img.shields.io/scrutinizer/g/svenluijten/artisan-view.svg?style=flat-square
-[ico-insight]: https://img.shields.io/sensiolabs/i/insight-id.svg?style=flat-square
+[ico-insight]: https://img.shields.io/sensiolabs/i/66dec030-8f99-435c-8e2f-e9f3d8894665.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
 [link-travis]: https://travis-ci.org/svenluijten/artisan-view
 [link-codeclimate]: https://codeclimate.com/github/svenluijten/artisan-view
 [link-quality]: https://scrutinizer-ci.com/g/svenluijten/artisan-view/?branch=master
-[link-insight]: https://insight.sensiolabs.com/projects/insight-id
+[link-insight]: https://insight.sensiolabs.com/projects/66dec030-8f99-435c-8e2f-e9f3d8894665
