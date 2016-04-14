@@ -26,7 +26,7 @@ Or add the package to your dependencies in `composer.json` and run
 ```json
 {
     "require": {
-        "sven/artisan-view": "^1.0"
+        "sven/artisan-view": "^1.1"
     }
 }
 ```
