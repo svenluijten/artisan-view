@@ -74,7 +74,7 @@ class FileInteractor
             return;
         }
 
-        $path = $this->addToPath(array_pop($folders));
+        $path = $this->addToPath(array_shift($folders));
 
         if ( ! is_dir($path)) {
             mkdir($path);

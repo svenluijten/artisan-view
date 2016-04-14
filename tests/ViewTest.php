@@ -32,6 +32,16 @@ class ViewTest extends ViewTestCase
     }
 
     /** @test */
+    public function it_creates_a_view_multiple_levels_deep()
+    {
+        $this->view->create('foo.bar.baz');
+
+        $this->assertTrue(
+            file_exists(__DIR__.'/assets/foo/bar/baz.blade.php')
+        );
+    }
+
+    /** @test */
     public function it_adds_a_file_to_existing_subfolder()
     {
         mkdir(__DIR__.'/assets/pages');
