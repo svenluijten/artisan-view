@@ -43,7 +43,7 @@ class MakeViewCommand extends Command
         $extension = (string) $this->option('extension');
         $extend    = (string) $this->option('extends');
         $sections  = $this->option('sections');
-        $resource  = (string) $this->option('resource');
+        $resource  = (boolean) $this->option('resource');
         $verbs     = $this->option('verbs');
 
         try {
