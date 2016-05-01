@@ -54,7 +54,7 @@ class ViewHelper
 
         $path = $this->addToPath(array_shift($folders));
 
-        if (! is_dir($path)) {
+        if ( ! is_dir($path)) {
             mkdir($path);
         }
 
@@ -68,7 +68,7 @@ class ViewHelper
      */
     public function addExtension($extension)
     {
-        return $this->path . $this->parseExtension($extension);
+        return $this->path.$this->parseExtension($extension);
     }
 
     /**
