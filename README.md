@@ -73,7 +73,7 @@ $ php artisan make:view products --resource
 $ php artisan make:view products --resource --verbs=index,create,edit
 
 # Create a resource that extends views and adds sections
-$ php artisan make:view products --resource --extend=layout --sections=foo,bar
+$ php artisan make:view products --resource --extends=layout --sections=foo,bar
 ```
 
 ### Scrap a view
