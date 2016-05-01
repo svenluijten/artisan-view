@@ -71,6 +71,9 @@ $ php artisan make:view products --resource
 
 # Create a resource with only specific verbs
 $ php artisan make:view products --resource --verbs=index,create,edit
+
+# Create a resource that extends views and adds sections
+$ php artisan make:view products --resource --extend=layout --sections=foo,bar
 ```
 
 ### Scrap a view
@@ -84,7 +87,7 @@ $ php artisan scrap:view pages.index
 
 ## Contributing
 All contributions (in the form on pull requests, issues and feature-requests) are
-welcomed. See the [contributors page](../../graphs/contributors) for all contributors.
+welcome. See the [contributors page](../../graphs/contributors) for all contributors.
 
 ## License
 `sven/artisan-view` is licenced under the MIT License (MIT). Please see the
