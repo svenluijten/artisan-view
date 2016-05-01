@@ -3,10 +3,33 @@
 namespace Sven\ArtisanView;
 
 use Illuminate\Support\Str;
-use Sven\ArtisanView\Shared\FileInteractor;
+use Illuminate\Support\Collection;
+use Sven\ArtisanView\Shared\ViewHelper;
 
-class View extends FileInteractor
+class View
 {
+    /**
+     * @var string
+     */
+    private $basePath;
+
+    /**
+     * @var array
+     */
+    private $recent;
+
+    /**
+     * Instantiate the FileInteractor.
+     *
+     * @param string $path Base path where your views are located.
+     */
+    public function __construct($path)
+    {
+        $this->basePath = realpath($path);
+        $this->helper = new ViewHelper($path);
+        $this->recent = new Collection;
+    }
+
     /**
      * Create a new view file.
      *
@@ -16,38 +39,21 @@ class View extends FileInteractor
      */
     public function create($name, $extension = '.blade.php')
     {
-        $filename = $this->parseName($name);
+       $pathToFile = $this->helper->getPathFor($name);
 
-        $this->makeFile($filename, $extension);
+        $fullPath = $this->helper->addExtension($extension);
+
+        $this->helper->makeFile($fullPath);
+
+        $this->addToRecent($fullPath);
 
         return $this;
     }
 
     /**
-     * Create a RESTful resource.
+     * Extend a view.
      *
-     * @param  string       $name      The name of the resource.
-     * @param  string|array $verbs     The verbs the resource should include.
-     * @param  string       $extension The extension the files should get.
-     * @return void
-     */
-    public function resource($name, $verbs = null, $extension = '.blade.php')
-    {
-        $types = ['index', 'show', 'edit', 'create'];
-
-        if ( ! is_null($verbs)) {
-            $types = $this->normalizeToArray($verbs, ',');
-        }
-
-        foreach ($types as $type) {
-            $this->clean()->create("$name.$type", $extension);
-        }
-    }
-
-    /**
-     * Extend a layout file.
-     *
-     * @param  string $name The name of the file to extend.
+     * @param  string $name The view to extend.
      * @return \Sven\ArtisanView\View
      */
     public function extend($name)
@@ -56,17 +62,19 @@ class View extends FileInteractor
             return $this;
         }
 
-        $this->appendToFile(
-            $this->getStub('extend', [$name])
-        );
+        $this->recent->each(function ($item, $key) use ($name) {
+            $stub = $this->getStub('extend', [$name]);
+
+            $this->helper->appendTo($item, $stub);
+        });
 
         return $this;
     }
 
     /**
-     * Add sections to the file.
+     * Add sections to the recently created view(s).
      *
-     * @param  string|array $sections Array or comma-separated list of sections.
+     * @param  mixed $sections The sections to add.
      * @return \Sven\ArtisanView\View
      */
     public function sections($sections)
@@ -75,38 +83,65 @@ class View extends FileInteractor
             return $this;
         }
 
-        foreach ($this->normalizeToArray($sections, ',') as $section) {
-            $stub = $this->getStub('section', [$section]);
+        $sections = $this->helper->normalizeToArray($sections, ',');
 
-            $this->appendToFile($stub);
+        $this->recent->each(function ($item, $key) use ($sections) {
+            foreach ($sections as $section) {
+                $stub = $this->getStub('section', [$section]);
+
+                $this->helper->appendTo($item, $stub);
+            }
+        });
+
+        return $this;
+    }
+
+    /**
+     * Create a resource of views.
+     *
+     * @param  string $name      Name of the resource.
+     * @param  mixed  $verbs     Verbs to create views for.
+     * @param  string $extension Extension of the views.
+     * @return \Sven\ArtisanView\View
+     */
+    public function resource($name, $verbs = null, $extension = '.blade.php')
+    {
+        $types = ['index', 'show', 'edit', 'create'];
+
+        if ( ! is_null($verbs)) {
+            $types = $this->helper->normalizeToArray($verbs, ',');
+        }
+
+        foreach ($types as $type) {
+            $this->clean()->create("$name.$type", $extension);
         }
 
         return $this;
     }
 
     /**
-     * Scrap an existing view file.
+     * Remove a view from the filesystem.
      *
-     * @param  string|array $name Name of the view to scrap
+     * @param  string $name      The name of the view to remove.
+     * @param  string $extension Extension of the view to remove.
+     * @return void
      */
     public function scrap($name, $extension = '.blade.php')
     {
-        $filename = $this->clean()->parseName($name);
+        $file = $this->helper->getPathFor($name).$this->helper->parseExtension($extension);
 
-        $this->removeFile($filename, $extension);
+        $this->helper->removeFile($file);
     }
 
     /**
-     * Set paths back to their defaults.
+     * Push an item to recent items.
      *
-     * @return \Sven\ArtisanView\View
+     * @param  string $path Path to push to the recent items.
+     * @return void
      */
-    protected function clean()
+    private function addToRecent($path)
     {
-        $this->path = $this->base;
-        $this->file = '';
-
-        return $this;
+        $this->recent->push($path);
     }
 
     /**
@@ -116,7 +151,7 @@ class View extends FileInteractor
      * @param  array  $params Parameters to replace in the stub.
      * @return string         Contents of the stub.
      */
-    protected function getStub($name, $params = [])
+    private function getStub($name, $params = [])
     {
         $stub = file_get_contents(__DIR__.'/stubs/'.$name.'.stub');
 
@@ -125,5 +160,17 @@ class View extends FileInteractor
         }
 
         return $stub;
+    }
+
+    /**
+     * Reset the path back to its original value.
+     *
+     * @return \Sven\ArtisanView\View
+     */
+    private function clean()
+    {
+        $this->helper->setPath($this->basePath);
+
+        return $this;
     }
 }

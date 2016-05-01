@@ -19,14 +19,17 @@ abstract class ViewTestCase extends AbstractPackageTestCase
         return ArtisanViewServiceProvider::class;
     }
 
+    public function view()
+    {
+        return new View(__DIR__.'/assets');
+    }
+
     /**
      * Set up the testing suite.
      */
     public function setUp()
     {
         mkdir(__DIR__.'/assets');
-
-        $this->view = new View(__DIR__.'/assets');
     }
 
     /**

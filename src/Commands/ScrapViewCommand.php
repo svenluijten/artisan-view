@@ -13,7 +13,8 @@ class ScrapViewCommand extends Command
      * @var string
      */
     protected $signature = 'scrap:view {name : The view to remove.}
-                                       {--directory=resources/views : Where are your views stored?}';
+                                       {--directory=resources/views : Where are your views stored?}
+                                       {--extension=.blade.php : The extension of the view to scrap.}';
 
     /**
      * The console command description.
@@ -36,18 +37,18 @@ class ScrapViewCommand extends Command
         );
 
         $name = (string) $this->argument('name');
+        $extension = (string) $this->option('extension');
 
         if ( ! $this->confirm("Are you sure you want to scrap the view [$name]?")) {
             return $this->info("Okay, no harm done!");
         }
 
         try {
-            $view->scrap($name);
+            $view->scrap($name, $extension);
 
             return $this->info("View [$name] successfully scrapped.");
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
-
     }
 }
