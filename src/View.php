@@ -39,7 +39,7 @@ class View
      */
     public function create($name, $extension = '.blade.php')
     {
-       $pathToFile = $this->helper->getPathFor($name);
+        $this->helper->getPathFor($name);
 
         $fullPath = $this->helper->addExtension($extension);
 
