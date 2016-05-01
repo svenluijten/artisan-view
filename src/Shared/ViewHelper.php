@@ -89,9 +89,9 @@ class ViewHelper
     }
 
     /**
-     * Create a file from the filename and extension.
+     * Create a file located at the given path.
      *
-     * @param  string $filename The full path to the file.
+     * @param  string $path The full path to the file.
      * @throws \Sven\ArtisanView\Exceptions\FileAlreadyExists
      * @return void
      */
@@ -105,9 +105,9 @@ class ViewHelper
     }
 
     /**
-     * Remove a file from the filename and extension.
+     * Remove a file located at the given path.
      *
-     * @param  string $filename Full path to the file.
+     * @param  string $path Full path to the file.
      * @throws \Sven\ArtisanView\Exceptions\FileDoesNotExist
      * @return void
      */

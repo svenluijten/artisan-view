@@ -14,9 +14,14 @@ class View
     private $basePath;
 
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     private $recent;
+
+    /**
+     * @var \Sven\ArtisanView\Shared\ViewHelper
+     */
+    private $helper;
 
     /**
      * Instantiate the FileInteractor.
@@ -62,7 +67,7 @@ class View
             return $this;
         }
 
-        $this->recent->each(function ($item, $key) use ($name) {
+        $this->recent->each(function ($item) use ($name) {
             $stub = $this->getStub('extend', [$name]);
 
             $this->helper->appendTo($item, $stub);
@@ -85,7 +90,7 @@ class View
 
         $sections = $this->helper->normalizeToArray($sections, ',');
 
-        $this->recent->each(function ($item, $key) use ($sections) {
+        $this->recent->each(function ($item) use ($sections) {
             foreach ($sections as $section) {
                 $stub = $this->getStub('section', [$section]);
 
