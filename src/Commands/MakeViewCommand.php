@@ -48,7 +48,9 @@ class MakeViewCommand extends Command
 
         try {
             if ($resource) {
-                $view->resource($name, $verbs, $extension);
+                $view->resource($name, $verbs, $extension)
+                     ->extend($extend)
+                     ->sections($sections);
 
                 return $this->info("Resource [$name] successfully created");
             }
