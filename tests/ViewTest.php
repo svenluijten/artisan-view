@@ -2,9 +2,8 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use Sven\ArtisanView\View;
-use Sven\ArtisanView\Exceptions\FileDoesNotExist;
 use Sven\ArtisanView\Exceptions\FileAlreadyExists;
+use Sven\ArtisanView\View;
 
 class ViewTest extends ViewTestCase
 {

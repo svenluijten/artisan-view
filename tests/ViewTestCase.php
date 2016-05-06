@@ -2,9 +2,9 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use Sven\ArtisanView\View;
-use Sven\ArtisanView\ArtisanViewServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use Sven\ArtisanView\ArtisanViewServiceProvider;
+use Sven\ArtisanView\View;
 
 abstract class ViewTestCase extends AbstractPackageTestCase
 {
@@ -12,6 +12,7 @@ abstract class ViewTestCase extends AbstractPackageTestCase
      * Get the service provider class.
      *
      * @param \Illuminate\Contracts\Foundation\Application $app
+     *
      * @return string
      */
     protected function getServiceProviderClass($app)

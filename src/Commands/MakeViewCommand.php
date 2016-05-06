@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView\Commands;
 
-use Sven\ArtisanView\View;
 use Illuminate\Console\Command;
+use Sven\ArtisanView\View;
 
 class MakeViewCommand extends Command
 {
@@ -39,12 +39,12 @@ class MakeViewCommand extends Command
 
         $view = new View(base_path($directory));
 
-        $name      = (string) $this->argument('name');
+        $name = (string) $this->argument('name');
         $extension = (string) $this->option('extension');
-        $extend    = (string) $this->option('extends');
-        $sections  = $this->option('sections');
-        $resource  = (boolean) $this->option('resource');
-        $verbs     = $this->option('verbs');
+        $extend = (string) $this->option('extends');
+        $sections = $this->option('sections');
+        $resource = (bool) $this->option('resource');
+        $verbs = $this->option('verbs');
 
         try {
             if ($resource) {

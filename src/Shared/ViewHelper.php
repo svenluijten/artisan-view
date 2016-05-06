@@ -3,8 +3,8 @@
 namespace Sven\ArtisanView\Shared;
 
 use Illuminate\Support\Str;
-use Sven\ArtisanView\Exceptions\FileDoesNotExist;
 use Sven\ArtisanView\Exceptions\FileAlreadyExists;
+use Sven\ArtisanView\Exceptions\FileDoesNotExist;
 
 class ViewHelper
 {
@@ -26,8 +26,9 @@ class ViewHelper
     /**
      * Get the path for the given view.
      *
-     * @param  string $name Name of view.
-     * @return string       Full path to the view.
+     * @param string $name Name of view.
+     *
+     * @return string Full path to the view.
      */
     public function getPathFor($name)
     {
@@ -43,8 +44,9 @@ class ViewHelper
     /**
      * Make folders if they don't yet exist.
      *
-     * @param  array  $folders Folders to create.
-     * @return string          Path to deepest nested folder.
+     * @param array $folders Folders to create.
+     *
+     * @return string Path to deepest nested folder.
      */
     public function createNestedFolders($folders)
     {
@@ -54,7 +56,7 @@ class ViewHelper
 
         $path = $this->addToPath(array_shift($folders));
 
-        if ( ! is_dir($path)) {
+        if (!is_dir($path)) {
             mkdir($path);
         }
 
@@ -91,8 +93,10 @@ class ViewHelper
     /**
      * Create a file located at the given path.
      *
-     * @param  string $path The full path to the file.
+     * @param string $path The full path to the file.
+     *
      * @throws \Sven\ArtisanView\Exceptions\FileAlreadyExists
+     *
      * @return void
      */
     public function makeFile($path)
@@ -107,13 +111,15 @@ class ViewHelper
     /**
      * Remove a file located at the given path.
      *
-     * @param  string $path Full path to the file.
+     * @param string $path Full path to the file.
+     *
      * @throws \Sven\ArtisanView\Exceptions\FileDoesNotExist
+     *
      * @return void
      */
     public function removeFile($path)
     {
-        if ( ! file_exists($path)) {
+        if (!file_exists($path)) {
             throw new FileDoesNotExist("The file at [$path] does not exist.");
         }
 
@@ -123,9 +129,10 @@ class ViewHelper
     /**
      * Normalize a string to an array.
      *
-     * @param  string|array $value     The value to normalize.
-     * @param  string       $delimiter Delimiter to explode by.
-     * @return array                   Normalized array of values.
+     * @param string|array $value     The value to normalize.
+     * @param string       $delimiter Delimiter to explode by.
+     *
+     * @return array Normalized array of values.
      */
     public function normalizeToArray($value, $delimiter)
     {
@@ -133,7 +140,7 @@ class ViewHelper
             return $value;
         }
 
-        if ( ! Str::contains($value, $delimiter)) {
+        if (!Str::contains($value, $delimiter)) {
             return [$value];
         }
 
@@ -143,7 +150,8 @@ class ViewHelper
     /**
      * Normalize the extension so it starts with a period.
      *
-     * @param  string $extension The extension to normalize.
+     * @param string $extension The extension to normalize.
+     *
      * @return string
      */
     public function parseExtension($extension)
