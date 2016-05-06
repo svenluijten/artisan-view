@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Sven\ArtisanView\Shared\ViewHelper;
 
 class View
@@ -32,14 +32,15 @@ class View
     {
         $this->basePath = realpath($path);
         $this->helper = new ViewHelper($path);
-        $this->recent = new Collection;
+        $this->recent = new Collection();
     }
 
     /**
      * Create a new view file.
      *
-     * @param  string $name      The name of the view to create.
-     * @param  string $extension The extension to give the view.
+     * @param string $name      The name of the view to create.
+     * @param string $extension The extension to give the view.
+     *
      * @return \Sven\ArtisanView\View
      */
     public function create($name, $extension = '.blade.php')
@@ -58,7 +59,8 @@ class View
     /**
      * Extend a view.
      *
-     * @param  string $name The view to extend.
+     * @param string $name The view to extend.
+     *
      * @return \Sven\ArtisanView\View
      */
     public function extend($name)
@@ -79,7 +81,8 @@ class View
     /**
      * Add sections to the recently created view(s).
      *
-     * @param  mixed $sections The sections to add.
+     * @param mixed $sections The sections to add.
+     *
      * @return \Sven\ArtisanView\View
      */
     public function sections($sections)
@@ -104,16 +107,17 @@ class View
     /**
      * Create a resource of views.
      *
-     * @param  string $name      Name of the resource.
-     * @param  mixed  $verbs     Verbs to create views for.
-     * @param  string $extension Extension of the views.
+     * @param string $name      Name of the resource.
+     * @param mixed  $verbs     Verbs to create views for.
+     * @param string $extension Extension of the views.
+     *
      * @return \Sven\ArtisanView\View
      */
     public function resource($name, $verbs = null, $extension = '.blade.php')
     {
         $types = ['index', 'show', 'edit', 'create'];
 
-        if ( ! is_null($verbs)) {
+        if (!is_null($verbs)) {
             $types = $this->helper->normalizeToArray($verbs, ',');
         }
 
@@ -127,8 +131,9 @@ class View
     /**
      * Remove a view from the filesystem.
      *
-     * @param  string $name      The name of the view to remove.
-     * @param  string $extension Extension of the view to remove.
+     * @param string $name      The name of the view to remove.
+     * @param string $extension Extension of the view to remove.
+     *
      * @return void
      */
     public function scrap($name, $extension = '.blade.php')
@@ -141,7 +146,8 @@ class View
     /**
      * Push an item to recent items.
      *
-     * @param  string $path Path to push to the recent items.
+     * @param string $path Path to push to the recent items.
+     *
      * @return void
      */
     private function addToRecent($path)
@@ -152,9 +158,10 @@ class View
     /**
      * Get a stub by name and replace optional parameters.
      *
-     * @param  string $name   Name of the stub.
-     * @param  array  $params Parameters to replace in the stub.
-     * @return string         Contents of the stub.
+     * @param string $name   Name of the stub.
+     * @param array  $params Parameters to replace in the stub.
+     *
+     * @return string Contents of the stub.
      */
     private function getStub($name, $params = [])
     {
