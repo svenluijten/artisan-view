@@ -17,7 +17,8 @@ class MakeViewCommand extends Command
                            {--resource : Should we create a RESTful resource?}
                            {--verbs= : The verbs that should be used for the resource.}
                            {--extends= : What \'master\' view should be extended?}
-                           {--sections= : A comma-separated list of sections to create.}
+                           {--sections= : A list of sections to create.}
+                           {--section= : A name of a section to create.}
                            {--directory=resources/views/ : The directory where your views are stored.}
                            {--extension=blade.php : What file extension should the view have?}';
 
@@ -42,7 +43,7 @@ class MakeViewCommand extends Command
         $name = (string) $this->argument('name');
         $extension = (string) $this->option('extension');
         $extend = (string) $this->option('extends');
-        $sections = $this->option('sections');
+        $sections = $this->option('sections') ?: $this->option('section');
         $resource = (bool) $this->option('resource');
         $verbs = $this->option('verbs');
 
