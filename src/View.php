@@ -108,7 +108,7 @@ class View
     /**
      * Add a section to all recently created views.
      *
-     * @param string $name The name of the section.
+     * @param string $name    The name of the section.
      * @param string $content The content of the section.
      *
      * @return \Sven\ArtisanView\View
