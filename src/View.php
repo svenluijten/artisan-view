@@ -106,29 +106,6 @@ class View
     }
 
     /**
-     * Add a section to all recently created views.
-     *
-     * @param string $name    The name of the section.
-     * @param string $content The content of the section.
-     *
-     * @return \Sven\ArtisanView\View
-     */
-    public function section($name, $content = null)
-    {
-        $this->recent->each(function ($item) use ($name, $content) {
-            $stub = $this->getStub('section', [$name]);
-
-            if (!is_null($content)) {
-                $stub = $this->getStub('inline-section', [$name, $content]);
-            }
-
-            $this->helper->appendTo($item, $stub);
-        });
-
-        return $this;
-    }
-
-    /**
      * Create a resource of views.
      *
      * @param string $name      Name of the resource.
@@ -196,6 +173,29 @@ class View
         }
 
         return $stub;
+    }
+
+    /**
+     * Add a section to all recently created views.
+     *
+     * @param string $name    The name of the section.
+     * @param string $content The content of the section.
+     *
+     * @return \Sven\ArtisanView\View
+     */
+    private function section($name, $content = null)
+    {
+        $this->recent->each(function ($item) use ($name, $content) {
+            $stub = $this->getStub('section', [$name]);
+
+            if (!is_null($content)) {
+                $stub = $this->getStub('inline-section', [$name, $content]);
+            }
+
+            $this->helper->appendTo($item, $stub);
+        });
+
+        return $this;
     }
 
     /**
