@@ -77,7 +77,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_adds_a_section()
     {
-        $this->view()->create('index')->section('foo');
+        $this->view()->create('index')->sections('foo');
 
         $this->assertEquals(
             PHP_EOL.'@section(\'foo\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
@@ -112,7 +112,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_adds_sections_with_multiple_method_calls()
     {
-        $this->view()->create('foo')->section('title')->section('content');
+        $this->view()->create('foo')->sections('title')->sections('content');
 
         $this->assertEquals(
             PHP_EOL.'@section(\'title\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.
@@ -124,7 +124,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_adds_inline_sections_with_multiple_method_calls()
     {
-        $this->view()->create('foo')->section('title', 'hello world')->section('content');
+        $this->view()->create('foo')->sections('title:hello world')->sections('content');
 
         $this->assertEquals(
             PHP_EOL.'@section(\'title\', \'hello world\')'.PHP_EOL.
@@ -136,7 +136,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_adds_an_inline_section()
     {
-        $this->view()->create('foo')->section('title', 'Hello World');
+        $this->view()->create('foo')->sections('title:Hello World');
 
         $this->assertEquals(
             PHP_EOL.'@section(\'title\', \'Hello World\')'.PHP_EOL,
