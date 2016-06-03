@@ -79,7 +79,7 @@ class View
     }
 
     /**
-     * Add sections to the recently created view(s).
+     * Add sections to the recently created views.
      *
      * @param mixed $sections The sections to add.
      *
@@ -93,12 +93,36 @@ class View
 
         $sections = $this->helper->normalizeToArray($sections, ',');
 
-        $this->recent->each(function ($item) use ($sections) {
-            foreach ($sections as $section) {
-                $stub = $this->getStub('section', [$section]);
+        foreach ($sections as $section) {
+            $parts = $this->helper->normalizeToArray($section, ':');
 
-                $this->helper->appendTo($item, $stub);
+            $this->section(
+                $parts[0],
+                isset($parts[1]) ? $parts[1] : null
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a section to all recently created views.
+     *
+     * @param string $name The name of the section.
+     * @param string $content The content of the section.
+     *
+     * @return \Sven\ArtisanView\View
+     */
+    public function section($name, $content = null)
+    {
+        $this->recent->each(function ($item) use ($name, $content) {
+            $stub = $this->getStub('section', [$name]);
+
+            if (!is_null($content)) {
+                $stub = $this->getStub('inline-section', [$name, $content]);
             }
+
+            $this->helper->appendTo($item, $stub);
         });
 
         return $this;

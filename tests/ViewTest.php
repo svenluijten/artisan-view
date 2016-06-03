@@ -77,7 +77,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_adds_a_section()
     {
-        $this->view()->create('index')->sections('foo');
+        $this->view()->create('index')->section('foo');
 
         $this->assertEquals(
             PHP_EOL.'@section(\'foo\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
@@ -106,6 +106,65 @@ class ViewTest extends ViewTestCase
             PHP_EOL.'@section(\'foo\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.
             PHP_EOL.'@section(\'bar\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
             file_get_contents(__DIR__.'/assets/about.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_adds_sections_with_multiple_method_calls()
+    {
+        $this->view()->create('foo')->section('title')->section('content');
+
+        $this->assertEquals(
+            PHP_EOL.'@section(\'title\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.
+            PHP_EOL.'@section(\'content\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/foo.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_adds_inline_sections_with_multiple_method_calls()
+    {
+        $this->view()->create('foo')->section('title', 'hello world')->section('content');
+
+        $this->assertEquals(
+            PHP_EOL.'@section(\'title\', \'hello world\')'.PHP_EOL.
+            PHP_EOL.'@section(\'content\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/foo.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_adds_an_inline_section()
+    {
+        $this->view()->create('foo')->section('title', 'Hello World');
+
+        $this->assertEquals(
+            PHP_EOL.'@section(\'title\', \'Hello World\')'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/foo.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_adds_multiple_inline_sections()
+    {
+        $this->view()->create('foo')->sections('title:Hello World,content:nothing');
+
+        $this->assertEquals(
+            PHP_EOL.'@section(\'title\', \'Hello World\')'.PHP_EOL.
+            PHP_EOL.'@section(\'content\', \'nothing\')'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/foo.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_adds_one_inline_and_one_full_section()
+    {
+        $this->view()->create('foo')->sections('title:Hello World,content');
+
+        $this->assertEquals(
+            PHP_EOL.'@section(\'title\', \'Hello World\')'.PHP_EOL.
+            PHP_EOL.'@section(\'content\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/foo.blade.php')
         );
     }
 
