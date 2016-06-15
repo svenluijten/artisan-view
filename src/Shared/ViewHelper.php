@@ -14,13 +14,20 @@ class ViewHelper
     private $path;
 
     /**
+     * @var bool
+     */
+    private $force;
+
+    /**
      * Construct the ViewHelper.
      *
-     * @param string $path Path to the view.
+     * @param string $path  Path to the view.
+     * @param bool   $force Force the creation if file already exists.
      */
-    public function __construct($path)
+    public function __construct($path, $force)
     {
         $this->path = realpath($path);
+        $this->force = $force;
     }
 
     /**
@@ -101,7 +108,7 @@ class ViewHelper
      */
     public function makeFile($path)
     {
-        if (file_exists($path)) {
+        if (!$this->force && file_exists($path)) {
             throw new FileAlreadyExists("The file at [$path] already exists.");
         }
 
