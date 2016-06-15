@@ -20,9 +20,14 @@ abstract class ViewTestCase extends AbstractPackageTestCase
         return ArtisanViewServiceProvider::class;
     }
 
-    public function view()
+    /**
+     * @param bool $force Force the creation if file already exists.
+     *
+     * @return View
+     */
+    public function view($force = false)
     {
-        return new View(__DIR__.'/assets');
+        return new View(__DIR__.'/assets', $force);
     }
 
     /**

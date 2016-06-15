@@ -3,7 +3,6 @@
 namespace Sven\ArtisanView\Tests;
 
 use Sven\ArtisanView\Exceptions\FileAlreadyExists;
-use Sven\ArtisanView\View;
 
 class ViewTest extends ViewTestCase
 {
@@ -300,6 +299,18 @@ class ViewTest extends ViewTestCase
 
         $this->assertFalse(
             file_exists(__DIR__.'/assets/pages/index.blade.php')
+        );
+    }
+
+    /** @test */
+    public function it_force_create_view()
+    {
+        $this->view()->create('index');
+        $this->view(true)->create('index')->extend('layout');
+
+        $this->assertEquals(
+            '@extends(\'layout\')'.PHP_EOL,
+            file_get_contents(__DIR__.'/assets/index.blade.php')
         );
     }
 }
