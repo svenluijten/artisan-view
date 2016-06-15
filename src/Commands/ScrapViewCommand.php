@@ -14,7 +14,8 @@ class ScrapViewCommand extends Command
      */
     protected $signature = 'scrap:view {name : The view to remove.}
                                        {--directory=resources/views : Where are your views stored?}
-                                       {--extension=.blade.php : The extension of the view to scrap.}';
+                                       {--extension=.blade.php : The extension of the view to scrap.}
+                                       {--force : Force the creation if file already exists.';
 
     /**
      * The console command description.
@@ -31,9 +32,11 @@ class ScrapViewCommand extends Command
     public function handle()
     {
         $directory = (string) $this->option('directory');
+        $force = (bool) $this->option('force');
 
         $view = new View(
-            base_path($directory)
+            base_path($directory),
+            $force
         );
 
         $name = (string) $this->argument('name');

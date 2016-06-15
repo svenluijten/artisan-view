@@ -20,7 +20,8 @@ class MakeViewCommand extends Command
                            {--sections= : A list of sections to create.}
                            {--section= : A name of a section to create.}
                            {--directory=resources/views/ : The directory where your views are stored.}
-                           {--extension=blade.php : What file extension should the view have?}';
+                           {--extension=blade.php : What file extension should the view have?}
+                           {--force : Force the creation if file already exists.';
 
     /**
      * The console command description.
@@ -37,8 +38,9 @@ class MakeViewCommand extends Command
     public function handle()
     {
         $directory = (string) $this->option('directory');
+        $force = (bool) $this->option('force');
 
-        $view = new View(base_path($directory));
+        $view = new View(base_path($directory), $force);
 
         $name = (string) $this->argument('name');
         $extension = (string) $this->option('extension');
