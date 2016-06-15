@@ -26,7 +26,7 @@ class View
     /**
      * Instantiate the FileInteractor.
      *
-     * @param string $path Base path where your views are located.
+     * @param string $path  Base path where your views are located.
      * @param bool   $force Force the creation if file already exists.
      */
     public function __construct($path, $force = false)
