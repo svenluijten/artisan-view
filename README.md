@@ -88,6 +88,10 @@ $ php artisan make:view products --resource --verbs=index,create,edit
 
 # Create a resource that extends views and adds sections
 $ php artisan make:view products --resource --extends=layout --sections=foo,bar
+
+# Use the force flag to force the creation of the view
+$ php artisan make:view index --force
+# This will overwrite a view if it already exists
 ```
 
 ### Scrap a view
