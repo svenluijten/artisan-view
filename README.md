@@ -71,14 +71,14 @@ $ php artisan make:view index --section=content
 
 # Add an inline section to the view
 $ php artisan make:view index --section="title:Hello world"
-# Remember to add quotes around the section if you want to use spaces.
+# Remember to add quotes around the section if you want to use spaces
 
 # Add 2 sections to the view
 $ php artisan make:view index --sections=title,content
 
 # Add one inline and one block-level section to the view
 $ php artisan make:view index --sections="title:Hello world,content"
-# Remember to add quotes around the sections if you want to use spaces.
+# Remember to add quotes around the sections if you want to use spaces
 
 # Create a resource called 'products'
 $ php artisan make:view products --resource
