@@ -7,6 +7,10 @@ php:
   - 7.1
   - hhvm
 
+branches:
+  only:
+  - master
+
 sudo: false
 
 install:
