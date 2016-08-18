@@ -28,4 +28,14 @@ class CreateNewViewsTest extends TestCase
             $this->filesystem->has('pages/about/index.blade.php')
         );
     }
+
+    /** @test */
+    public function it_creates_a_view_with_a_custom_extension()
+    {
+        $this->view->create('index', 'html');
+
+        $this->assertTrue(
+            $this->filesystem->has('index.html')
+        );
+    }
 }
