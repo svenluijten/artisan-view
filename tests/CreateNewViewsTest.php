@@ -38,4 +38,15 @@ class CreateNewViewsTest extends TestCase
             $this->filesystem->has('index.html')
         );
     }
+
+    /** @test */
+    public function it_can_extend_a_view()
+    {
+        $this->view->create('index')->extend('layouts.master');
+
+        $this->assertEquals(
+            "@extends('layouts.master')".PHP_EOL,
+            $this->filesystem->read('index.blade.php')
+        );
+    }
 }

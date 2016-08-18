@@ -4,6 +4,8 @@ namespace Sven\ArtisanView;
 
 use Illuminate\Support\Str;
 use League\Flysystem\Filesystem;
+use Illuminate\Support\Collection;
+use League\Flysystem\Adapter\Local;
 
 class ViewFactory
 {
@@ -13,6 +15,11 @@ class ViewFactory
     protected $filesystem;
 
     /**
+     * @var  \Illuminate\Support\Collection
+     */
+    protected $latest;
+
+    /**
      * Instantiate the ViewFacory class.
      *
      * @param \League\Flysystem\Filesystem  $filesystem  A Filesystem implementation.
@@ -20,6 +27,7 @@ class ViewFactory
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
+        $this->latest = new Collection;
     }
 
     /**
@@ -35,7 +43,43 @@ class ViewFactory
 
         $this->filesystem->write($filename, '');
 
+        $this->latest->push($filename);
+
         return $this;
+    }
+
+    /**
+     * Extend an template file.
+     *
+     * @param  string  $name  The name of the view to extend.
+     * @return  \Sven\ArtisanView\ViewFactory
+     */
+    public function extend($name)
+    {
+        $this->latest->each(function($filename, $_) use ($name) {
+            $variables = new Collection([
+                'view' => $name
+            ]);
+
+            $this->filesystem->put(
+                $filename,
+                Stub::make()->get('extend', $variables)
+            );
+        });
+
+        return $this;
+    }
+        return $this;
+    }
+
+    /**
+     * Add the given filename to the list of recently changed files.
+     *
+     * @param  string  $filename  Name of the file that was updated.
+     */
+    protected function addToLatest($filename)
+    {
+        $this->latest[] = $filename;
     }
 
     /**
