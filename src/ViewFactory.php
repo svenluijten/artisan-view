@@ -69,6 +69,26 @@ class ViewFactory
 
         return $this;
     }
+
+    /**
+     * Add a section to the view(s).
+     *
+     * @param  string  $section  Name of section to add.
+     * @return  \Sven\ArtisanView\ViewFactory
+     */
+    public function section($section)
+    {
+        $this->latest->each(function ($filename, $_) use ($section) {
+            $variables = new Collection([
+                'name' => $section,
+            ]);
+
+            $this->filesystem->put(
+                $filename,
+                Stub::make()->get('section', $variables)
+            );
+        });
+
         return $this;
     }
 
