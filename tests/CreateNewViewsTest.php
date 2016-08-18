@@ -1,6 +1,6 @@
 <?php
 
-namespace Sven\ArtisanView\Tests\Features;
+namespace Sven\ArtisanView\Tests;
 
 class CreateNewViewsTest extends TestCase
 {

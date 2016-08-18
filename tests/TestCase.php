@@ -1,16 +1,25 @@
 <?php
 
-namespace Sven\ArtisanView\Tests\Features;
+namespace Sven\ArtisanView\Tests;
 
 use League\Flysystem\Filesystem;
 use Sven\ArtisanView\ViewFactory;
 use League\Flysystem\Adapter\Local;
 use Symfony\Component\Finder\Finder;
-use League\Flysystem\Adapter\NullAdapter;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase
 {
+    /**
+     * @var  \League\Flysystem\Filesystem
+     */
+    protected $filesystem;
+
+    /**
+     * @var  \Sven\ArtisanView\ViewFactory
+     */
+    protected $view;
+
     /**
      * Set up the testing suite.
      *
@@ -18,7 +27,7 @@ abstract class TestCase extends AbstractPackageTestCase
      */
     public function setUp()
     {
-        $adapter = new Local(__DIR__.'/../assets');
+        $adapter = new Local(__DIR__.'/assets');
 
         $this->filesystem = new Filesystem($adapter);
         $this->view = new ViewFactory($this->filesystem);
@@ -33,7 +42,7 @@ abstract class TestCase extends AbstractPackageTestCase
     {
         $finder = new Finder;
 
-        foreach ($finder->in(__DIR__.'/../assets') as $file) {
+        foreach ($finder->in(__DIR__.'/assets') as $file) {
             $file = $file->getRealPath();
 
             exec("rm -r $file");
