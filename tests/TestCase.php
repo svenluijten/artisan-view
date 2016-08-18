@@ -27,7 +27,7 @@ abstract class TestCase extends AbstractPackageTestCase
      */
     public function setUp()
     {
-        $adapter = new Local(__DIR__.'/assets');
+        $adapter = new Local(__DIR__.'\\assets');
 
         $this->filesystem = new Filesystem($adapter);
         $this->view = new ViewFactory($this->filesystem);
@@ -40,12 +40,12 @@ abstract class TestCase extends AbstractPackageTestCase
      */
     public function tearDown()
     {
-        $finder = new Finder;
+        $directory = realpath(__DIR__.'\\assets');
+        $iterator = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST);
 
-        foreach ($finder->in(__DIR__.'/assets') as $file) {
-            $file = $file->getRealPath();
-
-            exec("rm -r $file");
+        foreach ($files as $file) {
+            $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
         }
     }
 }
