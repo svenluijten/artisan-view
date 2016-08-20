@@ -1,1 +1,1 @@
-@extends('^view^')
+@extends('{view}')

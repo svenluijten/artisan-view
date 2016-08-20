@@ -61,7 +61,11 @@ class Stub
     protected function replace(Collection $variables, $contents)
     {
         $variables->each(function ($newValue, $placeholder) use (&$contents) {
-            $contents = str_replace("^$placeholder^", $newValue, $contents);
+            $contents = str_replace(
+                sprintf('{%s}', $placeholder),
+                $newValue,
+                $contents
+            );
         });
 
         return $contents;
