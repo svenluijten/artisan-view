@@ -5,7 +5,6 @@ namespace Sven\ArtisanView\Tests;
 use League\Flysystem\Filesystem;
 use Sven\ArtisanView\ViewFactory;
 use League\Flysystem\Adapter\Local;
-use Symfony\Component\Finder\Finder;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 
 abstract class TestCase extends AbstractPackageTestCase

@@ -4,8 +4,6 @@ namespace Sven\ArtisanView;
 
 use Illuminate\Support\Str;
 use League\Flysystem\Filesystem;
-use Illuminate\Support\Collection;
-use League\Flysystem\Adapter\Local;
 
 class ViewFactory
 {
