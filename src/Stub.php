@@ -41,11 +41,14 @@ class Stub
      *
      * @param  string  $stub  The name of the stub to get.
      * @param  array  $variables  Stub-specific variables.
+     *
      * @return  string  The contents of the stub.
      */
     public function get($stub, array $variables)
     {
-        $contents = $this->filesystem->read('stubs/' . $stub . '.stub');
+        $contents = $this->filesystem->read(
+            sprintf('stubs/%s.stub', $stub)
+        );
 
         return $this->replace($variables, $contents);
     }
@@ -55,11 +58,12 @@ class Stub
      *
      * @param  array  $variables  Placeholders to replace & with what.
      * @param  string  $contents  Original contents from the stub.
-     * @return  string  New contents for the stub.
+     *
+     * @return  string  New contents of the stub.
      */
     protected function replace(array $variables, $contents)
     {
-        $placeholders = array_map(function($item) {
+        $placeholders = array_map(function ($item) {
             return '{'.$item.'}';
         }, array_keys($variables));
 

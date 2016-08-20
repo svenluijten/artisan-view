@@ -32,6 +32,7 @@ class ViewFactory
      *
      * @param  string  $name  The name of the file to create.
      * @param  string  $extension  The extension of the file to create.
+     *
      * @return  \Sven\ArtisanView\ViewFactory  This ViewFactory instance.
      */
     public function create($name, $extension = '.blade.php')
@@ -49,6 +50,7 @@ class ViewFactory
      * Extend an template file.
      *
      * @param  string  $name  The name of the view to extend.
+     *
      * @return  \Sven\ArtisanView\ViewFactory
      */
     public function extend($name)
@@ -67,6 +69,7 @@ class ViewFactory
      *
      * @param  string  $name  Name of section to add.
      * @param  string  $content  Content of the section for inline use.
+     *
      * @return  \Sven\ArtisanView\ViewFactory
      */
     public function section($name, $content = null)
@@ -89,6 +92,7 @@ class ViewFactory
      *
      * @param  string  $name  The name of the file to create.
      * @param  string  $extension  The extension of the file to create.
+     *
      * @return  string  The normalized path to the file to create.
      */
     protected function normalizeName($name, $extension)
@@ -96,7 +100,7 @@ class ViewFactory
         $name = str_replace('.', '/', $name);
         $extension = Str::startsWith($extension, '.') ? $extension : ".$extension";
 
-        return "$name$extension";
+        return sprintf('%s%s', $name, $extension);
     }
 
     /**
@@ -104,12 +108,14 @@ class ViewFactory
      *
      * @param  string  $filename  Name of the file to append to.
      * @param  string  $contents  Contents to add to the file.
+     *
+     * @return  bool  Whether or not writing to the file was successful.
      */
     protected function addToFile($filename, $contents)
     {
         $oldContents = $this->filesystem->read($filename);
-        $newContents = $oldContents . $contents;
+        $contents = $oldContents.$contents;
 
-        return $this->filesystem->put($filename, $newContents);
+        return $this->filesystem->put($filename, $contents);
     }
 }
