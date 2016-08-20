@@ -76,4 +76,18 @@ class CreateNewViewsTest extends TestCase
             $this->filesystem->read('index.blade.php')
         );
     }
+
+    /** @test */
+    public function it_adds_multiple_sections_to_one_view()
+    {
+        $this->view->create('index')->section('content')->section('footer');
+
+        $this->assertEquals(
+            "@section('content')".PHP_EOL.PHP_EOL.
+            "@endsection".PHP_EOL.
+            "@section('footer')".PHP_EOL.PHP_EOL.
+            "@endsection".PHP_EOL,
+            $this->filesystem->read('index.blade.php')
+        );
+    }
 }
