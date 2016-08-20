@@ -30,6 +30,21 @@ class CreateNewViewsTest extends TestCase
     }
 
     /** @test */
+    public function it_adds_a_view_to_existing_subfolder()
+    {
+        $this->view->create('pages.index');
+        $this->view->create('pages.about');
+
+        $this->assertTrue(
+            $this->filesystem->has('pages/index.blade.php')
+        );
+
+        $this->assertTrue(
+            $this->filesystem->has('pages/about.blade.php')
+        );
+    }
+
+    /** @test */
     public function it_creates_a_view_with_a_custom_extension()
     {
         $this->view->create('index', 'html');
