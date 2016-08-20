@@ -15,9 +15,9 @@ class ViewFactory
     protected $filesystem;
 
     /**
-     * @var  \Illuminate\Support\Collection
+     * @var  array
      */
-    protected $latest;
+    protected $latest = [];
 
     /**
      * Instantiate the ViewFacory class.
@@ -27,7 +27,6 @@ class ViewFactory
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
-        $this->latest = new Collection;
     }
 
     /**
@@ -43,7 +42,7 @@ class ViewFactory
 
         $this->filesystem->write($filename, '');
 
-        $this->latest->push($filename);
+        $this->latest[] = $filename;
 
         return $this;
     }
@@ -56,16 +55,11 @@ class ViewFactory
      */
     public function extend($name)
     {
-        $this->latest->each(function($filename, $_) use ($name) {
-            $variables = new Collection([
-                'view' => $name
-            ]);
+        foreach ($this->latest as $file) {
+            $stub = Stub::make()->get('extend', ['view' => $name]);
 
-            $this->filesystem->put(
-                $filename,
-                Stub::make()->get('extend', $variables)
-            );
-        });
+            $this->filesystem->put($file, $stub);
+        }
 
         return $this;
     }
@@ -73,33 +67,18 @@ class ViewFactory
     /**
      * Add a section to the view(s).
      *
-     * @param  string  $section  Name of section to add.
+     * @param  string  $name  Name of section to add.
      * @return  \Sven\ArtisanView\ViewFactory
      */
-    public function section($section)
+    public function section($name)
     {
-        $this->latest->each(function ($filename, $_) use ($section) {
-            $variables = new Collection([
-                'name' => $section,
-            ]);
+        foreach ($this->latest as $file) {
+            $stub = Stub::make()->get('section', ['name' => $name]);
 
-            $this->filesystem->put(
-                $filename,
-                Stub::make()->get('section', $variables)
-            );
-        });
+            $this->addToFile($file, $stub);
+        }
 
         return $this;
-    }
-
-    /**
-     * Add the given filename to the list of recently changed files.
-     *
-     * @param  string  $filename  Name of the file that was updated.
-     */
-    protected function addToLatest($filename)
-    {
-        $this->latest[] = $filename;
     }
 
     /**
@@ -115,5 +94,19 @@ class ViewFactory
         $extension = Str::startsWith($extension, '.') ? $extension : ".$extension";
 
         return "$name$extension";
+    }
+
+    /**
+     * Append something to the given file.
+     *
+     * @param  string  $filename  Name of the file to append to.
+     * @param  string  $contents  Contents to add to the file.
+     */
+    protected function addToFile($filename, $contents)
+    {
+        $oldContents = $this->filesystem->read($filename);
+        $newContents = $oldContents . $contents;
+
+        return $this->filesystem->put($filename, $newContents);
     }
 }

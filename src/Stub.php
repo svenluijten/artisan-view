@@ -3,7 +3,6 @@
 namespace Sven\ArtisanView;
 
 use League\Flysystem\Filesystem;
-use Illuminate\Support\Collection;
 use League\Flysystem\Adapter\Local;
 
 class Stub
@@ -41,10 +40,10 @@ class Stub
      * Get the contents of a stub.
      *
      * @param  string  $stub  The name of the stub to get.
-     * @param  Collection  $variables  Stub-specific variables.
+     * @param  array  $variables  Stub-specific variables.
      * @return  string  The contents of the stub.
      */
-    public function get($stub, Collection $variables)
+    public function get($stub, array $variables)
     {
         $contents = $this->filesystem->read('stubs/' . $stub . '.stub');
 
@@ -54,20 +53,22 @@ class Stub
     /**
      * Replace the placeholders in a stub with their new values.
      *
-     * @param  Collection  $variables  Placeholders to replace & with what.
+     * @param  array  $variables  Placeholders to replace & with what.
      * @param  string  $contents  Original contents from the stub.
      * @return  string  New contents for the stub.
      */
-    protected function replace(Collection $variables, $contents)
+    protected function replace(array $variables, $contents)
     {
-        $variables->each(function ($newValue, $placeholder) use (&$contents) {
-            $contents = str_replace(
-                sprintf('{%s}', $placeholder),
-                $newValue,
-                $contents
-            );
-        });
+        $placeholders = array_map(function($item) {
+            return '{'.$item.'}';
+        }, array_keys($variables));
 
-        return $contents;
+        $newValues = array_values($variables);
+
+        return str_replace(
+            $placeholders,
+            $newValues,
+            $contents
+        );
     }
 }
