@@ -71,6 +71,7 @@ class CreateNewViewsTest extends TestCase
         $this->view->create('index')->section('content');
 
         $this->assertEquals(
+            PHP_EOL.
             "@section('content')".PHP_EOL.PHP_EOL.
             "@endsection".PHP_EOL,
             $this->filesystem->read('index.blade.php')
@@ -83,8 +84,9 @@ class CreateNewViewsTest extends TestCase
         $this->view->create('index')->section('content')->section('footer');
 
         $this->assertEquals(
+            PHP_EOL.
             "@section('content')".PHP_EOL.PHP_EOL.
-            "@endsection".PHP_EOL.
+            "@endsection".PHP_EOL.PHP_EOL.
             "@section('footer')".PHP_EOL.PHP_EOL.
             "@endsection".PHP_EOL,
             $this->filesystem->read('index.blade.php')
