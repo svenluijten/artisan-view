@@ -10,7 +10,7 @@ class ViewFormatTest extends TestCase
         $this->view->create('index')->extend('layouts.master');
 
         $this->assertEquals(
-            "@extends('layouts.master')".PHP_EOL,
+            '@extends(\'layouts.master\')'.PHP_EOL,
             $this->filesystem->read('index.blade.php')
         );
     }
@@ -22,9 +22,9 @@ class ViewFormatTest extends TestCase
 
         $this->assertEquals(
             PHP_EOL.
-            "@section('content')".PHP_EOL.
+            '@section(\'content\')'.PHP_EOL.
             PHP_EOL.
-            "@endsection".PHP_EOL,
+            '@endsection'.PHP_EOL,
             $this->filesystem->read('index.blade.php')
         );
     }
@@ -36,13 +36,13 @@ class ViewFormatTest extends TestCase
 
         $this->assertEquals(
             PHP_EOL.
-            "@section('content')".PHP_EOL.
+            '@section(\'content\')'.PHP_EOL.
             PHP_EOL.
-            "@endsection".PHP_EOL.
+            '@endsection'.PHP_EOL.
             PHP_EOL.
-            "@section('footer')".PHP_EOL.
+            '@section(\'footer\')'.PHP_EOL.
             PHP_EOL.
-            "@endsection".
+            '@endsection'.
             PHP_EOL,
             $this->filesystem->read('index.blade.php')
         );
@@ -55,7 +55,8 @@ class ViewFormatTest extends TestCase
 
         $this->assertEquals(
             PHP_EOL.
-            "@section('title', 'My awesome page')".PHP_EOL,
+            '@section(\'title\', \'My awesome page\')'.PHP_EOL,
             $this->filesystem->read('index.blade.php')
        );
-    }}
+    }
+}
