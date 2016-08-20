@@ -55,9 +55,9 @@ class ViewFactory
      */
     public function extend($name)
     {
-        foreach ($this->latest as $file) {
-            $stub = Stub::make()->get('extend', ['view' => $name]);
+        $stub = Stub::make()->get('extend', ['view' => $name]);
 
+        foreach ($this->latest as $file) {
             $this->filesystem->put($file, $stub);
         }
 
@@ -68,14 +68,19 @@ class ViewFactory
      * Add a section to the view(s).
      *
      * @param  string  $name  Name of section to add.
+     * @param  string  $content  Content of the section for inline use.
      * @return  \Sven\ArtisanView\ViewFactory
      */
-    public function section($name)
+    public function section($name, $content = null)
     {
-        foreach ($this->latest as $file) {
-            $stub = Stub::make()->get('section', ['name' => $name]);
+        $stub = Stub::make();
 
-            $this->addToFile($file, $stub);
+        $stubContents = ($content === null)
+            ? $stub->get('section', compact('name'))
+            : $stub->get('inline-section', compact('name', 'content'));
+
+        foreach ($this->latest as $file) {
+            $this->addToFile($file, $stubContents);
         }
 
         return $this;

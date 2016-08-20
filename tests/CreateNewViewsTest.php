@@ -92,4 +92,16 @@ class CreateNewViewsTest extends TestCase
             $this->filesystem->read('index.blade.php')
         );
     }
+
+    /** @test */
+    public function it_adds_sections_inline()
+    {
+        $this->view->create('index')->section('title', 'My awesome page');
+
+        $this->assertEquals(
+            PHP_EOL.
+            "@section('title', 'My awesome page')".PHP_EOL.PHP_EOL,
+            $this->filesystem->read('index.blade.php')
+       );
+    }
 }
