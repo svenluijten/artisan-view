@@ -59,4 +59,23 @@ class ViewFormatTest extends TestCase
             $this->filesystem->read('index.blade.php')
        );
     }
+
+    /** @test */
+    public function it_accepts_an_array_of_sections()
+    {
+        $this->view->create('index')->sections(['header', 'content']);
+
+        $this->assertEquals(
+            PHP_EOL.
+            '@section(\'header\')'.PHP_EOL.
+            PHP_EOL.
+            '@endsection'.PHP_EOL.
+            PHP_EOL.
+            '@section(\'content\')'.PHP_EOL.
+            PHP_EOL.
+            '@endsection'.
+            PHP_EOL,
+            $this->filesystem->read('index.blade.php')
+        );
+    }
 }

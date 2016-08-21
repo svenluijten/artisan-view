@@ -67,21 +67,35 @@ class ViewFactory
     /**
      * Add a section to the view(s).
      *
-     * @param  string  $name  Name of section to add.
+     * @param  string|array  $name  Name(s) of section(s) to add.
      * @param  string  $content  Content of the section for inline use.
      *
      * @return  \Sven\ArtisanView\ViewFactory
      */
     public function section($name, $content = null)
     {
-        $stub = Stub::make();
-
         $stubContents = ($content === null)
-            ? $stub->get('section', compact('name'))
-            : $stub->get('inline-section', compact('name', 'content'));
+            ? Stub::make()->get('section', compact('name'))
+            : Stub::make()->get('inline-section', compact('name', 'content'));
 
         foreach ($this->latest as $file) {
             $this->addToFile($file, $stubContents);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add multiple sections to the view(s).
+     *
+     * @param  array  $sections  The sections to add to the view(s).
+     *
+     * @return  \Sven\ArtisanView\ViewFactory
+     */
+    public function sections(array $sections)
+    {
+        foreach ($sections as $section => $content) {
+            is_numeric($section) ? $this->section($content) : $this->section($section, $content);
         }
 
         return $this;
