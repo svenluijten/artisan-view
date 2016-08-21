@@ -9,6 +9,7 @@
 [![Code Climate][ico-codeclimate]][link-codeclimate]
 [![Code Quality][ico-quality]][link-quality]
 [![SensioLabs Insight][ico-insight]][link-insight]
+[![StyleCI][ico-styleci]][link-styleci]
 
 This package adds a couple of view-related commands to Artisan in your Laravel
 projects. It is super simple to use and easy to understand for everyone.
@@ -118,6 +119,7 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [ico-codeclimate]: https://img.shields.io/codeclimate/github/svenluijten/artisan-view.svg?style=flat-square
 [ico-quality]: https://img.shields.io/scrutinizer/g/svenluijten/artisan-view.svg?style=flat-square
 [ico-insight]: https://img.shields.io/sensiolabs/i/66dec030-8f99-435c-8e2f-e9f3d8894665.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/56054783/shield
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
@@ -125,3 +127,4 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [link-codeclimate]: https://codeclimate.com/github/svenluijten/artisan-view
 [link-quality]: https://scrutinizer-ci.com/g/svenluijten/artisan-view/?branch=master
 [link-insight]: https://insight.sensiolabs.com/projects/66dec030-8f99-435c-8e2f-e9f3d8894665
+[link-styleci]: https://styleci.io/repos/56054783
