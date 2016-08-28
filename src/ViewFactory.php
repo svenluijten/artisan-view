@@ -8,7 +8,7 @@ use League\Flysystem\Filesystem;
 class ViewFactory
 {
     /**
-     * @var \League\Flysystem\Filesystem
+     * @var  \League\Flysystem\Filesystem
      */
     protected $filesystem;
 
@@ -51,7 +51,7 @@ class ViewFactory
      *
      * @param  string  $name  The name of the view to extend.
      *
-     * @return  \Sven\ArtisanView\ViewFactory
+     * @return  \Sven\ArtisanView\ViewFactory  This ViewFactory instance.
      */
     public function extend($name)
     {
@@ -70,11 +70,11 @@ class ViewFactory
      * @param  string|array  $name  Name(s) of section(s) to add.
      * @param  string  $content  Content of the section for inline use.
      *
-     * @return  \Sven\ArtisanView\ViewFactory
+     * @return  \Sven\ArtisanView\ViewFactory  This ViewFactory instance.
      */
     public function section($name, $content = null)
     {
-        $stubContents = ($content === null)
+        $stubContents = $content === null
             ? Stub::make()->get('section', compact('name'))
             : Stub::make()->get('inline-section', compact('name', 'content'));
 
@@ -90,7 +90,7 @@ class ViewFactory
      *
      * @param  array  $sections  The sections to add to the view(s).
      *
-     * @return  \Sven\ArtisanView\ViewFactory
+     * @return  \Sven\ArtisanView\ViewFactory  This ViewFactory instance.
      */
     public function sections(array $sections)
     {
