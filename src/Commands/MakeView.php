@@ -135,7 +135,7 @@ class MakeView extends Command
         if (!$parent) return;
 
         $this->answers[$parameter] = $this->ask(
-            sprintf('%s [%s]', $options['question'], $options['default']);
+            sprintf('%s [%s]', $options['question'], $options['default'])
         );
     }
 }
