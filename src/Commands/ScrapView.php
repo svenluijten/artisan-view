@@ -10,6 +10,6 @@ class ScrapView extends Command
 
     public function handle()
     {
-    	//
+        //
     }
 }

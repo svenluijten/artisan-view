@@ -12,7 +12,7 @@ class MakeViewTest extends TestCase
 {
     protected function getPackageProviders($app)
     {
-    	return [ServiceProvider::class];
+        return [ServiceProvider::class];
     }
 
     /** @test */

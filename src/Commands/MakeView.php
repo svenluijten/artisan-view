@@ -73,35 +73,35 @@ class MakeView extends Command
         }
 
         return $this->buildView([
-			'name' => $this->argument('name'),
-			'extends' => $this->option('extends'),
-			'section' => explode(',', $this->option('section')),
-			'extension' => $this->option('extension'),
-			'resource' => $this->option('resource'),
-			'verbs' => explode(',', $this->option('verbs')),
+            'name' => $this->argument('name'),
+            'extends' => $this->option('extends'),
+            'section' => explode(',', $this->option('section')),
+            'extension' => $this->option('extension'),
+            'resource' => $this->option('resource'),
+            'verbs' => explode(',', $this->option('verbs')),
         ]);
     }
 
 
-	/**
-	 * Build up a new ViewFactory instance.
-	 *
-	 * @param $options
-	 */
-	protected function buildView($options)
+    /**
+     * Build up a new ViewFactory instance.
+     *
+     * @param $options
+     */
+    protected function buildView($options)
     {
-    	$driver = new Local(
-    		config('view.paths')[0]
-		);
+        $driver = new Local(
+            config('view.paths')[0]
+        );
 
-		$view = new ViewFactory(
-			new Filesystem($driver)
-		);
+        $view = new ViewFactory(
+            new Filesystem($driver)
+        );
 
         $view = $view->create(
-        	$options['name'],
-			$options['extension']
-		);
+            $options['name'],
+            $options['extension']
+        );
 
         return $this->addStubsToView($view);
     }

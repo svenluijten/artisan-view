@@ -26,6 +26,6 @@ class ServiceProvider extends BaseServiceProvider
 
     public function register()
     {
-    	//
+        //
     }
 }
