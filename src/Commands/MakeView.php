@@ -19,8 +19,8 @@ class MakeView extends Command
                           { --extension= : The file-extension to be used. }
                           { --resource : Do you want to create a RESTful resource? }
                           { --verbs= : The verbs that should be used for the resource. }
-                          { --force|-F : Force the creation of a view if one already exists. }
-                          { --interactive|-i : Create a view by answering some questions. }';
+                          { --force : Force the creation of a view if one already exists. }
+                          { --interactive : Create a view by answering some questions. }';
 
     /**
      * @var  array  Questions to be asked if the view is made interactively.
@@ -102,6 +102,8 @@ class MakeView extends Command
         	$options['name'],
 			$options['extension']
 		);
+
+        return $this->addStubsToView($view);
     }
 
     /**
@@ -111,7 +113,7 @@ class MakeView extends Command
      */
     protected function buildViewInteractively()
     {
-        foreach ($questions as $parameter => $options) {
+        foreach ($this->questions as $parameter => $options) {
             $this->askQuestion($parameter, $options);
         }
 
@@ -137,5 +139,10 @@ class MakeView extends Command
         $this->answers[$parameter] = $this->ask(
             sprintf('%s [%s]', $options['question'], $options['default'])
         );
+    }
+
+    protected function addStubsToView(ViewFactory $view)
+    {
+
     }
 }
