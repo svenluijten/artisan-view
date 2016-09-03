@@ -28,7 +28,7 @@ class MakeViewTest extends TestCase
         $filesystem->delete('resources/views/foo.txt');
 
         $command = Artisan::call('make:view', [
-            'name' => 'test'
+            'name' => 'test',
         ]);
 
         // assert
