@@ -11,10 +11,23 @@
 [![SensioLabs Insight][ico-insight]][link-insight]
 [![StyleCI][ico-styleci]][link-styleci]
 
-This package adds a couple of view-related commands to Artisan in your Laravel
+This package adds a handful of view-related commands to Artisan in your Laravel
 projects. It is super simple to use and easy to understand for everyone.
 
+## Index
+- [Installation](#installation)
+  - [Downloading](#downloading)
+  - [Registering the service provider](#registering-the-service-provider)
+- [Usage](#usage)
+  - [Creating views](#creating-views)
+  - [Scrapping views](#scrapping-views)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Installation
+You just have to follow a couple of simple steps to install this package.
+
+### Downloading
 Via [composer](http://getcomposer.org):
 
 ```bash
@@ -32,13 +45,14 @@ Or add the package to your dependencies in `composer.json` and run
 }
 ```
 
-Next, add the `ArtisanViewServiceProvider` to your `providers` array in `config/app.php`:
+### Registering the service provider
+Next, add `Sven\ArtisanView\ServiceProvider::class` to your `providers` array in `config/app.php`:
 
 ```php
 // config/app.php
 'providers' => [
     ...
-    Sven\ArtisanView\ArtisanViewServiceProvider::class,
+    Sven\ArtisanView\ServiceProvider::class,
 ];
 ```
 
@@ -46,11 +60,11 @@ If you want to only load this service provider in a specific environment (like `
 take a look at [sven/env-providers](https://github.com/svenluijten/env-providers).
 
 ## Usage
-If you now run `php artisan` you can see two new commands:
+If you now run `php artisan` you will see two new commands in the list:
 - `make:view`
 - `scrap:view`
 
-### Create a view
+### Creating views
 ```bash
 # Create a view 'index.blade.php' in the default directory
 $ php artisan make:view index
