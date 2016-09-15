@@ -303,7 +303,7 @@ class ViewTest extends ViewTestCase
     }
 
     /** @test */
-    public function it_force_create_view()
+    public function it_forcefully_creates_view()
     {
         $this->view()->create('index');
         $this->view(true)->create('index')->extend('layout');
