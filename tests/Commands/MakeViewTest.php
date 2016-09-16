@@ -19,22 +19,14 @@ class MakeViewTest extends TestCase
     public function it_creates_a_view()
     {
         // arrange
-        $adapter = new Local(__DIR__.'/../assets/');
-        $filesystem = new Filesystem($adapter);
+        $this->app->setBasePath(__DIR__.'/../assets/resources/views');
 
-        $this->app->setBasePath(__DIR__.'/../assets/');
-
-        $filesystem->write('resources/views/foo.txt', '');
-        $filesystem->delete('resources/views/foo.txt');
-
+        // act
         $command = Artisan::call('make:view', [
             'name' => 'test',
         ]);
 
         // assert
-        $this->assertEquals(
-            $command,
-            1
-        );
+        $this->assertEquals($command, 1);
     }
 }
