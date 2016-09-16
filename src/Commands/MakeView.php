@@ -98,6 +98,8 @@ class MakeView extends Command
             new Filesystem($driver)
         );
 
+        $this->comment('Creating view(s)...');
+
         $view = $view->create(
             $options['name'],
             $options['extension']
@@ -143,6 +145,10 @@ class MakeView extends Command
 
     protected function addStubsToView(ViewFactory $view)
     {
+        $this->comment('Adding "extends" and "section" blocks...');
 
+        // todo
+
+        return true;
     }
 }
