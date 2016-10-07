@@ -143,9 +143,9 @@ class View
         $file = $this->helper->getPathFor($name).$this->helper->parseExtension($extension);
 		$this->helper->removeFile($file);
 
-		if ($directory = $this->shouldRemoveDir($file))
+		if ($directory = $this->shouldRemoveDirectory($file))
 		{
-			$this->removeDir($directory);
+			$this->removeDirectory($directory);
 		}
     }
 
@@ -216,13 +216,18 @@ class View
     }
 
 	/**
-	 * @param string $path $file passed from scrapView, $dir passed from removeDir.
-	 * @return bool|string false|Directory containing the file specified or the parent directory of the directory
-	 * specified.
+	 * @param string $path passed from scrapView, $dir passed from removeDir.
+	 * @return bool|string false|parent directory of the path specified.
 	 */
-	private function shouldRemoveDir($path)
+	private function shouldRemoveDirectory($path)
 	{
 		$directory = substr($path, 0, strlen($path) - strlen(strrchr($path, '/')));
+
+		if ($directory == $this->basePath)
+		{
+			return false;
+		}
+
 		if (is_readable($directory) && count(scandir($directory)) == 2)
 		{
 			return $directory;
@@ -232,19 +237,19 @@ class View
 	}
 
 	/**
-	 * Remove the specified directory and check if the parent directory should be removed.
+	 * Remove the specified directory and any empty parent directories.
 	 *
-	 * @param string $dir The directory to be removed.
+	 * @param string $directory The directory to be removed.
 	 */
-	private function removeDir($dir)
+	private function removeDirectory($directory)
 	{
-		if (is_dir($dir) && is_writeable($dir))
+		if (is_dir($directory) && is_writeable($directory))
 		{
-			rmdir($dir);
+			rmdir($directory);
 
-			if ($parent = $this->shouldRemoveDir($dir))
+			if ($parent = $this->shouldRemoveDirectory($directory))
 			{
-				$this->removeDir($parent);
+				$this->removeDirectory($parent);
 			}
 		}
 	}
