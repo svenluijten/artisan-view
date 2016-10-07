@@ -313,4 +313,50 @@ class ViewTest extends ViewTestCase
             file_get_contents(__DIR__.'/assets/index.blade.php')
         );
     }
+
+    /** @test */
+    public function it_removes_empty_dir()
+    {
+        $this->view()->create('testdir.testview');
+        $this->view()->scrap('testdir.testview');
+
+        $this->assertFalse(
+            file_exists(__DIR__.'/assets/testdir')
+        );
+    }
+
+    /** @test */
+    public function it_removes_empty_dir_recursively()
+    {
+        $this->view()->create('testdir.subdir.testview');
+        $this->view()->scrap('testdir.subdir.testview');
+
+        $this->assertFalse(
+            file_exists(__DIR__.'/assets/testdir/subdir')
+        );
+    }
+
+    /** @test */
+    public function it_keeps_nonempty_dir()
+    {
+        $this->view()->create('testdir.testview');
+        $this->view()->create('testdir.anotherview');
+        $this->view()->scrap('testdir.testview');
+
+        $this->assertTrue(
+            file_exists(__DIR__.'/assets/testdir')
+        );
+    }
+
+    /** @test */
+    public function it_keeps_nonempty_dir_recursive()
+    {
+        $this->view()->create('testdir.testview');
+        $this->view()->create('testdir.subdir.testview');
+        $this->view()->scrap('testdir.subdir.testview');
+
+        $this->assertTrue(
+            file_exists(__DIR__.'/assets/testdir')
+        );
+    }
 }

@@ -141,8 +141,11 @@ class View
     public function scrap($name, $extension = '.blade.php')
     {
         $file = $this->helper->getPathFor($name).$this->helper->parseExtension($extension);
-
         $this->helper->removeFile($file);
+
+        if ($directory = $this->shouldRemoveDirectory($file)) {
+            $this->removeDirectory($directory);
+        }
     }
 
     /**
@@ -209,5 +212,41 @@ class View
         $this->helper->setPath($this->basePath);
 
         return $this;
+    }
+
+    /**
+     * @param string $path passed from scrapView, $dir passed from removeDir.
+     *
+     * @return bool|string false|parent directory of the path specified.
+     */
+    private function shouldRemoveDirectory($path)
+    {
+        $directory = substr($path, 0, strlen($path) - strlen(strrchr($path, '/')));
+
+        if ($directory == $this->basePath) {
+            return false;
+        }
+
+        if (is_readable($directory) && count(scandir($directory)) == 2) {
+            return $directory;
+        }
+
+        return false;
+    }
+
+    /**
+     * Remove the specified directory and any empty parent directories.
+     *
+     * @param string $directory The directory to be removed.
+     */
+    private function removeDirectory($directory)
+    {
+        if (is_dir($directory) && is_writable($directory)) {
+            rmdir($directory);
+
+            if ($parent = $this->shouldRemoveDirectory($directory)) {
+                $this->removeDirectory($parent);
+            }
+        }
     }
 }
