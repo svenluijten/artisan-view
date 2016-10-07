@@ -143,8 +143,7 @@ class View
         $file = $this->helper->getPathFor($name).$this->helper->parseExtension($extension);
         $this->helper->removeFile($file);
 
-        if ($directory = $this->shouldRemoveDirectory($file))
-        {
+        if ($directory = $this->shouldRemoveDirectory($file)) {
             $this->removeDirectory($directory);
         }
     }
@@ -217,19 +216,18 @@ class View
 
     /**
      * @param string $path passed from scrapView, $dir passed from removeDir.
+     *
      * @return bool|string false|parent directory of the path specified.
      */
     private function shouldRemoveDirectory($path)
     {
         $directory = substr($path, 0, strlen($path) - strlen(strrchr($path, '/')));
 
-        if ($directory == $this->basePath)
-        {
+        if ($directory == $this->basePath) {
             return false;
         }
 
-        if (is_readable($directory) && count(scandir($directory)) == 2)
-        {
+        if (is_readable($directory) && count(scandir($directory)) == 2) {
             return $directory;
         }
 
@@ -243,15 +241,12 @@ class View
      */
     private function removeDirectory($directory)
     {
-        if (is_dir($directory) && is_writeable($directory))
-        {
+        if (is_dir($directory) && is_writable($directory)) {
             rmdir($directory);
 
-            if ($parent = $this->shouldRemoveDirectory($directory))
-            {
+            if ($parent = $this->shouldRemoveDirectory($directory)) {
                 $this->removeDirectory($parent);
             }
         }
     }
 }
-
