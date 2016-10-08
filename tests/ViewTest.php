@@ -362,30 +362,30 @@ class ViewTest extends ViewTestCase
 
     /** @test */
     public function it_prints_view_files_and_directories()
-	{
-		$list = $this->listCommand();
+    {
+        $list = $this->listCommand();
 
-		$this->view()->create('testdir.testview');
-		$this->view()->create('testdir.subdir.testview');
-		$items = $list->getListAsString(__DIR__ . '/assets');
-		$correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n  testview.blade.php";
+        $this->view()->create('testdir.testview');
+        $this->view()->create('testdir.subdir.testview');
+        $items = $list->getListAsString(__DIR__.'/assets');
+        $correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n  testview.blade.php";
 
-		$this->assertTrue(strcmp($correctOutput, $items) == 0);
+        $this->assertTrue(strcmp($correctOutput, $items) == 0);
 
-		$this->view()->scrap('testdir.testview');
-		$this->view()->create('testdir.subdir.testview2');
-		$items = $list->getListAsString(__DIR__ . '/assets');
-		$correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n    testview2.blade.php";
+        $this->view()->scrap('testdir.testview');
+        $this->view()->create('testdir.subdir.testview2');
+        $items = $list->getListAsString(__DIR__.'/assets');
+        $correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n    testview2.blade.php";
 
-		$this->assertTrue(strcmp($correctOutput, $items) == 0);
-	}
+        $this->assertTrue(strcmp($correctOutput, $items) == 0);
+    }
 
-	/** @test */
+    /** @test */
     public function it_prints_view_directory_not_found_error()
-	{
-		$list = $this->listCommand();
-		$items = $list->getListAsString(__DIR__ . '/assets/somedir');
-		$correctOutput = __DIR__ . "/assets/somedir was not found.";
-		$this->assertTrue(strcmp($correctOutput, $items) == 0);
-	}
+    {
+        $list = $this->listCommand();
+        $items = $list->getListAsString(__DIR__.'/assets/somedir');
+        $correctOutput = __DIR__.'/assets/somedir was not found.';
+        $this->assertTrue(strcmp($correctOutput, $items) == 0);
+    }
 }

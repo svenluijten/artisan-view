@@ -4,8 +4,8 @@ namespace Sven\ArtisanView\Tests;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use Sven\ArtisanView\ArtisanViewServiceProvider;
-use Sven\ArtisanView\View;
 use Sven\ArtisanView\Commands\ListViewCommand;
+use Sven\ArtisanView\View;
 
 abstract class ViewTestCase extends AbstractPackageTestCase
 {
@@ -32,9 +32,9 @@ abstract class ViewTestCase extends AbstractPackageTestCase
     }
 
     public function listCommand()
-	{
-		return new ListViewCommand();
-	}
+    {
+        return new ListViewCommand();
+    }
 
     /**
      * Set up the testing suite.

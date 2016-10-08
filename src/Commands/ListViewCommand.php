@@ -49,14 +49,15 @@ class ListViewCommand extends Command
     }
 
     public function getListAsString($directory)
-	{
+    {
         try {
             $items = $this->scanDirectory($directory);
+
             return $items;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-	}
+    }
 
     /**
      * Scans a directory for views and returns them in a tree structure.
@@ -68,9 +69,9 @@ class ListViewCommand extends Command
      */
     private function scanDirectory($directory, $level = 0)
     {
-    	if (!file_exists($directory)) {
-			throw new \Exception("$directory was not found.");
-		}
+        if (!file_exists($directory)) {
+            throw new \Exception("$directory was not found.");
+        }
 
         if (!$this->directoryContainsViews($directory)) {
             return '';
