@@ -385,9 +385,10 @@ class ViewTest extends ViewTestCase
     {
         $list = $this->listCommand();
         $items = $list->getListAsString(__DIR__.'/assets/somedir');
-        if ($items == false) {
-            $items = __DIR__.'/assets/somedir'.' was not found.';
-        }
+		if ($items == false)
+		{
+			$items = __DIR__.'/assets/somedir'.' was not found.';
+		}
         $correctOutput = __DIR__.'/assets/somedir was not found.';
         $this->assertTrue(strcmp($correctOutput, $items) == 0);
     }
