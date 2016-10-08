@@ -48,7 +48,12 @@ class ListViewCommand extends Command
         }
     }
 
-    public function getListAsString($directory)
+	/**
+	 * @param $directory
+	 *
+	 * @return string Tree view as single string.
+	 */
+	public function getListAsString($directory)
     {
         try {
             $items = $this->scanDirectory($directory);
@@ -59,14 +64,15 @@ class ListViewCommand extends Command
         }
     }
 
-    /**
-     * Scans a directory for views and returns them in a tree structure.
-     *
-     * @param string $directory The directory to be scanned.
-     * @param int    $level     The level of indentation to be applied.
-     *
-     * @return string Tree structured list of views.
-     */
+	/**
+	 * Scans a directory for views and returns them in a tree structure.
+	 *
+	 * @param string $directory The directory to be scanned.
+	 * @param int    $level The level of indentation to be applied.
+	 *
+	 * @return string Tree structured list of views.
+	 * @throws \Exception Directory not found.
+	 */
     private function scanDirectory($directory, $level = 0)
     {
         if (!file_exists($directory)) {
