@@ -39,69 +39,43 @@ class ListViewCommand extends Command
     public function handle()
     {
         $directory = base_path('resources/views');
-        try {
-            $items = $this->scanDirectory($directory);
+		$items = $this->getListAsString($directory);
+		if ($items != false)
+		{
+			return $this->info($items);
+		}
 
-            return $this->info($items);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-    }
-
-    public function getListAsString($directory)
-    {
-        try {
-            $items = $this->scanDirectory($directory);
-
-            return $items;
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
+		return $this->error("$directory was not found.");
     }
 
     /**
-     * Scans a directory for views and returns them in a tree structure.
+     * @param $directory
      *
-     * @param string $directory The directory to be scanned.
-     * @param int    $level     The level of indentation to be applied.
-     *
-     * @return string Tree structured list of views.
+     * @return string Tree view as single string.
      */
-    private function scanDirectory($directory, $level = 0)
+    public function getListAsString($directory, $level = 0)
     {
-        if (!file_exists($directory)) {
-            throw new \Exception("$directory was not found.");
-        }
+		if (!file_exists($directory))
+		{
+			return false;
+		}
 
-        if (!$this->directoryContainsViews($directory)) {
-            return '';
-        }
+		$result = '';
 
-        $items = scandir($directory);
-        $result = '';
+		if ($this->directoryContainsViews($directory))
+		{
+			$items = array_diff(scandir($directory), array('.', '..'));
+			foreach ($items as $item) {
+				if ($this->directoryContainsViews($directory.'/'.$item)) {
+					$result .= PHP_EOL.$this->getIndentation($level).$item;
+					if (is_dir($directory.'/'.$item)) {
+						$result .= $this->getListAsString($directory.'/'.$item, $level + 1);
+					}
+				}
+			}
+		}
 
-        $indent = function ($level) {
-            $string = '';
-            for ($i = 0; $i < $level; ++$i) {
-                $string .= '  ';
-            }
-
-            return $string;
-        };
-
-        foreach ($items as $item) {
-            if ($item != '.' && $item != '..') {
-                if ($this->directoryContainsViews($directory.'/'.$item)) {
-                    $result .= PHP_EOL.$indent($level).$item;
-
-                    if (is_dir($directory.'/'.$item)) {
-                        $result .= $this->scanDirectory($directory.'/'.$item, $level + 1);
-                    }
-                }
-            }
-        }
-
-        return $result;
+		return $result;
     }
 
     /**
@@ -128,4 +102,16 @@ class ListViewCommand extends Command
 
         return false;
     }
+
+    private function getIndentation($level)
+	{
+		$indentation = '';
+
+		for ($i = 0; $i < $level; ++$i)
+		{
+			$indentation .= '  ';
+		}
+
+		return $indentation;
+	}
 }
