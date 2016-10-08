@@ -23,7 +23,6 @@ class ListViewCommand extends Command
 
    /**
     * Create a new command instance.
-    *
     */
    public function __construct()
    {
