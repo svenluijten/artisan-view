@@ -21,9 +21,14 @@ class ArtisanViewServiceProvider extends ServiceProvider
             return new Commands\ScrapViewCommand();
         });
 
+		$this->app['list:view'] = $this->app->share(function () {
+            return new Commands\ListViewCommand();
+        });
+
         $this->commands(
             'make:view',
-            'scrap:view'
+            'scrap:view',
+            'list:view'
         );
     }
 
