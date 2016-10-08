@@ -39,12 +39,13 @@ class ListViewCommand extends Command
     public function handle()
     {
         $directory = base_path('resources/views');
-        $items = $this->getListAsString($directory);
-        if ($items != false) {
-            return $this->info($items);
-        }
+		$items = $this->getListAsString($directory);
+		if ($items !== false)
+		{
+			return $this->info($items);
+		}
 
-        return $this->error("$directory was not found.");
+		return $this->error("$directory was not found.");
     }
 
     /**
@@ -54,25 +55,27 @@ class ListViewCommand extends Command
      */
     public function getListAsString($directory, $level = 0)
     {
-        if (!file_exists($directory)) {
-            return false;
-        }
+		if (!file_exists($directory))
+		{
+			return false;
+		}
 
-        $result = '';
+		$result = '';
 
-        if ($this->directoryContainsViews($directory)) {
-            $items = array_diff(scandir($directory), ['.', '..']);
-            foreach ($items as $item) {
-                if ($this->directoryContainsViews($directory.'/'.$item)) {
-                    $result .= PHP_EOL.$this->getIndentation($level).$item;
-                    if (is_dir($directory.'/'.$item)) {
-                        $result .= $this->getListAsString($directory.'/'.$item, $level + 1);
-                    }
-                }
-            }
-        }
+		if ($this->directoryContainsViews($directory))
+		{
+			$items = array_diff(scandir($directory), array('.', '..'));
+			foreach ($items as $item) {
+				if ($this->directoryContainsViews($directory.'/'.$item)) {
+					$result .= PHP_EOL.$this->getIndentation($level).$item;
+					if (is_dir($directory.'/'.$item)) {
+						$result .= $this->getListAsString($directory.'/'.$item, $level + 1);
+					}
+				}
+			}
+		}
 
-        return $result;
+		return $result;
     }
 
     /**
@@ -101,13 +104,14 @@ class ListViewCommand extends Command
     }
 
     private function getIndentation($level)
-    {
-        $indentation = '';
+	{
+		$indentation = '';
 
-        for ($i = 0; $i < $level; ++$i) {
-            $indentation .= '  ';
-        }
+		for ($i = 0; $i < $level; ++$i)
+		{
+			$indentation .= '  ';
+		}
 
-        return $indentation;
-    }
+		return $indentation;
+	}
 }
