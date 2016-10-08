@@ -5,10 +5,9 @@ namespace Sven\ArtisanView\Commands;
 use Illuminate\Console\Command;
 use Sven\ArtisanView\View;
 
-class ListViewCommand extends
-    Command
+class ListViewCommand extends Command
 {
-   /**
+    /**
     * The name and signature of the console command.
     *
     * @var string
@@ -29,7 +28,7 @@ class ListViewCommand extends
     */
    public function __construct()
    {
-      parent::__construct();
+       parent::__construct();
    }
 
    /**
@@ -39,14 +38,13 @@ class ListViewCommand extends
     */
    public function handle()
    {
-      $directory = base_path('resources/views');
-      $items = $this->getListAsString($directory);
-      if ($items !== false)
-      {
-         return $this->info($items);
-      }
+       $directory = base_path('resources/views');
+       $items = $this->getListAsString($directory);
+       if ($items !== false) {
+           return $this->info($items);
+       }
 
-      return $this->error("$directory was not found.");
+       return $this->error("$directory was not found.");
    }
 
    /**
@@ -56,30 +54,25 @@ class ListViewCommand extends
     */
    public function getListAsString($directory, $level = 0)
    {
-      if (!file_exists($directory))
-      {
-         return false;
-      }
+       if (!file_exists($directory)) {
+           return false;
+       }
 
-      $result = '';
+       $result = '';
 
-      if ($this->directoryContainsViews($directory))
-      {
-         $items = array_diff(scandir($directory), array('.', '..'));
-         foreach ($items as $item)
-         {
-            if ($this->directoryContainsViews($directory . '/' . $item))
-            {
-               $result .= PHP_EOL . $this->getIndentation($level) . $item;
-               if (is_dir($directory . '/' . $item))
-               {
-                  $result .= $this->getListAsString($directory . '/' . $item, $level + 1);
+       if ($this->directoryContainsViews($directory)) {
+           $items = array_diff(scandir($directory), ['.', '..']);
+           foreach ($items as $item) {
+               if ($this->directoryContainsViews($directory.'/'.$item)) {
+                   $result .= PHP_EOL.$this->getIndentation($level).$item;
+                   if (is_dir($directory.'/'.$item)) {
+                       $result .= $this->getListAsString($directory.'/'.$item, $level + 1);
+                   }
                }
-            }
-         }
-      }
+           }
+       }
 
-      return $result;
+       return $result;
    }
 
    /**
@@ -89,39 +82,32 @@ class ListViewCommand extends
     */
    private function directoryContainsViews($directory)
    {
-      if (is_dir($directory))
-      {
-         $items = scandir($directory);
-         foreach ($items as $item)
-         {
-            if ($item != '.' && $item != '..')
-            {
-               if ($this->directoryContainsViews($directory . '/' . $item))
-               {
-                  return true;
+       if (is_dir($directory)) {
+           $items = scandir($directory);
+           foreach ($items as $item) {
+               if ($item != '.' && $item != '..') {
+                   if ($this->directoryContainsViews($directory.'/'.$item)) {
+                       return true;
+                   }
                }
-            }
-         }
-      }
-      elseif (file_exists($directory))
-      {
-         $match = fnmatch('*.blade.php', $directory);
+           }
+       } elseif (file_exists($directory)) {
+           $match = fnmatch('*.blade.php', $directory);
 
-         return $match == 1 ? true : false;
-      }
+           return $match == 1 ? true : false;
+       }
 
-      return false;
+       return false;
    }
 
-   private function getIndentation($level)
-   {
-      $indentation = '';
+    private function getIndentation($level)
+    {
+        $indentation = '';
 
-      for ($i = 0; $i < $level; ++$i)
-      {
-         $indentation .= '  ';
-      }
+        for ($i = 0; $i < $level; ++$i) {
+            $indentation .= '  ';
+        }
 
-      return $indentation;
-   }
+        return $indentation;
+    }
 }
