@@ -4,6 +4,7 @@ namespace Sven\ArtisanView\Tests;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use Sven\ArtisanView\ArtisanViewServiceProvider;
+use Sven\ArtisanView\Commands\ListViewCommand;
 use Sven\ArtisanView\View;
 
 abstract class ViewTestCase extends AbstractPackageTestCase
@@ -28,6 +29,11 @@ abstract class ViewTestCase extends AbstractPackageTestCase
     public function view($force = false)
     {
         return new View(__DIR__.'/assets', $force);
+    }
+
+    public function listCommand()
+    {
+        return new ListViewCommand();
     }
 
     /**
