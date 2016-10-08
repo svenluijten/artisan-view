@@ -56,9 +56,7 @@ class ListViewCommand extends Command
 	public function getListAsString($directory)
     {
         try {
-            $items = $this->scanDirectory($directory);
-
-            return $items;
+            return($this->scanDirectory($directory));
         } catch (\Exception $e) {
             return $e->getMessage();
         }
