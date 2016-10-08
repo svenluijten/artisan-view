@@ -41,6 +41,7 @@ class ListViewCommand extends Command
         $directory = base_path('resources/views');
         try {
             $items = $this->scanDirectory($directory);
+
             return $this->info($items);
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
