@@ -389,4 +389,3 @@ class ViewTest extends ViewTestCase
         $this->assertTrue(strcmp($correctOutput, $items) == 0);
     }
 }
-

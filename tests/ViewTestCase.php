@@ -61,4 +61,3 @@ abstract class ViewTestCase extends AbstractPackageTestCase
         rmdir($directory);
     }
 }
-
