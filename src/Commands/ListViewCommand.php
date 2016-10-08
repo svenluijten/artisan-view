@@ -92,9 +92,7 @@ class ListViewCommand extends Command
                }
            }
        } elseif (file_exists($directory)) {
-           $match = fnmatch('*.blade.php', $directory);
-
-           return $match == 1 ? true : false;
+           return fnmatch('*.blade.php', $directory);
        }
 
        return false;
