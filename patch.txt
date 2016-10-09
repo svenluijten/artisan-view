@@ -1,0 +1,36 @@
+diff --git a/src/Shared/ListHelper.php b/src/Shared/ListHelper.php
+index 80fccec1a243bae009e388c1cdc981074841b68b..6cd8809009c88f0b87b08b8f915838fe486677dc 100644
+--- a/src/Shared/ListHelper.php
++++ b/src/Shared/ListHelper.php
+@@ -4,7 +4,7 @@ namespace Sven\ArtisanView\Shared;
+ 
+ class ListHelper
+ {
+-   /**
++    /**
+     * @param $directory
+     *
+     * @return string Tree view as single string.
+@@ -55,14 +55,14 @@ class ListHelper
+        return false;
+    }
+ 
+-   public function getIndentation($level)
+-   {
+-      $indentation = '';
++    public function getIndentation($level)
++    {
++        $indentation = '';
+ 
+-      for ($i = 0; $i < $level; ++$i) {
+-         $indentation .= '  ';
+-      }
++        for ($i = 0; $i < $level; ++$i) {
++            $indentation .= '  ';
++        }
+ 
+-      return $indentation;
+-   }
++        return $indentation;
++    }
+ }

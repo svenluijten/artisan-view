@@ -4,7 +4,7 @@ namespace Sven\ArtisanView\Shared;
 
 class ListHelper
 {
-   /**
+    /**
     * @param $directory
     *
     * @return string Tree view as single string.
@@ -55,14 +55,14 @@ class ListHelper
        return false;
    }
 
-   public function getIndentation($level)
-   {
-      $indentation = '';
+    public function getIndentation($level)
+    {
+        $indentation = '';
 
-      for ($i = 0; $i < $level; ++$i) {
-         $indentation .= '  ';
-      }
+        for ($i = 0; $i < $level; ++$i) {
+            $indentation .= '  ';
+        }
 
-      return $indentation;
-   }
+        return $indentation;
+    }
 }
