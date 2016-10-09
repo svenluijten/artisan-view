@@ -363,7 +363,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_prints_view_files_and_directories()
     {
-        $list = $this->listCommand();
+        $list = $this->listHelper();
 
         $this->view()->create('testdir.testview');
         $this->view()->create('testdir.subdir.testview');
@@ -383,7 +383,7 @@ class ViewTest extends ViewTestCase
     /** @test */
     public function it_prints_view_directory_not_found_error()
     {
-        $list = $this->listCommand();
+        $list = $this->listHelper();
         $items = $list->getListAsString(__DIR__.'/assets/somedir');
         if ($items == false) {
             $items = __DIR__.'/assets/somedir'.' was not found.';
