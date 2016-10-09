@@ -377,7 +377,7 @@ class ViewTest extends ViewTestCase
         $items = $list->getListAsString(__DIR__.'/assets');
         $correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n    testview2.blade.php";
 
-        $this->assertTrue(strcmp($correctOutput, $items) == 0);
+        $this->assertEquals($correctOutput, $items);
     }
 
     /** @test */
@@ -389,6 +389,7 @@ class ViewTest extends ViewTestCase
             $items = __DIR__.'/assets/somedir'.' was not found.';
         }
         $correctOutput = __DIR__.'/assets/somedir was not found.';
-        $this->assertTrue(strcmp($correctOutput, $items) == 0);
+
+        $this->assertEquals($correctOutput, $items);
     }
 }
