@@ -4,7 +4,7 @@ namespace Sven\ArtisanView\Tests;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use Sven\ArtisanView\ArtisanViewServiceProvider;
-use Sven\ArtisanView\Commands\ListViewCommand;
+use Sven\ArtisanView\Shared\ListHelper;
 use Sven\ArtisanView\View;
 
 abstract class ViewTestCase extends AbstractPackageTestCase
@@ -31,9 +31,9 @@ abstract class ViewTestCase extends AbstractPackageTestCase
         return new View(__DIR__.'/assets', $force);
     }
 
-    public function listCommand()
+    public function listHelper()
     {
-        return new ListViewCommand();
+        return new ListHelper();
     }
 
     /**
