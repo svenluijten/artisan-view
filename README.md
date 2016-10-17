@@ -104,8 +104,9 @@ $ php artisan scrap:view pages.index
 ```
 
 ## Contributing
-All contributions (in the form on pull requests, issues and feature-requests) are
-welcome. See the [contributors page](../../graphs/contributors) for all contributors.
+All contributions (pull requests, issues and feature requests) are
+welcome. Make sure to read through the [CONTRIBUTING.md](CONTRIBUTING.md) first,
+though. See the [contributors page](../../graphs/contributors) for all contributors.
 
 ## License
 `sven/artisan-view` is licenced under the MIT License (MIT). Please see the
