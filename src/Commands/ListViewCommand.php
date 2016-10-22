@@ -29,7 +29,7 @@ class ListViewCommand extends Command
    public function handle()
    {
       $list = new ListHelper();
-      $directory = base_path('resources/views');
+      $directory = config('view.paths')[0];
       $items = $list->getListAsString($directory);
       if ($items !== false) {
          return $this->info($items);
