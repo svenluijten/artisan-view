@@ -359,4 +359,37 @@ class ViewTest extends ViewTestCase
             file_exists(__DIR__.'/assets/testdir')
         );
     }
+
+    /** @test */
+    public function it_prints_view_files_and_directories()
+    {
+        $list = $this->listHelper();
+
+        $this->view()->create('testdir.testview');
+        $this->view()->create('testdir.subdir.testview');
+        $items = $list->getListAsString(__DIR__.'/assets');
+        $correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n  testview.blade.php";
+
+        $this->assertTrue(strcmp($correctOutput, $items) == 0);
+
+        $this->view()->scrap('testdir.testview');
+        $this->view()->create('testdir.subdir.testview2');
+        $items = $list->getListAsString(__DIR__.'/assets');
+        $correctOutput = "\ntestdir\n  subdir\n    testview.blade.php\n    testview2.blade.php";
+
+        $this->assertEquals($correctOutput, $items);
+    }
+
+    /** @test */
+    public function it_prints_view_directory_not_found_error()
+    {
+        $list = $this->listHelper();
+        $items = $list->getListAsString(__DIR__.'/assets/somedir');
+        if ($items == false) {
+            $items = __DIR__.'/assets/somedir'.' was not found.';
+        }
+        $correctOutput = __DIR__.'/assets/somedir was not found.';
+
+        $this->assertEquals($correctOutput, $items);
+    }
 }
