@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Sven\ArtisanView\Shared\ViewHelper;
 
 class View
@@ -119,7 +119,7 @@ class View
     {
         $types = ['index', 'show', 'edit', 'create'];
 
-        if (!is_null($verbs)) {
+        if (! is_null($verbs)) {
             $types = $this->helper->normalizeToArray($verbs, ',');
         }
 
@@ -192,7 +192,7 @@ class View
         $this->recent->each(function ($item) use ($name, $content) {
             $stub = $this->getStub('section', [$name]);
 
-            if (!is_null($content)) {
+            if (! is_null($content)) {
                 $stub = $this->getStub('inline-section', [$name, $content]);
             }
 
