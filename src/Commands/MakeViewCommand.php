@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView\Commands;
 
-use Illuminate\Console\Command;
 use Sven\ArtisanView\View;
+use Illuminate\Console\Command;
 
 class MakeViewCommand extends Command
 {

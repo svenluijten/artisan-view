@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView\Commands;
 
-use Illuminate\Console\Command;
 use Sven\ArtisanView\View;
+use Illuminate\Console\Command;
 
 class ScrapViewCommand extends Command
 {
@@ -39,7 +39,7 @@ class ScrapViewCommand extends Command
         $name = (string) $this->argument('name');
         $extension = (string) $this->option('extension');
 
-        if (!$this->confirm("Are you sure you want to scrap the view [$name]?")) {
+        if (! $this->confirm("Are you sure you want to scrap the view [$name]?")) {
             return $this->info('Okay, no harm done!');
         }
 

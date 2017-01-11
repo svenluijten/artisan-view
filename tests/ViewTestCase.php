@@ -2,9 +2,9 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use GrahamCampbell\TestBench\AbstractPackageTestCase;
-use Sven\ArtisanView\ArtisanViewServiceProvider;
 use Sven\ArtisanView\View;
+use Sven\ArtisanView\ArtisanViewServiceProvider;
+use GrahamCampbell\TestBench\AbstractPackageTestCase;
 
 abstract class ViewTestCase extends AbstractPackageTestCase
 {
