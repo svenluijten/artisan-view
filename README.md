@@ -109,7 +109,7 @@ welcome. Make sure to read through the [CONTRIBUTING.md](CONTRIBUTING.md) first,
 though. See the [contributors page](../../graphs/contributors) for all contributors.
 
 ## License
-`sven/artisan-view` is licenced under the MIT License (MIT). Please see the
+`sven/artisan-view` is licensed under the MIT License (MIT). Please see the
 [license file](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg?style=flat-square
