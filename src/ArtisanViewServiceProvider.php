@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ArtisanViewServiceProvider extends ServiceProvider
 {
-     /**
+    /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
@@ -32,7 +32,7 @@ class ArtisanViewServiceProvider extends ServiceProvider
     {
         $this->commands([
             Commands\MakeViewCommand::class,
-            Commands\ScrapViewCommand::class
+            Commands\ScrapViewCommand::class,
         ]);
     }
 
@@ -45,7 +45,7 @@ class ArtisanViewServiceProvider extends ServiceProvider
     {
         return [
             Commands\MakeViewCommand::class,
-            Commands\ScrapViewCommand::class
+            Commands\ScrapViewCommand::class,
         ];
     }
 }
