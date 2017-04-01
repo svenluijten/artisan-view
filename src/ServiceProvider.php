@@ -2,6 +2,7 @@
 
 namespace Sven\ArtisanView;
 
+use Illuminate\Foundation\Application;
 use Sven\ArtisanView\Commands\ScrapView;
 use Sven\ArtisanView\Commands\MakeView;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -10,12 +11,16 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function boot()
     {
-        $this->app['make:view'] = $this->app->share(function () {
-            return new MakeView();
+        $this->app->bind('view.factory', function () {
+            return new ViewGenerator();
         });
 
-        $this->app['scrap:view'] = $this->app->share(function () {
-            return new ScrapView();
+        $this->app->bind('commands.make:view', function (Application $app) {
+            return new MakeView($app->make('view.factory'));
+        });
+
+        $this->app->bind(function () {
+            return new ScrapView($app->make('view.factory'));
         });
 
         $this->commands(
