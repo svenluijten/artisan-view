@@ -12,7 +12,8 @@
 [![StyleCI][ico-styleci]][link-styleci]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
-projects. It is super simple to use and easy to understand for everyone.
+projects. Easily generate blade files that extend other views, automatically
+scaffold out sections, and remove views. All from the command line!
 
 ## Index
 - [Installation](#installation)
@@ -20,6 +21,9 @@ projects. It is super simple to use and easy to understand for everyone.
   - [Registering the service provider](#registering-the-service-provider)
 - [Usage](#usage)
   - [Creating views](#creating-views)
+  - [Nesting views](#nesting-views)
+  - [Extending and sections](#extending-and-sections)
+  - [REST resources](#rest-resources)
   - [Scrapping views](#scrapping-views)
 - [Contributing](#contributing)
 - [License](#license)
