@@ -31,6 +31,9 @@ Or add the package to your dependencies in `composer.json` and run
 }
 ```
 
+**Note:** If you're using Laravel 5.5, you're done! The service provider is automatically registered in the container,
+thanks to [auto-discovery](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518).
+
 Next, add the `ArtisanViewServiceProvider` to your `providers` array in `config/app.php`:
 
 ```php
