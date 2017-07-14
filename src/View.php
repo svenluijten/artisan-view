@@ -26,8 +26,8 @@ class View
     /**
      * Instantiate the FileInteractor.
      *
-     * @param string $path  Base path where your views are located.
-     * @param bool   $force Force the creation if file already exists.
+     * @param string $path Base path where your views are located.
+     * @param bool $force Force the creation if file already exists.
      */
     public function __construct($path, $force = false)
     {
@@ -39,7 +39,7 @@ class View
     /**
      * Create a new view file.
      *
-     * @param string $name      The name of the view to create.
+     * @param string $name The name of the view to create.
      * @param string $extension The extension to give the view.
      *
      * @return \Sven\ArtisanView\View
@@ -97,10 +97,7 @@ class View
         foreach ($sections as $section) {
             $parts = $this->helper->normalizeToArray($section, ':');
 
-            $this->section(
-                $parts[0],
-                isset($parts[1]) ? $parts[1] : null
-            );
+            $this->section($parts[0], isset($parts[1]) ? $parts[1] : null);
         }
 
         return $this;
@@ -109,8 +106,8 @@ class View
     /**
      * Create a resource of views.
      *
-     * @param string $name      Name of the resource.
-     * @param mixed  $verbs     Verbs to create views for.
+     * @param string $name Name of the resource.
+     * @param mixed $verbs Verbs to create views for.
      * @param string $extension Extension of the views.
      *
      * @return \Sven\ArtisanView\View
@@ -133,7 +130,7 @@ class View
     /**
      * Remove a view from the filesystem.
      *
-     * @param string $name      The name of the view to remove.
+     * @param string $name The name of the view to remove.
      * @param string $extension Extension of the view to remove.
      *
      * @return void
@@ -163,8 +160,8 @@ class View
     /**
      * Get a stub by name and replace optional parameters.
      *
-     * @param string $name   Name of the stub.
-     * @param array  $params Parameters to replace in the stub.
+     * @param string $name Name of the stub.
+     * @param array $params Parameters to replace in the stub.
      *
      * @return string Contents of the stub.
      */
@@ -186,7 +183,7 @@ class View
     /**
      * Add a section to all recently created views.
      *
-     * @param string $name    The name of the section.
+     * @param string $name The name of the section.
      * @param string $content The content of the section.
      *
      * @return \Sven\ArtisanView\View

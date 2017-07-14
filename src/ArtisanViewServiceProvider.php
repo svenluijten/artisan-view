@@ -20,9 +20,9 @@ class ArtisanViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (! is_dir(app_path('Console/stubs'))){
+        if (! is_dir(app_path('Console/stubs'))) {
             $this->publishes([
-                __DIR__.'/stubs' => app_path('Console/stubs')
+                __DIR__.'/stubs' => app_path('Console/stubs'),
             ], 'stubs');
         }
     }
