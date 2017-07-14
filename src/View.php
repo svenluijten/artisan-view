@@ -170,7 +170,11 @@ class View
      */
     private function getStub($name, $params = [])
     {
-        $stub = file_get_contents(__DIR__.'/stubs/'.$name.'.stub');
+        if (file_exists(app_path('Console/stubs/'.$name.'.stub'))) {
+            $stub = file_get_contents(app_path('Console/stubs/'.$name.'.stub'));
+        } else {
+            $stub = file_get_contents(__DIR__.'/stubs/'.$name.'.stub');
+        }
 
         foreach ($params as $param) {
             $stub = Str::replaceFirst('*', $param, $stub);
