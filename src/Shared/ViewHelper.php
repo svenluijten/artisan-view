@@ -63,7 +63,7 @@ class ViewHelper
 
         $path = $this->addToPath(array_shift($folders));
 
-        if (! is_dir($path)) {
+        if ( ! is_dir($path)) {
             mkdir($path);
         }
 
@@ -108,7 +108,7 @@ class ViewHelper
      */
     public function makeFile($path)
     {
-        if (! $this->force && file_exists($path)) {
+        if ( ! $this->force && file_exists($path)) {
             throw new FileAlreadyExists("The file at [$path] already exists.");
         }
 
@@ -126,7 +126,7 @@ class ViewHelper
      */
     public function removeFile($path)
     {
-        if (! file_exists($path)) {
+        if ( ! file_exists($path)) {
             throw new FileDoesNotExist("The file at [$path] does not exist.");
         }
 
@@ -147,7 +147,7 @@ class ViewHelper
             return $value;
         }
 
-        if (! Str::contains($value, $delimiter)) {
+        if ( ! Str::contains($value, $delimiter)) {
             return [$value];
         }
 
