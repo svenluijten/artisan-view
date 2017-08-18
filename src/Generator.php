@@ -48,7 +48,7 @@ class Generator
     protected function getViewNames(iterable $names)
     {
         return array_map(function ($name) {
-            return $name . $this->config->getExtension();
+            return $name.$this->config->getExtension();
         }, $names);
     }
 

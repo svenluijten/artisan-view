@@ -14,7 +14,7 @@ class BlocksTest extends TestCase
         $block = new Extend('layouts.app');
 
         $this->assertEquals(
-            "@extends('layouts.app')" . PHP_EOL . PHP_EOL,
+            "@extends('layouts.app')".PHP_EOL.PHP_EOL,
             $block->render()
         );
     }
@@ -25,7 +25,7 @@ class BlocksTest extends TestCase
         $block = new Section('content');
 
         $this->assertEquals(
-            "@section('content')" . PHP_EOL . PHP_EOL . "@endsection" . PHP_EOL . PHP_EOL,
+            "@section('content')".PHP_EOL.PHP_EOL."@endsection".PHP_EOL.PHP_EOL,
             $block->render()
         );
     }
@@ -36,7 +36,7 @@ class BlocksTest extends TestCase
         $block = new InlineSection('title', 'Some title');
 
         $this->assertEquals(
-            "@section('title', 'Some title')" . PHP_EOL . PHP_EOL,
+            "@section('title', 'Some title')".PHP_EOL.PHP_EOL,
             $block->render()
         );
     }

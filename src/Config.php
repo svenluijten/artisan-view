@@ -53,7 +53,7 @@ class Config
      */
     public function setExtension($extension)
     {
-        if ( ! Str::startsWith($extension, '.')) {
+        if (! Str::startsWith($extension, '.')) {
             $extension = ".$extension";
         }
 
