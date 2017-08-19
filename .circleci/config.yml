@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/artisan-view
     docker:
-      - image: circleci/7.1-cli
+      - image: circleci/php:7.1-cli
     steps:
       - checkout
       - run: composer self-update
