@@ -20,6 +20,7 @@ to add to those templates, and more. All from the command line we know and love!
   - [Extending and sections](#extending-and-sections)
   - [REST resources](#rest-resources)
   - [Scrapping views](#scrapping-views)
+  - [Mix and match](#mix-and-match)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -85,15 +86,12 @@ $ php artisan make:view index --extends=app
 # Add a section to the view
 $ php artisan make:view index --section=content
 
-# Add an inline section to the view
-# Remember to add quotes around the section if you want to use spaces
-$ php artisan make:view index --section="title:Hello world"
-
 # Add multiple sections to the view
 $ php artisan make:view index --section=title --section=content
 
-# Add one inline and one block-level section to the view
-$ php artisan make:view index --sections="title:Hello world" --section=content
+# Add an inline section to the view
+# Remember to add quotes around the section if you want to use spaces
+$ php artisan make:view index --section="title:Hello world"
 ```
 
 ### REST resources
@@ -112,6 +110,26 @@ $ php artisan scrap:view index
 
 # Remove the view by dot notation
 $ php artisan scrap:view pages.index
+```
+
+### Mix and match
+Of course, all the options work well together like you'd expect. So the following command...
+
+```bash
+$ php artisan make:view products --resource --extends=app --section="title:This is my title" --section=content
+```
+
+... will put the following contents in `products/index.blade.php`, `products/edit.blade.php`, `products/create.blade.php`,
+and `products/show.blade.php`:
+
+```blade
+@extends('app')
+
+@section('title', 'This is my title')
+
+@section('content')
+
+@endsection
 ```
 
 ## Contributing
