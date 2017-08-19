@@ -5,10 +5,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Code Climate][ico-codeclimate]][link-codeclimate]
-[![Code Quality][ico-quality]][link-quality]
-[![SensioLabs Insight][ico-insight]][link-insight]
+[![Build Status][ico-circleci]][link-circleci]
 [![StyleCI][ico-styleci]][link-styleci]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
@@ -133,16 +130,10 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/svenluijten/artisan-view.svg?style=flat-square
-[ico-codeclimate]: https://img.shields.io/codeclimate/github/svenluijten/artisan-view.svg?style=flat-square
-[ico-quality]: https://img.shields.io/scrutinizer/g/svenluijten/artisan-view.svg?style=flat-square
-[ico-insight]: https://img.shields.io/sensiolabs/i/66dec030-8f99-435c-8e2f-e9f3d8894665.svg?style=flat-square
+[ico-circleci]: https://img.shields.io/circleci/project/github/svenluijten/artisan-view.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/56054783/shield
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
-[link-travis]: https://travis-ci.org/svenluijten/artisan-view
-[link-codeclimate]: https://codeclimate.com/github/svenluijten/artisan-view
-[link-quality]: https://scrutinizer-ci.com/g/svenluijten/artisan-view/?branch=master
-[link-insight]: https://insight.sensiolabs.com/projects/66dec030-8f99-435c-8e2f-e9f3d8894665
+[link-circleci]: https://circleci.com/gh/svenluijten/artisan-view
 [link-styleci]: https://styleci.io/repos/56054783
