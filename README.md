@@ -1,7 +1,6 @@
 ![artisan-view](https://cloud.githubusercontent.com/assets/11269635/14457826/a3bde82a-00ad-11e6-8161-0c218937156a.jpg)
 
 # Artisan View
-
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
@@ -9,8 +8,8 @@
 [![StyleCI][ico-styleci]][link-styleci]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
-projects. Easily generate blade files that extend other views, automatically
-scaffold out sections, and remove views. All from the command line!
+project. Generate blade files that extend other views, scaffold out sections
+to add to those templates, and more. All from the command line we know and love!
 
 ## Index
 - [Installation](#installation)
@@ -18,7 +17,6 @@ scaffold out sections, and remove views. All from the command line!
   - [Registering the service provider](#registering-the-service-provider)
 - [Usage](#usage)
   - [Creating views](#creating-views)
-  - [Nesting views](#nesting-views)
   - [Extending and sections](#extending-and-sections)
   - [REST resources](#rest-resources)
   - [Scrapping views](#scrapping-views)
@@ -26,39 +24,41 @@ scaffold out sections, and remove views. All from the command line!
 - [License](#license)
 
 ## Installation
-You just have to follow a couple of simple steps to install this package.
+You'll have to follow a couple of simple steps to install this package.
 
 ### Downloading
 Via [composer](http://getcomposer.org):
 
 ```bash
-$ composer require sven/artisan-view
+$ composer require sven/artisan-view:^2.0 --dev
 ```
 
-Or add the package to your dependencies in `composer.json` and run
+Or add the package to your development dependencies in `composer.json` and run
 `composer update` to download the package:
 
 ```json
 {
-    "require": {
-        "sven/artisan-view": "^1.0"
+    "require-dev": {
+        "sven/artisan-view": "^2.0"
     }
 }
 ```
 
 ### Registering the service provider
-Next, add `Sven\ArtisanView\ServiceProvider::class` to your `providers` array in `config/app.php`:
+If you're using Laravel 5.5, you can skip this step. The service provider will have already been registered
+thanks to auto-discovery. 
+
+Otherwise, register `Sven\ArtisanView\ServiceProvider::class` manually in your `AppServiceProvider`'s
+`register` method:
 
 ```php
-// config/app.php
-'providers' => [
-    ...
-    Sven\ArtisanView\ServiceProvider::class,
-];
+public function register()
+{
+    if ($this->app->environment() !== 'production') {
+        $this->app->register(\Sven\ArtisanView\ServiceProvider::class);
+    }    
+}
 ```
-
-If you want to only load this service provider in a specific environment (like `local` or `development`),
-take a look at [sven/env-providers](https://github.com/svenluijten/env-providers).
 
 ## Usage
 If you now run `php artisan` you will see two new commands in the list:
@@ -73,12 +73,12 @@ $ php artisan make:view index
 # Create a view 'index.blade.php' in a subdirectory ('pages')
 $ php artisan make:view pages.index
 
-# Create a view in a custom directory
-$ php artisan make:view index --directory=custom/path
-
-# Give the view a custom file extension
+# Create a view with a different file extension ('index.html')
 $ php artisan make:view index --extension=html
+```
 
+### Extending and sections
+```bash
 # Extend an existing view
 $ php artisan make:view index --extends=app
 
@@ -86,33 +86,28 @@ $ php artisan make:view index --extends=app
 $ php artisan make:view index --section=content
 
 # Add an inline section to the view
-$ php artisan make:view index --section="title:Hello world"
 # Remember to add quotes around the section if you want to use spaces
+$ php artisan make:view index --section="title:Hello world"
 
-# Add 2 sections to the view
-$ php artisan make:view index --sections=title,content
+# Add multiple sections to the view
+$ php artisan make:view index --section=title --section=content
 
 # Add one inline and one block-level section to the view
-$ php artisan make:view index --sections="title:Hello world,content"
-# Remember to add quotes around the sections if you want to use spaces
+$ php artisan make:view index --sections="title:Hello world" --section=content
+```
 
+### REST resources
+```bash
 # Create a resource called 'products'
 $ php artisan make:view products --resource
 
 # Create a resource with only specific verbs
 $ php artisan make:view products --resource --verbs=index,create,edit
-
-# Create a resource that extends views and adds sections
-$ php artisan make:view products --resource --extends=layout --sections=foo,bar
-
-# Use the force flag to force the creation of the view
-$ php artisan make:view index --force
-# This will overwrite a view if it already exists
 ```
 
-### Scrap a view
+### Scrapping views
 ```bash
-# Scrap the view 'index.blade.php'
+# Remove the view 'index.blade.php'
 $ php artisan scrap:view index
 
 # Remove the view by dot notation
