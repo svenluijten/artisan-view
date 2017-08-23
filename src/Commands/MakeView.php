@@ -6,18 +6,15 @@ use Illuminate\Console\Command;
 use Sven\ArtisanView\Blocks\Extend;
 use Sven\ArtisanView\Config;
 use Sven\ArtisanView\Generator;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class MakeView extends Command
 {
     /**
      * {@inheritdoc}
      */
-    protected $signature
-        = 'make:view
-                            { name : The name of the view to create. }
-                            { --extension=blade.php : The extension of the generated view. }
-                            { --resource : Whether or not a RESTful resource should be created. }
-                            { --section=* }';
+    protected $name = 'make:view';
 
     /**
      * {@inheritdoc}
@@ -57,5 +54,33 @@ class MakeView extends Command
         }
 
         return $blocks;
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['extension', null, InputOption::VALUE_OPTIONAL, 'The extension of the generated view.', 'blade.php'],
+            ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be created.'],
+            ['verbs', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verbs to generate views for.', ['index', 'show', 'create', 'edit']],
+            ['section', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'A list of "@section"s to define in the created view(s).'],
+            ['extends', null, InputOption::VALUE_OPTIONAL, 'The view to "@extend" from the created view(s).'],
+        ];
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the view to create.'],
+        ];
     }
 }
