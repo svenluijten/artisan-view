@@ -3,6 +3,8 @@
 namespace Sven\ArtisanView\Tests;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
+use Sven\ArtisanView\Blocks\Extend;
+use Sven\ArtisanView\Blocks\Section;
 
 class GeneratorTest extends TestCase
 {
@@ -46,6 +48,8 @@ class GeneratorTest extends TestCase
             '--extends' => 'layouts.app',
         ]);
 
-        $this->assertContains('@extends(\'layouts.app\')', $this->view('pages.contact'));
+        $block = new Extend('layouts.app');
+
+        $this->assertContains($block->render(), $this->view('pages.contact'));
     }
 }
