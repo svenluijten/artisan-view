@@ -18,7 +18,7 @@ class GeneratorTest extends TestCase
             'name' => 'index',
         ]);
 
-        $this->assertTrue($this->view->exists('index'));
+        $this->assertFileExists(base_path('resources/views/index.blade.php'));
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class GeneratorTest extends TestCase
             'name' => 'pages.about',
         ]);
 
-        $this->assertTrue($this->view->exists('pages.about'));
+        $this->assertFileExists(base_path('resources/views/pages/about.blade.php'));
     }
 
     /** @test */

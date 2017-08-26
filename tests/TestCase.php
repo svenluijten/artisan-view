@@ -12,21 +12,6 @@ abstract class TestCase extends AbstractPackageTestCase
     use ServiceProviderTrait;
 
     /**
-     * @var \Illuminate\View\Factory
-     */
-    protected $view;
-
-    /**
-     * Set up the testing environment.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->view = $this->app->make(Factory::class);
-    }
-
-    /**
      * Tear down the testing environment.
      */
     public function tearDown()
@@ -71,7 +56,9 @@ abstract class TestCase extends AbstractPackageTestCase
      */
     protected function view($name)
     {
-        return file_get_contents($this->view->getFinder()->find($name));
+        $view = $this->app->make(Factory::class);
+
+        return file_get_contents($view->getFinder()->find($name));
     }
 
     /**
