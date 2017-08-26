@@ -73,6 +73,12 @@ class Generator
         }
     }
 
+    /**
+     * @param string $path
+     * @param string $fileName
+     *
+     * @return string
+     */
     protected function createIntermediateFolders($path, $fileName)
     {
         if (! str_contains($fileName, DIRECTORY_SEPARATOR)) {
