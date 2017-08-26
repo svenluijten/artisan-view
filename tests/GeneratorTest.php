@@ -2,7 +2,6 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use Illuminate\View\Factory;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
 
 class GeneratorTest extends TestCase
@@ -16,6 +15,6 @@ class GeneratorTest extends TestCase
             'name' => 'index',
         ]);
 
-        $this->assertTrue($this->app->make(Factory::class)->exists('index'));
+        $this->assertTrue($this->view->exists('index'));
     }
 }
