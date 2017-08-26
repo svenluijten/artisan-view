@@ -45,7 +45,7 @@ class Generator
      */
     protected function getViews()
     {
-        if (!$this->config->isResource()) {
+        if (! $this->config->isResource()) {
             return [$this->config->getName()];
         }
 
@@ -102,7 +102,7 @@ class Generator
         $folders = implode(DIRECTORY_SEPARATOR, $folders);
         $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
 
-        if (!is_dir($fullPath)) {
+        if (! is_dir($fullPath)) {
             mkdir($fullPath, 0777, true);
         }
 
