@@ -28,6 +28,9 @@ class Generator
         $this->blocks = $blocks;
     }
 
+    /**
+     * Generate the view(s) as specified in the constructor.
+     */
     public function generate()
     {
         $views = $this->config->isResource()
