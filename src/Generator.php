@@ -91,6 +91,7 @@ class Generator
 
     /**
      * @throws \Sven\ArtisanView\Exceptions\UnsupportedException
+     *
      * @return string
      */
     protected function getPath()
