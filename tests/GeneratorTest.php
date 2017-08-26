@@ -17,4 +17,14 @@ class GeneratorTest extends TestCase
 
         $this->assertTrue($this->view->exists('index'));
     }
+
+    /** @test */
+    public function it_makes_a_view_in_a_subfolder()
+    {
+        $this->artisan('make:view', [
+            'name' => 'pages.about',
+        ]);
+
+        $this->assertTrue($this->view->exists('pages.about'));
+    }
 }

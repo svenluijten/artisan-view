@@ -47,6 +47,8 @@ class Generator
     protected function getViewNames(iterable $names)
     {
         return array_map(function ($name) {
+            $name = str_replace('.', '/', $name);
+
             return $name.$this->config->getExtension();
         }, $names);
     }
@@ -57,17 +59,36 @@ class Generator
      */
     protected function makeViews(iterable $names, array $blocks)
     {
-        $path = $this->getPath();
         $contents = BlockBuilder::build($blocks);
 
         foreach ($names as $name) {
-            file_put_contents($path . '/' . $name, $contents);
+            $fileName = $this->createIntermediateFolders(
+                $this->getPath(), $this->normalizePath($name)
+            );
+
+            file_put_contents($fileName, $contents);
         }
+    }
+
+    protected function createIntermediateFolders($path, $fileName)
+    {
+        if (! str_contains($fileName, DIRECTORY_SEPARATOR)) {
+            return $path.DIRECTORY_SEPARATOR.$fileName;
+        }
+
+        $folders = explode(DIRECTORY_SEPARATOR, $fileName);
+        $file = array_pop($folders);
+        $folders = implode(DIRECTORY_SEPARATOR, $folders);
+        $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
+
+        @mkdir($fullPath, null, true);
+
+        return $fullPath.DIRECTORY_SEPARATOR.$file;
     }
 
     /**
      * @throws \Sven\ArtisanView\Exceptions\UnsupportedException
-     * @return array
+     * @return string
      */
     protected function getPath()
     {
@@ -83,6 +104,18 @@ class Generator
             throw UnsupportedException::tooManyPaths(count($paths));
         }
 
-        return reset($paths);
+        return $this->normalizePath(realpath(reset($paths)));
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function normalizePath($path)
+    {
+        $withoutBackslashes = str_replace('\\', DIRECTORY_SEPARATOR, $path);
+
+        return str_replace('/', DIRECTORY_SEPARATOR, $withoutBackslashes);
     }
 }
