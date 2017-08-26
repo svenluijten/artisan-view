@@ -2,6 +2,7 @@
 
 namespace Sven\ArtisanView\Commands;
 
+use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\Config;
 use Illuminate\Console\Command;
 use Sven\ArtisanView\Generator;
@@ -48,6 +49,10 @@ class MakeView extends Command
 
         if ($this->option('extends')) {
             $blocks[] = new Extend($this->option('extends'));
+        }
+
+        if ($this->option('section')) {
+            $blocks[] = new Section($this->option('section'));
         }
 
         return $blocks;

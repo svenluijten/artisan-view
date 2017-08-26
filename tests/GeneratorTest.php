@@ -52,4 +52,17 @@ class GeneratorTest extends TestCase
 
         $this->assertContains($block->render(), $this->view('pages.contact'));
     }
+
+    /** @test */
+    public function it_includes_a_section()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--section' => 'content'
+        ]);
+
+        $block = new Section('content');
+
+        $this->assertContains($block->render(), $this->view('index'));
+    }
 }
