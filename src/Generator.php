@@ -33,13 +33,25 @@ class Generator
      */
     public function generate()
     {
-        $views = $this->config->isResource()
-            ? $this->config->getVerbs()
-            : [$this->config->getName()];
+        $views = $this->getViews();
 
         $this->makeViews(
             $this->getViewNames($views), $this->blocks
         );
+    }
+
+    /**
+     * @return array
+     */
+    protected function getViews()
+    {
+        if (!$this->config->isResource()) {
+            return [$this->config->getName()];
+        }
+
+        return array_map(function ($view) {
+            return $this->config->getName().'.'.$view;
+        }, $this->config->getVerbs());
     }
 
     /**
@@ -90,7 +102,9 @@ class Generator
         $folders = implode(DIRECTORY_SEPARATOR, $folders);
         $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
 
-        mkdir($fullPath, 0777, true);
+        if (!is_dir($fullPath)) {
+            mkdir($fullPath, 0777, true);
+        }
 
         return $fullPath.DIRECTORY_SEPARATOR.$file;
     }

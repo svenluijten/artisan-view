@@ -104,4 +104,31 @@ class GeneratorTest extends TestCase
 
         $this->assertContains($block->render(), $this->view('index'));
     }
+
+    /** @test */
+    public function it_makes_all_restful_views()
+    {
+        $this->artisan('make:view', [
+            'name' => 'products',
+            '--resource' => true,
+        ]);
+
+        $this->assertFileExists(base_path('resources/views/products/index.blade.php'));
+        $this->assertFileExists(base_path('resources/views/products/show.blade.php'));
+        $this->assertFileExists(base_path('resources/views/products/create.blade.php'));
+        $this->assertFileExists(base_path('resources/views/products/edit.blade.php'));
+    }
+
+    /** @test */
+    public function it_makes_some_restful_routes()
+    {
+        $this->artisan('make:view', [
+            'name' => 'products',
+            '--resource' => true,
+            '--verbs' => ['show', 'create'],
+        ]);
+
+        $this->assertFileExists(base_path('resources/views/products/show.blade.php'));
+        $this->assertFileExists(base_path('resources/views/products/create.blade.php'));
+    }
 }
