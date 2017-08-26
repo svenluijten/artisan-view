@@ -81,7 +81,7 @@ class Generator
         $folders = implode(DIRECTORY_SEPARATOR, $folders);
         $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
 
-        @mkdir($fullPath, null, true);
+        @mkdir($fullPath, 0777, true);
 
         return $fullPath.DIRECTORY_SEPARATOR.$file;
     }
