@@ -22,6 +22,17 @@ class GeneratorTest extends TestCase
     }
 
     /** @test */
+    public function it_makes_a_view_with_a_different_extension()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--extension' => 'html.twig',
+        ]);
+
+        $this->assertFileExists(base_path('resources/views/index.html.twig'));
+    }
+
+    /** @test */
     public function it_makes_a_view_in_a_subfolder()
     {
         $this->artisan('make:view', [
