@@ -3,8 +3,8 @@
 namespace Sven\ArtisanView\Tests;
 
 use Sven\ArtisanView\Blocks\Extend;
-use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\Blocks\InlineSection;
+use Sven\ArtisanView\Blocks\Section;
 
 class BlocksTest extends TestCase
 {

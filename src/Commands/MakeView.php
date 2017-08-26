@@ -2,14 +2,14 @@
 
 namespace Sven\ArtisanView\Commands;
 
+use Illuminate\Console\Command;
+use Sven\ArtisanView\Blocks\Extend;
 use Sven\ArtisanView\Blocks\InlineSection;
 use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\Config;
-use Illuminate\Console\Command;
 use Sven\ArtisanView\Generator;
-use Sven\ArtisanView\Blocks\Extend;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class MakeView extends Command
 {
