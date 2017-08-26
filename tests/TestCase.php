@@ -65,6 +65,16 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function view($name)
+    {
+        return file_get_contents($this->view->getFinder()->find($name));
+    }
+
+    /**
      * @param \Illuminate\Contracts\Foundation\Application $app
      *
      * @return string

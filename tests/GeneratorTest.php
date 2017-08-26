@@ -35,6 +35,6 @@ class GeneratorTest extends TestCase
             'name' => 'index',
         ]);
 
-        $this->assertEmpty(file_get_contents($this->view->getFinder()->find('index')));
+        $this->assertEmpty($this->view('index'));
     }
 }
