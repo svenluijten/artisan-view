@@ -65,4 +65,18 @@ class GeneratorTest extends TestCase
 
         $this->assertContains($block->render(), $this->view('index'));
     }
+
+    /** @test */
+    public function it_includes_multiple_sections()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--section' => ['content', 'footer'],
+        ]);
+
+        $firstBlock = new Section('content');
+        $secondBlock = new Section('footer');
+
+        $this->assertContains($firstBlock->render().$secondBlock->render(), $this->view('index'));
+    }
 }

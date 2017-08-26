@@ -51,8 +51,8 @@ class MakeView extends Command
             $blocks[] = new Extend($this->option('extends'));
         }
 
-        if ($this->option('section')) {
-            $blocks[] = new Section($this->option('section'));
+        foreach ((array) $this->option('section') as $section) {
+            $blocks[] = new Section($section);
         }
 
         return $blocks;
