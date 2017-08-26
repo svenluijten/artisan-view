@@ -4,6 +4,7 @@ namespace Sven\ArtisanView\Tests;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
 use Sven\ArtisanView\Blocks\Extend;
+use Sven\ArtisanView\Blocks\InlineSection;
 use Sven\ArtisanView\Blocks\Section;
 
 class GeneratorTest extends TestCase
@@ -78,5 +79,18 @@ class GeneratorTest extends TestCase
         $secondBlock = new Section('footer');
 
         $this->assertContains($firstBlock->render().$secondBlock->render(), $this->view('index'));
+    }
+
+    /** @test */
+    public function it_includes_an_inline_section()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--section' => 'title:Hello world',
+        ]);
+
+        $block = new InlineSection('title', 'Hello world');
+
+        $this->assertContains($block->render(), $this->view('index'));
     }
 }

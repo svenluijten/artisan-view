@@ -2,6 +2,7 @@
 
 namespace Sven\ArtisanView\Commands;
 
+use Sven\ArtisanView\Blocks\InlineSection;
 use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\Config;
 use Illuminate\Console\Command;
@@ -52,7 +53,13 @@ class MakeView extends Command
         }
 
         foreach ((array) $this->option('section') as $section) {
-            $blocks[] = new Section($section);
+            if (str_contains($section, ':')) {
+                list($name, $title) = explode(':', $section);
+
+                $blocks[] = new InlineSection($name, $title);
+            } else {
+                $blocks[] = new Section($section);
+            }
         }
 
         return $blocks;
