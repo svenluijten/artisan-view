@@ -59,7 +59,7 @@ class GeneratorTest extends TestCase
     {
         $this->artisan('make:view', [
             'name' => 'index',
-            '--section' => 'content'
+            '--section' => 'content',
         ]);
 
         $block = new Section('content');
