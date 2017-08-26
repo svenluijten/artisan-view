@@ -100,7 +100,7 @@ $ php artisan make:view index --section="title:Hello world"
 $ php artisan make:view products --resource
 
 # Create a resource with only specific verbs
-$ php artisan make:view products --resource --verbs=index,create,edit
+$ php artisan make:view products --resource --verbs=index --verbs=create --verbs=edit
 ```
 
 ### Scrapping views
