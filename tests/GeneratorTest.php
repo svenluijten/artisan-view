@@ -37,4 +37,15 @@ class GeneratorTest extends TestCase
 
         $this->assertEmpty($this->view('index'));
     }
+
+    /** @test */
+    public function it_extends_another_view()
+    {
+        $this->artisan('make:view', [
+            'name' => 'pages.contact',
+            '--extends' => 'layouts.app',
+        ]);
+
+        $this->assertContains('@extends(\'layouts.app\')', $this->view('pages.contact'));
+    }
 }
