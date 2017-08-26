@@ -45,5 +45,5 @@ abstract class Block
     /**
      * @return string
      */
-    public abstract function render();
+    abstract public function render();
 }

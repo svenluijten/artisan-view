@@ -2,8 +2,8 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
 use Illuminate\View\Factory;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
 
 class GeneratorTest extends TestCase
 {

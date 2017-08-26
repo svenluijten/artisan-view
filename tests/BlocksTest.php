@@ -3,8 +3,8 @@
 namespace Sven\ArtisanView\Tests;
 
 use Sven\ArtisanView\Blocks\Extend;
-use Sven\ArtisanView\Blocks\InlineSection;
 use Sven\ArtisanView\Blocks\Section;
+use Sven\ArtisanView\Blocks\InlineSection;
 
 class BlocksTest extends TestCase
 {
@@ -25,7 +25,7 @@ class BlocksTest extends TestCase
         $block = new Section('content');
 
         $this->assertEquals(
-            "@section('content')".PHP_EOL.PHP_EOL."@endsection".PHP_EOL.PHP_EOL,
+            "@section('content')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL,
             $block->render()
         );
     }
