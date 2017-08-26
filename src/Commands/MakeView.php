@@ -23,6 +23,9 @@ class MakeView extends Command
      */
     protected $description = 'Create a new view';
 
+    /**
+     * Execute the command.
+     */
     public function handle()
     {
         $generator = new Generator($this->getConfig(), $this->buildBlockStack());
@@ -66,9 +69,7 @@ class MakeView extends Command
     }
 
     /**
-     * Get the console command options.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     protected function getOptions()
     {
@@ -82,9 +83,7 @@ class MakeView extends Command
     }
 
     /**
-     * Get the console command arguments.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     protected function getArguments()
     {
