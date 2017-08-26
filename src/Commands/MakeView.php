@@ -46,7 +46,7 @@ class MakeView extends Command
     {
         $blocks = [];
 
-        if ($this->hasOption('extends')) {
+        if ($this->option('extends')) {
             $blocks[] = new Extend($this->option('extends'));
         }
 

@@ -27,4 +27,14 @@ class GeneratorTest extends TestCase
 
         $this->assertTrue($this->view->exists('pages.about'));
     }
+
+    /** @test */
+    public function the_view_it_generates_is_empty()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+        ]);
+
+        $this->assertEmpty(file_get_contents($this->view->getFinder()->find('index')));
+    }
 }
