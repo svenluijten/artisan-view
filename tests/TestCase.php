@@ -2,9 +2,9 @@
 
 namespace Sven\ArtisanView\Tests;
 
+use Sven\ArtisanView\ServiceProvider;
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
-use Sven\ArtisanView\ServiceProvider;
 
 abstract class TestCase extends AbstractPackageTestCase
 {

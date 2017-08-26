@@ -26,9 +26,6 @@ class Generator
         $this->blocks = $blocks;
     }
 
-    /**
-     *
-     */
     public function generate()
     {
         $views = $this->config->isResource()

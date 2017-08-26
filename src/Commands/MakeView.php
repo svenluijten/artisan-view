@@ -2,12 +2,12 @@
 
 namespace Sven\ArtisanView\Commands;
 
-use Illuminate\Console\Command;
-use Sven\ArtisanView\Blocks\Extend;
 use Sven\ArtisanView\Config;
+use Illuminate\Console\Command;
 use Sven\ArtisanView\Generator;
-use Symfony\Component\Console\Input\InputArgument;
+use Sven\ArtisanView\Blocks\Extend;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MakeView extends Command
 {
@@ -21,9 +21,6 @@ class MakeView extends Command
      */
     protected $description = 'Create a new view';
 
-    /**
-     *
-     */
     public function handle()
     {
         $generator = new Generator($this->getConfig(), $this->buildBlockStack());
