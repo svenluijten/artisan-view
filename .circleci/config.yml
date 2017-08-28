@@ -8,5 +8,5 @@ jobs:
     steps:
       - checkout
       - run: composer self-update
-      - run: composer install -n --prefer-dist
+      - run: composer install -n --prefer-dist --no-progress
       - run: ./vendor/bin/phpunit
