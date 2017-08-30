@@ -2,8 +2,6 @@
 
 namespace Sven\ArtisanView;
 
-use Sven\ArtisanView\Exceptions\UnsupportedException;
-
 class Generator
 {
     /**
@@ -77,69 +75,11 @@ class Generator
         $contents = BlockBuilder::build($blocks);
 
         foreach ($names as $name) {
-            $fileName = $this->createIntermediateFolders(
-                $this->getPath(), $this->normalizePath($name)
+            $fileName = PathHelper::createIntermediateFolders(
+                PathHelper::getPath(), PathHelper::normalizePath($name)
             );
 
             file_put_contents($fileName, $contents);
         }
-    }
-
-    /**
-     * @param string $path
-     * @param string $fileName
-     *
-     * @return string
-     */
-    protected function createIntermediateFolders($path, $fileName)
-    {
-        if (! str_contains($fileName, DIRECTORY_SEPARATOR)) {
-            return $path.DIRECTORY_SEPARATOR.$fileName;
-        }
-
-        $folders = explode(DIRECTORY_SEPARATOR, $fileName);
-        $file = array_pop($folders);
-        $folders = implode(DIRECTORY_SEPARATOR, $folders);
-        $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
-
-        if (! is_dir($fullPath)) {
-            mkdir($fullPath, 0777, true);
-        }
-
-        return $fullPath.DIRECTORY_SEPARATOR.$file;
-    }
-
-    /**
-     * @throws \Sven\ArtisanView\Exceptions\UnsupportedException
-     *
-     * @return string
-     */
-    protected function getPath()
-    {
-        /** @var \Illuminate\View\FileViewFinder $viewFinder */
-        $viewFinder = app('view.finder');
-
-        $paths = $viewFinder->getPaths();
-
-        // If we have more than one path configured, throw an
-        // exception as this is currently not supported by
-        // the package. It might be supported later on.
-        if (count($paths) !== 1) {
-            throw UnsupportedException::tooManyPaths(count($paths));
-        }
-
-        return $this->normalizePath(realpath(reset($paths)));
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    protected function normalizePath($path)
-    {
-        $withoutBackslashes = str_replace('\\', DIRECTORY_SEPARATOR, $path);
-
-        return str_replace('/', DIRECTORY_SEPARATOR, $withoutBackslashes);
     }
 }
