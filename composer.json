@@ -28,5 +28,12 @@
         "psr-4": {
             "Sven\\ArtisanView\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sven\\ArtisanView\\ServiceProvider"
+            ]
+        }
     }
 }
