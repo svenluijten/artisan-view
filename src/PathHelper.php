@@ -8,34 +8,24 @@ class PathHelper
 {
     /**
      * @param string $path
-     * @param string $fileName
-     *
-     * @return string
      */
-    public static function createIntermediateFolders($path, $fileName)
+    public static function createIntermediateFolders($path)
     {
-        if (! str_contains($fileName, DIRECTORY_SEPARATOR)) {
-            return $path.DIRECTORY_SEPARATOR.$fileName;
+        $folderPath = static::removeFileName($path);
+
+        if (! is_dir($folderPath)) {
+            mkdir($folderPath, 0777, true);
         }
-
-        $folders = explode(DIRECTORY_SEPARATOR, $fileName);
-        $file = array_pop($folders);
-        $folders = implode(DIRECTORY_SEPARATOR, $folders);
-        $fullPath = $path.DIRECTORY_SEPARATOR.$folders;
-
-        if (! is_dir($fullPath)) {
-            mkdir($fullPath, 0777, true);
-        }
-
-        return $fullPath.DIRECTORY_SEPARATOR.$file;
     }
 
     /**
+     * @param string|null $fileName
+     *
      * @throws \Sven\ArtisanView\Exceptions\UnsupportedException
      *
      * @return string
      */
-    public static function getPath()
+    public static function getPath($fileName = null)
     {
         /** @var \Illuminate\View\FileViewFinder $viewFinder */
         $viewFinder = app('view.finder');
@@ -49,7 +39,9 @@ class PathHelper
             throw UnsupportedException::tooManyPaths(count($paths));
         }
 
-        return self::normalizePath(realpath(reset($paths)));
+        $path = reset($paths);
+
+        return self::normalizePath($path.DIRECTORY_SEPARATOR.$fileName);
     }
 
     /**
@@ -62,5 +54,19 @@ class PathHelper
         $withoutBackslashes = str_replace('\\', DIRECTORY_SEPARATOR, $path);
 
         return str_replace('/', DIRECTORY_SEPARATOR, $withoutBackslashes);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public static function removeFileName($path)
+    {
+        $parts = explode(DIRECTORY_SEPARATOR, static::normalizePath($path));
+
+        array_pop($parts);
+
+        return implode(DIRECTORY_SEPARATOR, $parts);
     }
 }

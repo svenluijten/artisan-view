@@ -75,11 +75,11 @@ class Generator
         $contents = BlockBuilder::build($blocks);
 
         foreach ($names as $name) {
-            $fileName = PathHelper::createIntermediateFolders(
-                PathHelper::getPath(), PathHelper::normalizePath($name)
-            );
+            $path = PathHelper::getPath($name);
 
-            file_put_contents($fileName, $contents);
+            PathHelper::createIntermediateFolders($path);
+
+            file_put_contents($path, $contents);
         }
     }
 }
