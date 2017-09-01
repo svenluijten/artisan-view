@@ -112,6 +112,27 @@ $ php artisan scrap:view index
 $ php artisan scrap:view pages.index
 ```
 
+This will ask you if you're sure. To skip this question, pass the `--force` flag:
+
+```bash
+# Don't ask for confirmation
+$ php artisan scrap:view index --force
+```
+
+### Scrapping a REST resource
+```bash
+# Remove the resource called 'products'
+$ php artisan scrap:view products --resource
+```
+
+This will remove the directory `products/`, but only if it is empty. You can also only scrap
+part of a resource by adding `--verbs` flags:
+
+```bash
+# Remove the 'create' and 'edit' views from a previously generated resource.
+$ php artisan scrap:view products --resource --verbs=create --verbs=edit
+```
+
 ### Mix and match
 Of course, all the options work well together like you'd expect. So the following command...
 
