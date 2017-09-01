@@ -27,8 +27,7 @@ class ScrapView extends Command
     {
         $config = $this->getConfig();
 
-
-        if (!$config->isForce() && !$this->confirm('Are you sure you want to scrap the view?')) {
+        if (! $config->isForce() && ! $this->confirm('Are you sure you want to scrap the view?')) {
             $this->line('Alright, nothing happened.');
 
             return;
