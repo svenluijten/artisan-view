@@ -2,13 +2,8 @@
 
 namespace Sven\ArtisanView;
 
-class Generator
+class Generator extends ViewActor
 {
-    /**
-     * @var \Sven\ArtisanView\Config
-     */
-    protected $config;
-
     /**
      * @var \Sven\ArtisanView\Blocks\Block[]
      */
@@ -22,8 +17,9 @@ class Generator
      */
     public function __construct(Config $config, array $blocks = [])
     {
-        $this->config = $config;
         $this->blocks = $blocks;
+
+        parent::__construct($config);
     }
 
     /**
@@ -36,34 +32,6 @@ class Generator
         $this->makeViews(
             $this->getViewNames($views), $this->blocks
         );
-    }
-
-    /**
-     * @return array
-     */
-    protected function getViews()
-    {
-        if (! $this->config->isResource()) {
-            return [$this->config->getName()];
-        }
-
-        return array_map(function ($view) {
-            return $this->config->getName().'.'.$view;
-        }, $this->config->getVerbs());
-    }
-
-    /**
-     * @param iterable $names
-     *
-     * @return array
-     */
-    protected function getViewNames(iterable $names)
-    {
-        return array_map(function ($name) {
-            $name = str_replace('.', '/', $name);
-
-            return $name.$this->config->getExtension();
-        }, $names);
     }
 
     /**
