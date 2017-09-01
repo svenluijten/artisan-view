@@ -15,8 +15,7 @@
         "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8 || ^5.0",
-        "graham-campbell/testbench": "^3.3",
+        "graham-campbell/testbench": "^4.0",
         "mockery/mockery": "^0.9.9"
     },
     "autoload": {
