@@ -35,7 +35,7 @@ $ composer require sven/artisan-view:^2.0 --dev
 ```
 
 Or add the package to your development dependencies in `composer.json` and run
-`composer update` to download the package:
+`composer update sven/artisan-view` to download the package:
 
 ```json
 {
