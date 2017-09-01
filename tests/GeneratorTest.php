@@ -18,7 +18,7 @@ class GeneratorTest extends TestCase
             'name' => 'index',
         ]);
 
-        $this->assertFileExists(base_path('resources/views/index.blade.php'));
+        $this->assertViewExists('index.blade.php');
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class GeneratorTest extends TestCase
             '--extension' => 'html.twig',
         ]);
 
-        $this->assertFileExists(base_path('resources/views/index.html.twig'));
+        $this->assertViewExists('index.html.twig');
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class GeneratorTest extends TestCase
             'name' => 'pages.about',
         ]);
 
-        $this->assertFileExists(base_path('resources/views/pages/about.blade.php'));
+        $this->assertViewExists('pages/about.blade.php');
     }
 
     /** @test */
@@ -113,10 +113,10 @@ class GeneratorTest extends TestCase
             '--resource' => true,
         ]);
 
-        $this->assertFileExists(base_path('resources/views/products/index.blade.php'));
-        $this->assertFileExists(base_path('resources/views/products/show.blade.php'));
-        $this->assertFileExists(base_path('resources/views/products/create.blade.php'));
-        $this->assertFileExists(base_path('resources/views/products/edit.blade.php'));
+        $this->assertViewExists('products/index.blade.php');
+        $this->assertViewExists('products/show.blade.php');
+        $this->assertViewExists('products/create.blade.php');
+        $this->assertViewExists('products/edit.blade.php');
     }
 
     /** @test */
@@ -128,7 +128,7 @@ class GeneratorTest extends TestCase
             '--verbs' => ['show', 'create'],
         ]);
 
-        $this->assertFileExists(base_path('resources/views/products/show.blade.php'));
-        $this->assertFileExists(base_path('resources/views/products/create.blade.php'));
+        $this->assertViewExists('products/show.blade.php');
+        $this->assertViewExists('products/create.blade.php');
     }
 }
