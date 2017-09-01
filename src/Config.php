@@ -27,6 +27,11 @@ class Config
     protected $verbs = ['index', 'create', 'edit', 'show'];
 
     /**
+     * @var bool
+     */
+    protected $force = false;
+
+    /**
      * @param string $name
      *
      * @return $this
@@ -108,5 +113,25 @@ class Config
     public function getVerbs()
     {
         return $this->verbs;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForce()
+    {
+        return $this->force;
+    }
+
+    /**
+     * @param bool $force
+     *
+     * @return $this
+     */
+    public function setForce(bool $force)
+    {
+        $this->force = $force;
+
+        return $this;
     }
 }

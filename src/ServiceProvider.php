@@ -13,6 +13,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $this->commands([
             Commands\MakeView::class,
+            Commands\ScrapView::class,
         ]);
     }
 
@@ -31,6 +32,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         return [
             Commands\MakeView::class,
+            Commands\ScrapView::class,
         ];
     }
 }
