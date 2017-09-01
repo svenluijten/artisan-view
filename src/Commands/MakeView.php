@@ -41,7 +41,8 @@ class MakeView extends Command
         return (new Config)
             ->setName($this->argument('name'))
             ->setExtension($this->option('extension'))
-            ->setResource($this->option('resource'));
+            ->setResource($this->option('resource'))
+            ->setVerbs(...$this->option('verbs'));
     }
 
     /**

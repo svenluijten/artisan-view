@@ -130,5 +130,7 @@ class GeneratorTest extends TestCase
 
         $this->assertViewExists('products/show.blade.php');
         $this->assertViewExists('products/create.blade.php');
+        $this->assertViewNotExists('products/edit.blade.php');
+        $this->assertViewNotExists('products/index.blade.php');
     }
 }

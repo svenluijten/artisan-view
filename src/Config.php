@@ -95,9 +95,9 @@ class Config
      *
      * @return $this
      */
-    public function setVerbs(...$verbs)
+    public function setVerbs($verbs)
     {
-        $this->verbs = $verbs;
+        $this->verbs = func_get_args();
 
         return $this;
     }
