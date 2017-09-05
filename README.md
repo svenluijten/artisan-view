@@ -125,11 +125,13 @@ $ php artisan scrap:view index --force
 $ php artisan scrap:view products --resource
 ```
 
-This will remove the directory `products/`, but only if it is empty. You can also only scrap
-part of a resource by adding `--verbs` flags:
+This will remove the views `products.index`, `products.show`, `products.create`, and `products.edit`. If the directory
+`products/` is empty after doing that, it will also be deleted.
+
+You can scrap part of a resource by adding `--verbs` flags:
 
 ```bash
-# Remove the 'create' and 'edit' views from a previously generated resource.
+# Remove the 'products.create' and 'products.edit' views.
 $ php artisan scrap:view products --resource --verbs=create --verbs=edit
 ```
 
