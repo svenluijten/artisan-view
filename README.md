@@ -100,7 +100,7 @@ $ php artisan make:view index --section="title:Hello world"
 $ php artisan make:view products --resource
 
 # Create a resource with only specific verbs
-$ php artisan make:view products --resource --verbs=index --verbs=create --verbs=edit
+$ php artisan make:view products --resource --verb=index --verb=create --verb=edit
 ```
 
 ### Scrapping views
@@ -128,11 +128,11 @@ $ php artisan scrap:view products --resource
 This will remove the views `products.index`, `products.show`, `products.create`, and `products.edit`. If the directory
 `products/` is empty after doing that, it will also be deleted.
 
-You can scrap part of a resource by adding `--verbs` flags:
+You can scrap part of a resource by adding `--verb` flags:
 
 ```bash
 # Remove the 'products.create' and 'products.edit' views.
-$ php artisan scrap:view products --resource --verbs=create --verbs=edit
+$ php artisan scrap:view products --resource --verb=create --verb=edit
 ```
 
 ### Mix and match

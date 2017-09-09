@@ -125,7 +125,7 @@ class GeneratorTest extends TestCase
         $this->artisan('make:view', [
             'name' => 'products',
             '--resource' => true,
-            '--verbs' => ['show', 'create'],
+            '--verb' => ['show', 'create'],
         ]);
 
         $this->assertViewExists('products/show.blade.php');

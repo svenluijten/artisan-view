@@ -102,7 +102,7 @@ class ScrapTest extends TestCase
         $this->artisan('scrap:view', [
             'name' => 'products',
             '--resource' => true,
-            '--verbs' => ['create', 'edit'],
+            '--verb' => ['create', 'edit'],
             '--force' => true,
         ]);
 
