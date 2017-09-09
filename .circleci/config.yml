@@ -1,0 +1,12 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/artisan-view
+    docker:
+      - image: circleci/php:5.6-cli
+    steps:
+      - checkout
+      - run: composer self-update
+      - run: composer install -n --prefer-dist --no-progress
+      - run: ./vendor/bin/phpunit
