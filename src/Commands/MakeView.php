@@ -28,9 +28,9 @@ class MakeView extends Command
      */
     public function handle()
     {
-        $generator = new Generator($this->getConfig(), $this->buildBlockStack());
+        $generator = new Generator($this->getConfig());
 
-        $generator->generate();
+        $generator->generate($this->buildBlockStack());
     }
 
     /**

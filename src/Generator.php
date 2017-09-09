@@ -5,32 +5,16 @@ namespace Sven\ArtisanView;
 class Generator extends ViewActor
 {
     /**
-     * @var \Sven\ArtisanView\Blocks\Block[]
-     */
-    protected $blocks = [];
-
-    /**
-     * Generator constructor.
-     *
-     * @param \Sven\ArtisanView\Config         $config
-     * @param \Sven\ArtisanView\Blocks\Block[] $blocks
-     */
-    public function __construct(Config $config, array $blocks = [])
-    {
-        $this->blocks = $blocks;
-
-        parent::__construct($config);
-    }
-
-    /**
      * Generate the view(s) as specified in the constructor.
+     *
+     * @param array $blocks
      */
-    public function generate()
+    public function generate(array $blocks = [])
     {
         $views = $this->getViews();
 
         $this->makeViews(
-            $this->getViewNames($views), $this->blocks
+            $this->getViewNames($views), $blocks
         );
     }
 
