@@ -34,11 +34,11 @@ abstract class ViewActor
     }
 
     /**
-     * @param iterable $names
+     * @param array $names
      *
      * @return array
      */
-    protected function getViewNames(iterable $names)
+    protected function getViewNames(array $names)
     {
         return array_map(function ($name) {
             $name = str_replace('.', '/', $name);

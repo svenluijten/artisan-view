@@ -19,10 +19,10 @@ class Generator extends ViewActor
     }
 
     /**
-     * @param iterable                         $names
+     * @param array                            $names
      * @param \Sven\ArtisanView\Blocks\Block[] $blocks
      */
-    protected function makeViews(iterable $names, array $blocks)
+    protected function makeViews(array $names, array $blocks)
     {
         $contents = BlockBuilder::build($blocks);
 

@@ -17,9 +17,9 @@ class Destroyer extends ViewActor
     }
 
     /**
-     * @param iterable $names
+     * @param array $names
      */
-    protected function destroyViews(iterable $names)
+    protected function destroyViews(array $names)
     {
         foreach ($names as $name) {
             $path = PathHelper::getPath($name);
