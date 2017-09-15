@@ -7,6 +7,6 @@ jobs:
       - image: circleci/php:7.1-cli
     steps:
       - checkout
-      - run: composer self-update
-      - run: composer install -n --prefer-dist --no-progress
+      - run: composer self-update --no-progress --no-interaction
+      - run: composer install --no-progress --no-interaction --prefer-dist
       - run: ./vendor/bin/phpunit
