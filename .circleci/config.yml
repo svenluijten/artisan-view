@@ -1,7 +1,8 @@
 version: 2
 
 jobs:
-  test_70:
+  test_7.0:
+    working_directory: ~/artisan-view
     docker:
       - image: circleci/php:7.0-cli
     steps:
@@ -10,7 +11,8 @@ jobs:
       - run: composer install --no-progress --no-interaction --prefer-dist
       - run: ./vendor/bin/phpunit
 
-  test_71:
+  test_7.1:
+    working_directory: ~/artisan-view
     docker:
       - image: circleci/php:7.1-cli
     steps:
@@ -22,7 +24,6 @@ jobs:
 workflows:
   version: 2
   test:
-    working_directory: ~/artisan-view
     jobs:
       - test_7.0
       - test_7.1
