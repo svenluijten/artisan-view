@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test_7.0:
+  test_70:
     docker:
       - image: circleci/php:7.0-cli
     steps:
@@ -10,7 +10,7 @@ jobs:
       - run: composer install --no-progress --no-interaction --prefer-dist
       - run: ./vendor/bin/phpunit
 
-  test_7.1:
+  test_71:
     docker:
       - image: circleci/php:7.1-cli
     steps:
