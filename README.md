@@ -34,17 +34,6 @@ Via [composer](http://getcomposer.org):
 $ composer require sven/artisan-view:^2.0 --dev
 ```
 
-Or add the package to your development dependencies in `composer.json` and run
-`composer update sven/artisan-view` to download the package:
-
-```json
-{
-    "require-dev": {
-        "sven/artisan-view": "^2.0"
-    }
-}
-```
-
 ### Registering the service provider
 If you're using Laravel 5.5, you can skip this step. The service provider will have already been registered
 thanks to auto-discovery. 
