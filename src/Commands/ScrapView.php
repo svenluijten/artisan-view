@@ -36,6 +36,8 @@ class ScrapView extends Command
         $destroyer = new Destroyer($config);
 
         $destroyer->destroy();
+
+        $this->info('View scrapped successfully.');
     }
 
     /**
