@@ -5,11 +5,13 @@ namespace Sven\ArtisanView\Commands;
 use Illuminate\Console\Command;
 use Sven\ArtisanView\Blocks\Extend;
 use Sven\ArtisanView\Blocks\InlineSection;
+use Sven\ArtisanView\Blocks\Push;
 use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\Config;
 use Sven\ArtisanView\Generator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Sven\ArtisanView\PathHelper;
 
 class MakeView extends Command
 {
@@ -55,7 +57,30 @@ class MakeView extends Command
         $blocks = [];
 
         if ($this->option('extends')) {
-            $blocks[] = new Extend($this->option('extends'));
+            $template = $this->option('extends');
+
+            $blocks[] = new Extend($template);
+
+            if ($this->option('with-yields') || $this->option('with-stacks')) {
+                $file = file_get_contents(PathHelper::getPath(str_replace('.', '/', $template).'.blade.php'));
+            }
+
+            if ($this->option('with-yields')) {
+                preg_match_all('/\@yield\(\'(\w+)\'/', $file, $matches);
+
+                foreach ($matches[1] as $yield) {
+                    $blocks[] = new Section($yield);
+                }
+            }
+
+            if ($this->option('with-stacks')) {
+                // $file =  file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
+                preg_match_all('/\@stack\(\'(.+)\'/', $file, $matches);
+
+                foreach ($matches[1] as $stack) {
+                    $blocks[] = new Push($stack);
+                }
+            }
         }
 
         foreach ((array) $this->option('section') as $section) {
@@ -82,6 +107,8 @@ class MakeView extends Command
             ['verb', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verb(s) to generate views for.', ['index', 'show', 'create', 'edit']],
             ['section', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'A list of "@section"s to define in the created view(s).'],
             ['extends', null, InputOption::VALUE_OPTIONAL, 'The view to "@extend" from the created view(s).'],
+            ['with-yields', 'y', InputOption::VALUE_NONE, 'Whether or not to add all @yield sections from extended template (if --extends provided)'],
+            ['with-stacks', 's', InputOption::VALUE_NONE, 'Whether or not to add all @stacks from extended template as @push (if --extends provided)'],
         ];
     }
 
