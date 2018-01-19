@@ -62,7 +62,7 @@ class MakeView extends Command
             $blocks[] = new Extend($template);
 
             if ($this->option('with-yields') || $this->option('with-stacks')) {
-                $file = file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
+                $file = file_get_contents(PathHelper::getPath(str_replace('.', '/', $template).".blade.php"));
             }
 
             if ($this->option('with-yields')) {
