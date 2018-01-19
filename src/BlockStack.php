@@ -32,7 +32,7 @@ class BlockStack
 
         /** @var \Sven\ArtisanView\Voters\Voter $voter */
         foreach ($voters as $voter) {
-            if (!$voter->canHandle($input)) {
+            if (! $voter->canHandle($input)) {
                 continue;
             }
 

@@ -43,7 +43,7 @@ class StacksFromParent implements Voter
      */
     protected function file($name)
     {
-        $path = PathHelper::getPath(str_replace('.', '/', $name) . '.blade.php');
+        $path = PathHelper::getPath(str_replace('.', '/', $name).'.blade.php');
 
         return file_exists($path) ? file_get_contents($path) : '';
     }
