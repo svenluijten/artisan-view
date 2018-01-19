@@ -57,12 +57,15 @@ class MakeView extends Command
         $blocks = [];
 
         if ($this->option('extends')) {
-            $template= $this->option('extends');
+            $template = $this->option('extends');
 
             $blocks[] = new Extend($template);
 
+            if ($this->option('with-yields') || $this->option('with-stacks')) {
+                $file = file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
+            }
+
             if ($this->option('with-yields')) {
-                $file =  file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
                 preg_match_all('/\@yield\(\'(\w+)\'/', $file, $matches);
 
                 foreach ($matches[1] as $yield) {
@@ -71,9 +74,9 @@ class MakeView extends Command
             }
 
             if ($this->option('with-stacks')) {
-                $file =  file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
-                preg_match_all('/\@stack\(\'(\w+)\'/', $file, $matches);
-print_r($matches);
+                // $file =  file_get_contents(PathHelper::getPath(str_replace(".", "/", $template).".blade.php"));
+                preg_match_all('/\@stack\(\'(.+)\'/', $file, $matches);
+
                 foreach ($matches[1] as $stack) {
                     $blocks[] = new Push($stack);
                 }
