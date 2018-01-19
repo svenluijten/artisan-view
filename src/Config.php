@@ -34,7 +34,7 @@ class Config
     /**
      * @param string $name
      *
-     * @return $this
+     * @return \Sven\ArtisanView\Config
      */
     public function setName($name)
     {
@@ -54,7 +54,7 @@ class Config
     /**
      * @param string $extension
      *
-     * @return $this
+     * @return \Sven\ArtisanView\Config
      */
     public function setExtension($extension)
     {
@@ -78,7 +78,7 @@ class Config
     /**
      * @param bool $resource
      *
-     * @return $this
+     * @return \Sven\ArtisanView\Config
      */
     public function setResource($resource)
     {
@@ -98,7 +98,7 @@ class Config
     /**
      * @param array $verbs
      *
-     * @return $this
+     * @return \Sven\ArtisanView\Config
      */
     public function setVerbs($verbs)
     {
@@ -126,7 +126,7 @@ class Config
     /**
      * @param bool $force
      *
-     * @return $this
+     * @return \Sven\ArtisanView\Config
      */
     public function setForce(bool $force)
     {

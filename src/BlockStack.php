@@ -17,8 +17,6 @@ class BlockStack
     protected $blocks = [];
 
     /**
-     * Build the block stack based on the given input.
-     *
      * @param \Symfony\Component\Console\Input\InputInterface $input
      *
      * @return \Sven\ArtisanView\BlockStack
@@ -45,8 +43,6 @@ class BlockStack
     }
 
     /**
-     * Add a block to the block stack.
-     *
      * @param \Sven\ArtisanView\Blocks\Block[] ...$blocks
      *
      * @return \Sven\ArtisanView\BlockStack
@@ -61,8 +57,6 @@ class BlockStack
     }
 
     /**
-     * Get all blocks currently in the block stack.
-     *
      * @return \Sven\ArtisanView\Blocks\Block[]
      */
     public function all()

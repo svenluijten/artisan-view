@@ -15,8 +15,6 @@ abstract class Block
     protected $contents;
 
     /**
-     * Block constructor.
-     *
      * @param string $name
      * @param string $contents
      */

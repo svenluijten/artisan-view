@@ -5,8 +5,6 @@ namespace Sven\ArtisanView;
 class Generator extends ViewActor
 {
     /**
-     * Generate the view(s) as specified in the constructor.
-     *
      * @param \Sven\ArtisanView\BlockStack $blockStack
      */
     public function generate(BlockStack $blockStack)

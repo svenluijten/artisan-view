@@ -8,8 +8,6 @@ use Symfony\Component\Console\Input\InputInterface;
 interface Voter
 {
     /**
-     * See if the class needs to be used with the current input.
-     *
      * @param \Symfony\Component\Console\Input\InputInterface $input
      *
      * @return bool
@@ -17,8 +15,6 @@ interface Voter
     public function canHandle(InputInterface $input);
 
     /**
-     * Add a section to the given block stack.
-     *
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Sven\ArtisanView\BlockStack $blockStack
      *
