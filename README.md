@@ -92,6 +92,12 @@ $ php artisan make:view index --section=title --section=content
 # Add an inline section to the view
 # Remember to add quotes around the section if you want to use spaces
 $ php artisan make:view index --section="title:Hello world"
+
+# Automatically create sections for each @yield statement in the extended view
+$ php artisan make:view index --extends=app -with-yields
+
+# Automatically create push sections for each @stack statement in the extended view
+$ php artisan make:view index --extends=app -with-stacks
 ```
 
 ### REST resources
