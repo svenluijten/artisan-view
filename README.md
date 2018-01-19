@@ -94,10 +94,10 @@ $ php artisan make:view index --section=title --section=content
 $ php artisan make:view index --section="title:Hello world"
 
 # Automatically create sections for each @yield statement in the extended view
-$ php artisan make:view index --extends=app -with-yields
+$ php artisan make:view index --extends=app --with-yields
 
 # Automatically create push sections for each @stack statement in the extended view
-$ php artisan make:view index --extends=app -with-stacks
+$ php artisan make:view index --extends=app --with-stacks
 ```
 
 ### REST resources
