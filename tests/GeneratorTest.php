@@ -3,9 +3,7 @@
 namespace Sven\ArtisanView\Tests;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
-use Sven\ArtisanView\Blocks\Extend;
-use Sven\ArtisanView\Blocks\InlineSection;
-use Sven\ArtisanView\Blocks\Section;
+use Sven\ArtisanView\Blocks;
 
 class GeneratorTest extends TestCase
 {
@@ -60,7 +58,7 @@ class GeneratorTest extends TestCase
             '--extends' => 'layouts.app',
         ]);
 
-        $block = new Extend('layouts.app');
+        $block = new Blocks\Extend('layouts.app');
 
         $this->assertContains($block->render(), $this->view('pages.contact'));
     }
@@ -73,7 +71,7 @@ class GeneratorTest extends TestCase
             '--section' => 'content',
         ]);
 
-        $block = new Section('content');
+        $block = new Blocks\Section('content');
 
         $this->assertContains($block->render(), $this->view('index'));
     }
@@ -86,8 +84,8 @@ class GeneratorTest extends TestCase
             '--section' => ['content', 'footer'],
         ]);
 
-        $firstBlock = new Section('content');
-        $secondBlock = new Section('footer');
+        $firstBlock = new Blocks\Section('content');
+        $secondBlock = new Blocks\Section('footer');
 
         $this->assertContains($firstBlock->render().$secondBlock->render(), $this->view('index'));
     }
@@ -100,7 +98,7 @@ class GeneratorTest extends TestCase
             '--section' => 'title:Hello world',
         ]);
 
-        $block = new InlineSection('title', 'Hello world');
+        $block = new Blocks\InlineSection('title', 'Hello world');
 
         $this->assertContains($block->render(), $this->view('index'));
     }
@@ -132,5 +130,52 @@ class GeneratorTest extends TestCase
         $this->assertViewExists('products/create.blade.php');
         $this->assertViewNotExists('products/edit.blade.php');
         $this->assertViewNotExists('products/index.blade.php');
+    }
+
+    /** @test */
+    public function it_reads_yield_directives_from_the_parent_view()
+    {
+        $this->makeView('layout', '@yield(\'content\')'.PHP_EOL.PHP_EOL.'@yield(\'something\')');
+
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--extends' => 'layout',
+            '--with-yields' => true,
+        ]);
+
+        $blockOne = new Blocks\Section('content');
+        $blockTwo = new Blocks\Section('something');
+
+        $this->assertContains($blockOne->render().$blockTwo->render(), $this->view('index'));
+    }
+
+    /** @test */
+    public function it_reads_stack_directives_from_the_parent_view()
+    {
+        $this->makeView('layout', '@stack(\'javascripts\')');
+
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--extends' => 'layout',
+            '--with-stacks' => true,
+        ]);
+
+        $pushBlock = new Blocks\Push('javascripts');
+
+        $this->assertContains($pushBlock->render(), $this->view('index'));
+    }
+
+    /** @test */
+    public function it_ignores_yield_and_stack_options_if_the_parent_view_does_not_exist_yet()
+    {
+        $this->artisan('make:view', [
+            'name' => 'index',
+            '--extends' => 'doesnotexist',
+            '--with-yields' => true,
+            '--with-stacks' => true,
+        ]);
+
+        $this->assertNotContains('@section', $this->view('index'));
+        $this->assertNotContains('@push', $this->view('index'));
     }
 }

@@ -58,9 +58,7 @@ abstract class TestCase extends AbstractPackageTestCase
      */
     protected function view($name)
     {
-        $view = $this->app->make(Factory::class);
-
-        return file_get_contents($view->getFinder()->find($name));
+        return file_get_contents($this->pathToView($name));
     }
 
     /**
@@ -71,5 +69,29 @@ abstract class TestCase extends AbstractPackageTestCase
     protected function getServiceProviderClass($app)
     {
         return ServiceProvider::class;
+    }
+
+    /**
+     * @param string $name
+     * @param string $contents
+     */
+    protected function makeView($name, $contents)
+    {
+        $this->artisan('make:view', ['name' => $name]);
+
+        file_put_contents($this->pathToView($name), $contents);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function pathToView($name)
+    {
+        /** @var Factory $view */
+        $view = $this->app->make(Factory::class);
+
+        return $view->getFinder()->find($name);
     }
 }

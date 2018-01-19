@@ -7,14 +7,14 @@ class Generator extends ViewActor
     /**
      * Generate the view(s) as specified in the constructor.
      *
-     * @param array $blocks
+     * @param \Sven\ArtisanView\BlockStack $blockStack
      */
-    public function generate(array $blocks = [])
+    public function generate(BlockStack $blockStack)
     {
         $views = $this->getViews();
 
         $this->makeViews(
-            $this->getViewNames($views), $blocks
+            $this->getViewNames($views), $blockStack->all()
         );
     }
 
