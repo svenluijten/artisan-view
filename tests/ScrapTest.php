@@ -10,9 +10,7 @@ class ScrapTest extends TestCase
     /** @test */
     public function it_scraps_an_existing_view()
     {
-        $this->artisan('make:view', [
-            'name' => 'index',
-        ]);
+        $this->makeView('index');
 
         $this->assertViewExists('index.blade.php');
 
@@ -31,9 +29,7 @@ class ScrapTest extends TestCase
     /** @test */
     public function it_forcefully_scraps_a_view()
     {
-        $this->artisan('make:view', [
-            'name' => 'index',
-        ]);
+        $this->makeView('index');
 
         $this->assertViewExists('index.blade.php');
 

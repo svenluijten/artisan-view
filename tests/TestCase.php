@@ -4,6 +4,7 @@ namespace Sven\ArtisanView\Tests;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
 use GrahamCampbell\TestBenchCore\ServiceProviderTrait;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithConsole;
 use Illuminate\View\Factory;
 use Sven\ArtisanView\ServiceProvider;
 use Sven\ArtisanView\Tests\Traits\ViewAssertions;
@@ -12,6 +13,7 @@ abstract class TestCase extends AbstractPackageTestCase
 {
     use ServiceProviderTrait;
     use ViewAssertions;
+    use InteractsWithConsole;
 
     /**
      * Tear down the testing environment.
@@ -75,7 +77,7 @@ abstract class TestCase extends AbstractPackageTestCase
      * @param string $name
      * @param string $contents
      */
-    protected function makeView($name, $contents)
+    protected function makeView($name, $contents = '')
     {
         $this->artisan('make:view', ['name' => $name]);
 
