@@ -96,13 +96,13 @@ class Config
     }
 
     /**
-     * @param array $verbs
+     * @param mixed ...$verbs
      *
      * @return \Sven\ArtisanView\Config
      */
-    public function setVerbs($verbs)
+    public function setVerbs(...$verbs)
     {
-        $this->verbs = func_get_args();
+        $this->verbs = $verbs;
 
         return $this;
     }
