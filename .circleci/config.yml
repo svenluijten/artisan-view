@@ -9,7 +9,8 @@ jobs:
       - checkout
       - run: sudo composer self-update --no-progress --no-interaction
       - run: composer install --no-progress --no-interaction --prefer-dist
-      - run: ./vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      - run: bash <(curl -s https://codecov.io/bash)
 
   test_7.2:
     working_directory: ~/artisan-view
@@ -19,7 +20,8 @@ jobs:
       - checkout
       - run: sudo composer self-update --no-progress --no-interaction
       - run: composer install --no-progress --no-interaction --prefer-dist
-      - run: ./vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      - run: bash <(curl -s https://codecov.io/bash)
 
 workflows:
   version: 2
