@@ -1,7 +1,5 @@
 preset: laravel
 
-linting: true
-
 risky: false
 
 enabled:
