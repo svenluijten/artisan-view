@@ -22,7 +22,7 @@ class Destroyer extends ViewActor
     protected function destroyViews(array $names)
     {
         foreach ($names as $name) {
-            $path = PathHelper::getPath($name);
+            $path = PathHelper::normalizePath($name);
 
             unlink($path);
 

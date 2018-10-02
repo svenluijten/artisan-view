@@ -17,18 +17,6 @@ class PathHelper
     }
 
     /**
-     * @param string|null $fileName
-     *
-     * @throws \Sven\ArtisanView\Exceptions\UnsupportedException
-     *
-     * @return string
-     */
-    public static function getPath($fileName = null)
-    {
-        return self::normalizePath($fileName);
-    }
-
-    /**
      * @param string $path
      *
      * @return string
