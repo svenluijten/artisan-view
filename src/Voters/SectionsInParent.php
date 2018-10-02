@@ -10,11 +10,23 @@ use Symfony\Component\Console\Input\InputInterface;
 class SectionsInParent implements Voter
 {
     /**
+     * @var string
+     */
+    protected $path;
+
+    /**
      * {@inheritdoc}
      */
     public function canHandle(InputInterface $input)
     {
         return $input->hasOption('section');
+    }
+
+    public function inPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
     }
 
     /**

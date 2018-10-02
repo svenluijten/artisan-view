@@ -15,6 +15,13 @@ interface Voter
     public function canHandle(InputInterface $input);
 
     /**
+     * @param string $path
+     *
+     * @return \Sven\ArtisanView\Voters\Voter
+     */
+    public function inPath($path);
+
+    /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Sven\ArtisanView\BlockStack $blockStack
      *

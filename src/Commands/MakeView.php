@@ -29,7 +29,7 @@ class MakeView extends Command
         $generator = new Generator($this->getConfig());
 
         $generator->generate(
-            (new BlockStack)->build($this->input)
+            (new BlockStack)->build($this->input, $this->getPath())
         );
 
         $this->info('View created successfully.');

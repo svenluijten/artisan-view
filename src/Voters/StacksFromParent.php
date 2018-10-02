@@ -10,12 +10,24 @@ use Symfony\Component\Console\Input\InputInterface;
 class StacksFromParent implements Voter
 {
     /**
+     * @var string
+     */
+    protected $path;
+
+    /**
      * {@inheritdoc}
      */
     public function canHandle(InputInterface $input)
     {
         return $input->hasOption('extends') && $input->getOption('extends')
             && $input->hasOption('with-stacks') && $input->getOption('with-stacks');
+    }
+
+    public function inPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -43,7 +55,9 @@ class StacksFromParent implements Voter
      */
     protected function file($name)
     {
-        $path = PathHelper::normalizePath(str_replace('.', '/', $name).'.blade.php');
+        $path = PathHelper::normalizePath(
+            $this->path.DIRECTORY_SEPARATOR.str_replace('.', '/', $name).'.blade.php'
+        );
 
         return file_exists($path) ? file_get_contents($path) : '';
     }

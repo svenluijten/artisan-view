@@ -2,11 +2,11 @@
 
 namespace Sven\ArtisanView;
 
+use Sven\ArtisanView\Blocks\Block;
 use Sven\ArtisanView\Voters\ExtendsParent;
 use Sven\ArtisanView\Voters\SectionsInParent;
 use Sven\ArtisanView\Voters\StacksFromParent;
 use Sven\ArtisanView\Voters\YieldsFromParent;
-use Sven\ArtisanView\Blocks\Block;
 use Symfony\Component\Console\Input\InputInterface;
 
 class BlockStack
@@ -18,10 +18,11 @@ class BlockStack
 
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param string $path
      *
      * @return \Sven\ArtisanView\BlockStack
      */
-    public function build(InputInterface $input)
+    public function build(InputInterface $input, $path)
     {
         $voters = [
             new ExtendsParent,
@@ -36,7 +37,7 @@ class BlockStack
                 continue;
             }
 
-            $voter->run($input, $this);
+            $voter->inPath($path)->run($input, $this);
         }
 
         return $this;
