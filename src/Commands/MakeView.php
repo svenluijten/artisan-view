@@ -26,16 +26,6 @@ class MakeView extends Command
      */
     public function handle()
     {
-        $viewFinder = app('view.finder');
-
-        $paths = $viewFinder->getPaths();
-
-        if (count($paths) > 1) {
-            $this->path = $this->choice('Where do you want to create the view(s)?', $paths, $paths[0]);
-        } else {
-            $this->path = $paths[0];
-        }
-
         $generator = new Generator($this->getConfig());
 
         $generator->generate(
@@ -55,7 +45,18 @@ class MakeView extends Command
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'))
             ->setVerbs(...$this->option('verb'))
-            ->setPath($this->path);
+            ->setPath($this->getPath());
+    }
+
+    private function getPath()
+    {
+        $paths = app('view.finder')->getPaths();
+
+        if (count($paths) === 1) {
+            return head($paths);
+        }
+
+        return $this->choice('Where do you want to create the view(s)?', $paths, head($paths));
     }
 
     /**

@@ -50,7 +50,19 @@ class ScrapView extends Command
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'))
             ->setVerbs(...$this->option('verb'))
-            ->setForce($this->option('force'));
+            ->setForce($this->option('force'))
+            ->setPath($this->getPath());
+    }
+
+    private function getPath()
+    {
+        $paths = app('view.finder')->getPaths();
+
+        if (count($paths) === 1) {
+            return head($paths);
+        }
+
+        return $this->choice('Where is/are the view(s) you want to scrap?', $paths, head($paths));
     }
 
     /**
