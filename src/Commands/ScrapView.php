@@ -33,9 +33,7 @@ class ScrapView extends Command
             return;
         }
 
-        $destroyer = new Destroyer($config);
-
-        $destroyer->destroy();
+        (new Destroyer($config, $this->getPath()))->destroy();
 
         $this->info('View scrapped successfully.');
     }
@@ -50,8 +48,7 @@ class ScrapView extends Command
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'))
             ->setVerbs(...$this->option('verb'))
-            ->setForce($this->option('force'))
-            ->setPath($this->getPath());
+            ->setForce($this->option('force'));
     }
 
     private function getPath()

@@ -13,10 +13,12 @@ abstract class ViewActor
      * ViewActor constructor.
      *
      * @param \Sven\ArtisanView\Config $config
+     * @param string $path
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, $path)
     {
         $this->config = $config;
+        $this->config->setPath($path);
     }
 
     /**
