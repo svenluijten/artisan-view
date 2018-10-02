@@ -2,8 +2,6 @@
 
 namespace Sven\ArtisanView;
 
-use Sven\ArtisanView\Exceptions\UnsupportedException;
-
 class PathHelper
 {
     /**
