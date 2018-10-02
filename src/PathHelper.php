@@ -27,21 +27,7 @@ class PathHelper
      */
     public static function getPath($fileName = null)
     {
-        /** @var \Illuminate\View\FileViewFinder $viewFinder */
-        $viewFinder = app('view.finder');
-
-        $paths = $viewFinder->getPaths();
-
-        // If we have more than one path configured, throw an
-        // exception as this is currently not supported by
-        // the package. It might be supported later on.
-        if (count($paths) !== 1) {
-            throw UnsupportedException::tooManyPaths(count($paths));
-        }
-
-        $path = reset($paths);
-
-        return self::normalizePath($path.DIRECTORY_SEPARATOR.$fileName);
+        return self::normalizePath($fileName);
     }
 
     /**

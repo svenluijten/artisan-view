@@ -31,6 +31,8 @@ class Config
      */
     protected $force = false;
 
+    protected $path;
+
     /**
      * @param string $name
      *
@@ -132,6 +134,15 @@ class Config
     {
         $this->force = $force;
 
+        return $this;
+    }
+
+    public function getPath() {
+        return $this->path;
+    }
+
+    public function setPath($path) {
+        $this->path = $path;
         return $this;
     }
 }

@@ -25,8 +25,7 @@ class Generator extends ViewActor
         $contents = BlockBuilder::build($blocks);
 
         foreach ($names as $name) {
-            $path = PathHelper::getPath($name);
-
+            $path = PathHelper::getPath($this->config->getPath().DIRECTORY_SEPARATOR.$name);
             PathHelper::createIntermediateFolders($path);
 
             file_put_contents($path, $contents);
