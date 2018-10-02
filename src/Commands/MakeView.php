@@ -30,7 +30,7 @@ class MakeView extends Command
 
         $paths = $viewFinder->getPaths();
 
-        if(count($paths) > 1) {
+        if (count($paths) > 1) {
             $this->path = $this->choice('Where do you want to create the view(s)?', $paths, $paths[0]);
         } else {
             $this->path = $paths[0];

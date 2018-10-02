@@ -31,6 +31,9 @@ class Config
      */
     protected $force = false;
 
+    /**
+     * @var string
+     */
     protected $path;
 
     /**
@@ -137,12 +140,15 @@ class Config
         return $this;
     }
 
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
+        
         return $this;
     }
 }
