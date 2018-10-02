@@ -148,7 +148,7 @@ class Config
     public function setPath($path)
     {
         $this->path = $path;
-        
+
         return $this;
     }
 }
