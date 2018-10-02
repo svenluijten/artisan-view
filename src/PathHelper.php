@@ -23,9 +23,7 @@ class PathHelper
      */
     public static function normalizePath($path)
     {
-        $withoutBackslashes = str_replace('\\', DIRECTORY_SEPARATOR, $path);
-
-        return str_replace('/', DIRECTORY_SEPARATOR, $withoutBackslashes);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
     /**
