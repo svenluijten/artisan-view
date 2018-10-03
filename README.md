@@ -31,7 +31,7 @@ You'll have to follow a couple of simple steps to install this package.
 Via [composer](http://getcomposer.org):
 
 ```bash
-$ composer require sven/artisan-view:^3.0 --dev
+$ composer require sven/artisan-view:^3.1 --dev
 ```
 
 Or add the package to your development dependencies in `composer.json` and run
@@ -40,7 +40,7 @@ Or add the package to your development dependencies in `composer.json` and run
 ```json
 {
     "require-dev": {
-        "sven/artisan-view": "^3.0"
+        "sven/artisan-view": "^3.1"
     }
 }
 ```
