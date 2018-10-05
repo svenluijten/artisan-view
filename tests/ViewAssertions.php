@@ -1,6 +1,6 @@
 <?php
 
-namespace Sven\ArtisanView\Tests\Traits;
+namespace Sven\ArtisanView\Tests;
 
 trait ViewAssertions
 {
@@ -14,7 +14,7 @@ trait ViewAssertions
         self::assertFileNotExists(self::normalizedPathToView($name), $message);
     }
 
-    final private static function normalizedPathToView(string $view): string
+    private static function normalizedPathToView(string $view): string
     {
         return str_replace(['/', '\\', '.'], DIRECTORY_SEPARATOR, base_path('resources/views/'.$view));
     }
