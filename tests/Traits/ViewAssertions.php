@@ -4,19 +4,18 @@ namespace Sven\ArtisanView\Tests\Traits;
 
 trait ViewAssertions
 {
-    /**
-     * @param  string  $name
-     */
-    public static function assertViewExists($name)
+    public static function assertViewExists(string $name, string $message = ''): void
     {
-        self::assertFileExists(base_path('resources/views/'.$name));
+        self::assertFileExists(self::normalizedPathToView($name), $message);
     }
 
-    /**
-     * @param  string  $name
-     */
-    public static function assertViewNotExists($name)
+    public static function assertViewNotExists(string $name, string $message = ''): void
     {
-        self::assertFileDoesNotExist(base_path('resources/views/'.$name));
+        self::assertFileNotExists(self::normalizedPathToView($name), $message);
+    }
+
+    final private static function normalizedPathToView(string $view): string
+    {
+        return str_replace(['/', '\\', '.'], DIRECTORY_SEPARATOR, base_path('resources/views/'.$view));
     }
 }

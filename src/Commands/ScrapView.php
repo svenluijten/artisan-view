@@ -10,14 +10,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ScrapView extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
     protected $name = 'scrap:view';
 
-    /**
-     * {@inheritdoc}
-     */
     protected $description = 'Scrap an existing view';
 
     /**
@@ -68,10 +62,10 @@ class ScrapView extends Command
     protected function getOptions()
     {
         return [
-            ['force', null, InputOption::VALUE_NONE, 'Don\'t ask for confirmation before scrapping the view.'],
             ['extension', null, InputOption::VALUE_REQUIRED, 'The extension of the view to scrap.', 'blade.php'],
             ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be scrapped.'],
             ['verb', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verb(s) to scrap views for.', ['index', 'show', 'create', 'edit']],
+            ['force', null, InputOption::VALUE_NONE, 'Don\'t ask for confirmation before scrapping the view.'],
         ];
     }
 
