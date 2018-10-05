@@ -6,10 +6,7 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 class ServiceProvider extends LaravelServiceProvider
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function register()
+    public function register(): void
     {
         $this->commands([
             Commands\MakeView::class,
@@ -17,18 +14,7 @@ class ServiceProvider extends LaravelServiceProvider
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function provides()
+    public function provides(): array
     {
         return [
             Commands\MakeView::class,
