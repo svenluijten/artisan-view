@@ -62,7 +62,6 @@ class ScrapView extends Command
         return $this->config->get('view.paths', []);
     }
 
-
     protected function getOptions(): array
     {
         return [
