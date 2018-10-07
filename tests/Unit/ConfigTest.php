@@ -40,4 +40,3 @@ class ConfigTest extends TestCase
         $this->assertEquals('some/path/to/create/the/view/in', $config->getPath());
     }
 }
-
