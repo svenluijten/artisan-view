@@ -10,69 +10,69 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ScrapView extends Command
 {
+    use Concerns\ChoosesPath;
+
     protected $name = 'scrap:view';
 
     protected $description = 'Scrap an existing view';
 
     /**
-     * Execute the command.
+     * @var \Illuminate\Contracts\Config\Repository
      */
-    public function handle()
+    protected $config;
+
+    public function __construct(Repository $config)
     {
-        $config = $this->getConfig();
+        $this->config = $config;
 
-        if (!$config->isForce() && !$this->confirm('Are you sure you want to scrap the view?')) {
-            $this->line('Alright, nothing happened.');
-
-            return;
-        }
-
-        (new Destroyer($config, $this->getPath()))->destroy();
-
-        $this->info('View scrapped successfully.');
+        parent::__construct();
     }
 
-    /**
-     * @return \Sven\ArtisanView\Config
-     */
-    protected function getConfig()
+    public function handle(): int
     {
-        return (new Config)
-            ->setName($this->argument('name'))
+        $manager = ViewManager::make($this->config());
+
+        if ($this->option('force') || $this->confirm('Are you sure you want to remove that view / those views?')) {
+            $manager->delete($this->argument('name'));
+
+            return 0;
+        }
+
+        $this->info('Okay, nothing was changed.');
+
+        return 0;
+    }
+
+    private function config(): Config
+    {
+        return Config::make()
             ->setExtension($this->option('extension'))
-            ->setResource($this->option('resource'))
-            ->setVerbs(...$this->option('verb'))
-            ->setForce($this->option('force'));
+            ->setResource($this->option('resource'), $this->option('verbs'))
+            ->setPath($this->path());
     }
 
-    private function getPath()
+    protected function pathQuestion(): string
     {
-        $paths = app('view.finder')->getPaths();
-
-        if (count($paths) === 1) {
-            return head($paths);
-        }
-
-        return $this->choice('Where is/are the view(s) you want to scrap?', $paths, head($paths));
+        return 'What path should the view be scrapped from?';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getOptions()
+    protected function possiblePaths(): array
+    {
+        return $this->config->get('view.paths', []);
+    }
+
+
+    protected function getOptions(): array
     {
         return [
             ['extension', null, InputOption::VALUE_REQUIRED, 'The extension of the view to scrap.', 'blade.php'],
-            ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be scrapped.'],
+            ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be remove.'],
             ['verb', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verb(s) to scrap views for.', ['index', 'show', 'create', 'edit']],
-            ['force', null, InputOption::VALUE_NONE, 'Don\'t ask for confirmation before scrapping the view.'],
+            ['force', null, InputOption::VALUE_NONE, 'Don\'t ask for confirmation before removing the view.'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the view to scrap.'],
