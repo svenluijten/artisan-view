@@ -27,7 +27,7 @@ class Config
     /**
      * @var string
      */
-    protected $path;
+    protected $location;
 
     public static function make(): self
     {
@@ -76,15 +76,15 @@ class Config
         return $this->force;
     }
 
-    public function setPath(string $path): self
+    public function setLocation(string $location): self
     {
-        $this->path = $path;
+        $this->location = $location;
 
         return $this;
     }
 
-    public function getPath(): string
+    public function getLocation(): string
     {
-        return $this->path;
+        return $this->location;
     }
 }

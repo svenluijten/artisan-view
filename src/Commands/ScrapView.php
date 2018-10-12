@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ScrapView extends Command
 {
-    use Concerns\ChoosesPath;
+    use Concerns\ChoosesViewLocation;
 
     protected $name = 'scrap:view';
 
@@ -49,15 +49,15 @@ class ScrapView extends Command
         return Config::make()
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'), $this->option('verb'))
-            ->setPath($this->path());
+            ->setLocation($this->path());
     }
 
     protected function pathQuestion(): string
     {
-        return 'What path should the view be scrapped from?';
+        return 'Where should the view be scrapped from?';
     }
 
-    protected function possiblePaths(): array
+    protected function possibleLocations(): array
     {
         return $this->config->get('view.paths', []);
     }

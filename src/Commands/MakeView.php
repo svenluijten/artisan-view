@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class MakeView extends Command
 {
-    use Concerns\ChoosesPath;
+    use Concerns\ChoosesViewLocation;
 
     protected $name = 'make:view';
 
@@ -44,15 +44,15 @@ class MakeView extends Command
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'), $this->option('verb'))
             ->setForce($this->option('force'))
-            ->setPath($this->path());
+            ->setLocation($this->path());
     }
 
     protected function pathQuestion(): string
     {
-        return 'What path should the view be stored in?';
+        return 'Where should the view be created?';
     }
 
-    protected function possiblePaths(): array
+    protected function possibleLocations(): array
     {
         return $this->config->get('view.paths', []);
     }

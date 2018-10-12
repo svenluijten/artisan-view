@@ -4,11 +4,11 @@ namespace Sven\ArtisanView\Commands\Concerns;
 
 use InvalidArgumentException;
 
-trait ChoosesPath
+trait ChoosesViewLocation
 {
     protected function path(): string
     {
-        $paths = $this->possiblePaths();
+        $paths = $this->possibleLocations();
 
         if (count($paths) === 0) {
             throw new InvalidArgumentException('There are no paths configured to store the views in.');
@@ -23,5 +23,5 @@ trait ChoosesPath
 
     abstract protected function pathQuestion(): string;
 
-    abstract protected function possiblePaths(): array;
+    abstract protected function possibleLocations(): array;
 }
