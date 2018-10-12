@@ -12,7 +12,7 @@ class ConfigTest extends TestCase
     {
         $config = Config::make()->setExtension('html.twig');
 
-        $this->assertEquals('html.twig', $config->getExtension());
+        $this->assertEquals('.html.twig', $config->getExtension());
     }
 
     /** @test */

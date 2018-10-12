@@ -2,6 +2,8 @@
 
 namespace Sven\ArtisanView;
 
+use Illuminate\Support\Str;
+
 class Config
 {
     /**
@@ -36,7 +38,7 @@ class Config
 
     public function setExtension(string $extension): self
     {
-        $this->extension = $extension;
+        $this->extension = Str::start($extension, '.');
 
         return $this;
     }
