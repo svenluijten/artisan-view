@@ -33,10 +33,10 @@ class ConfigTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_and_gets_the_path()
+    public function it_sets_and_gets_the_location()
     {
-        $config = Config::make()->setPath('some/path/to/create/the/view/in');
+        $config = Config::make()->setLocation('some/path/to/create/the/view/in');
 
-        $this->assertEquals('some/path/to/create/the/view/in', $config->getPath());
+        $this->assertEquals('some/path/to/create/the/view/in', $config->getLocation());
     }
 }
