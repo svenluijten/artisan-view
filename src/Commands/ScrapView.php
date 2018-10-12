@@ -47,7 +47,7 @@ class ScrapView extends Command
     {
         return Config::make()
             ->setExtension($this->option('extension'))
-            ->setResource($this->option('resource'), $this->option('verbs'))
+            ->setResource($this->option('resource'), $this->option('verb'))
             ->setPath($this->path());
     }
 
