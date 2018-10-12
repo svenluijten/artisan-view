@@ -30,10 +30,8 @@ class ViewManager
         /** @var \Illuminate\Filesystem\Filesystem $files */
         $files = app('files');
 
-        // 3. Create intermediate folders for the view to be created. (?)
         $files->makeDirectory(str_before($fullPath, $this->config->getExtension()), null, true);
 
-        // 4. Put the contents from step #2 in the file.
         $files->put($fullPath, '');
 
         return true;
