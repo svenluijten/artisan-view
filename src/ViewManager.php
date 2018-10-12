@@ -21,12 +21,27 @@ class ViewManager
 
     public function create(string $view): bool
     {
-        // 1. Get the full path + name of the view(s) to create.
+        $filename = $this->getFileName($view);
+
+        $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
+
         // 2. Build up the contents of the view.
+
+        /** @var \Illuminate\Filesystem\Filesystem $files */
+        $files = app('files');
+
         // 3. Create intermediate folders for the view to be created. (?)
+        $files->makeDirectory(str_before($fullPath, $this->config->getExtension()), null, true);
+
         // 4. Put the contents from step #2 in the file.
+        $files->put($fullPath, '');
 
         return true;
+    }
+
+    protected function getFileName(string $view): string
+    {
+        return str_replace('.', DIRECTORY_SEPARATOR, $view) . $this->config->getExtension();
     }
 
     public function delete(string $view): bool
