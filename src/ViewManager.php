@@ -2,6 +2,8 @@
 
 namespace Sven\ArtisanView;
 
+use Illuminate\Filesystem\Filesystem;
+
 class ViewManager
 {
     /**
@@ -9,14 +11,20 @@ class ViewManager
      */
     protected $config;
 
-    private function __construct(Config $config)
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $filesystem;
+
+    private function __construct(Config $config, Filesystem $filesystem)
     {
         $this->config = $config;
+        $this->filesystem = $filesystem;
     }
 
-    public static function make(Config $config): self
+    public static function make(Config $config, Filesystem $filesystem): self
     {
-        return new self($config);
+        return new self($config, $filesystem);
     }
 
     public function create(string $view): bool
@@ -27,12 +35,11 @@ class ViewManager
 
         // 2. Build up the contents of the view.
 
-        /** @var \Illuminate\Filesystem\Filesystem $files */
-        $files = app('files');
+        $this->filesystem->makeDirectory(
+            str_before($fullPath, $this->config->getExtension()), 0755, true
+        );
 
-        $files->makeDirectory(str_before($fullPath, $this->config->getExtension()), 0755, true);
-
-        $files->put($fullPath, '');
+        $this->filesystem->put($fullPath, '');
 
         return true;
     }
