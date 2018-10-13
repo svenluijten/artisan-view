@@ -39,7 +39,7 @@ class ViewManager
 
     protected function getFileName(string $view): string
     {
-        return str_replace('.', DIRECTORY_SEPARATOR, $view) . $this->config->getExtension();
+        return str_replace('.', DIRECTORY_SEPARATOR, $view).$this->config->getExtension();
     }
 
     public function delete(string $view): bool
