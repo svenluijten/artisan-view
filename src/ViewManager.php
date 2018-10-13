@@ -3,6 +3,7 @@
 namespace Sven\ArtisanView;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 
 class ViewManager
 {
@@ -29,24 +30,30 @@ class ViewManager
 
     public function create(string $view): bool
     {
-        $filename = $this->getFileName($view);
+        foreach ($this->getFileNames($view) as $filename) {
+            $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
 
-        $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
+            // 2. Build up the contents of the view.
 
-        // 2. Build up the contents of the view.
+            $this->filesystem->makeDirectory(
+                $this->everythingBeforeLast($fullPath, '/'), 0755, true, true
+            );
 
-        $this->filesystem->makeDirectory(
-            str_before($fullPath, $this->config->getExtension()), 0755, true
-        );
-
-        $this->filesystem->put($fullPath, '');
+            $this->filesystem->put($fullPath, '');
+        }
 
         return true;
     }
 
-    protected function getFileName(string $view): string
+    protected function getFileNames(string $view): array
     {
-        return str_replace('.', DIRECTORY_SEPARATOR, $view).$this->config->getExtension();
+        $viewPaths = str_replace(
+            '.', DIRECTORY_SEPARATOR, $this->getViewNames($view)
+        );
+
+        return array_map(function ($viewName) {
+            return $viewName.$this->config->getExtension();
+        }, $viewPaths);
     }
 
     public function delete(string $view): bool
@@ -57,5 +64,21 @@ class ViewManager
         // 3. Remove the folder the view(s) is / were in if it is empty.
 
         return true;
+    }
+
+    protected function everythingBeforeLast(string $haystack, string $search): string
+    {
+        return substr($haystack, 0, strrpos($haystack, $search));
+    }
+
+    protected function getViewNames(string $view): array
+    {
+        if (! $this->config->isResource()) {
+            return Arr::wrap($view);
+        }
+
+        return array_map(function ($verb) use ($view) {
+            return $view.'.'.$verb;
+        }, $this->config->getVerbs());
     }
 }
