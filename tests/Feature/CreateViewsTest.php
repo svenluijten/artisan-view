@@ -24,7 +24,7 @@ class CreateViewsTest extends TestCase
         // Remove all the files and folders in the configured
         // view paths. This will make sure we have a clean
         // state to start the next test with.
-        foreach(app('view.finder')->getPaths() as $path) {
+        foreach (app('view.finder')->getPaths() as $path) {
             $this->clearDirectory($path);
         }
 
