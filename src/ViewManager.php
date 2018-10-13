@@ -30,7 +30,7 @@ class ViewManager
         /** @var \Illuminate\Filesystem\Filesystem $files */
         $files = app('files');
 
-        $files->makeDirectory(str_before($fullPath, $this->config->getExtension()), null, true);
+        $files->makeDirectory(str_before($fullPath, $this->config->getExtension()), 0755, true);
 
         $files->put($fullPath, '');
 
