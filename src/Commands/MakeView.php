@@ -4,6 +4,7 @@ namespace Sven\ArtisanView\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Filesystem\Filesystem;
 use Sven\ArtisanView\Config;
 use Sven\ArtisanView\ViewManager;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,16 +23,22 @@ class MakeView extends Command
      */
     protected $config;
 
-    public function __construct(Repository $config)
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $filesystem;
+
+    public function __construct(Repository $config, Filesystem $filesystem)
     {
         $this->config = $config;
+        $this->filesystem = $filesystem;
 
         parent::__construct();
     }
 
     public function handle(): int
     {
-        $manager = ViewManager::make($this->config());
+        $manager = ViewManager::make($this->config(), $this->filesystem);
 
         $manager->create($this->argument('name'));
 
