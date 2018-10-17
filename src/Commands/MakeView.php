@@ -44,6 +44,8 @@ class MakeView extends Command
         return Config::make()
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'), $this->option('verb'))
+            ->setExtends($this->option('extends'))
+            ->setSections($this->option('section'))
             ->setLocation($this->path());
     }
 

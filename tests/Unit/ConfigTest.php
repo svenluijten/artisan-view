@@ -8,7 +8,7 @@ use Sven\ArtisanView\Tests\TestCase;
 class ConfigTest extends TestCase
 {
     /** @test */
-    public function it_sets_and_gets_the_extension()
+    public function it_sets_and_gets_the_extension(): void
     {
         $config = Config::make()->setExtension('html.twig');
 
@@ -16,7 +16,7 @@ class ConfigTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_and_gets_the_resource_and_verbs()
+    public function it_sets_and_gets_the_resource_and_verbs(): void
     {
         $config = Config::make()->setResource(true, ['foo', 'bar', 'baz']);
 
@@ -25,7 +25,7 @@ class ConfigTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_and_gets_the_location()
+    public function it_sets_and_gets_the_location(): void
     {
         $config = Config::make()->setLocation('some/path/to/create/the/view/in');
 
