@@ -36,11 +36,20 @@ class ViewManager
             // 2. Build up the contents of the view.
 
             $this->filesystem->makeDirectory(
-                $this->everythingBeforeLast($fullPath, '/'), 0755, true, true
+                $this->filesystem->dirname($fullPath), 0755, true, true
             );
 
             $this->filesystem->put($fullPath, '');
         }
+
+        return true;
+    }
+
+    public function delete(string $view): bool
+    {
+        // 1. Get the full path + name of the view(s) to delete.
+        // 2. Remove the view(s) from step #1.
+        // 3. Remove the folder the view(s) is / were in if it is empty.
 
         return true;
     }
@@ -54,20 +63,6 @@ class ViewManager
         return array_map(function ($viewName) {
             return $viewName.$this->config->getExtension();
         }, $viewPaths);
-    }
-
-    public function delete(string $view): bool
-    {
-        // 1. Get the full path + name of the view(s) to delete.
-        // 2. Remove the view(s) from step #1.
-        // 3. Remove the folder the view(s) is / were in if it is empty.
-
-        return true;
-    }
-
-    protected function everythingBeforeLast(string $haystack, string $search): string
-    {
-        return substr($haystack, 0, strrpos($haystack, $search));
     }
 
     protected function getViewNames(string $view): array
