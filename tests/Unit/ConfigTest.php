@@ -25,14 +25,6 @@ class ConfigTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_and_gets_the_force_value()
-    {
-        $config = Config::make()->setForce(true);
-
-        $this->assertTrue($config->isForce());
-    }
-
-    /** @test */
     public function it_sets_and_gets_the_location()
     {
         $config = Config::make()->setLocation('some/path/to/create/the/view/in');
