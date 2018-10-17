@@ -26,6 +26,16 @@ class Config
      */
     protected $location;
 
+    /**
+     * @var string
+     */
+    protected $extends;
+
+    /**
+     * @var array
+     */
+    protected $sections;
+
     public static function make(): self
     {
         return new self();
@@ -71,5 +81,29 @@ class Config
     public function getLocation(): string
     {
         return $this->location;
+    }
+
+    public function getExtends(): ?string
+    {
+        return $this->extends;
+    }
+
+    public function setExtends(?string $extends = null): self
+    {
+        $this->extends = $extends;
+
+        return $this;
+    }
+
+    public function getSections(): array
+    {
+        return $this->sections ?? [];
+    }
+
+    public function setSections(array $sections = []): self
+    {
+        $this->sections = $sections;
+
+        return $this;
     }
 }

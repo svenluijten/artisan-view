@@ -33,13 +33,11 @@ class ViewManager
         foreach ($this->getFileNames($view) as $filename) {
             $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
 
-            // 2. Build up the contents of the view.
-
             $this->filesystem->makeDirectory(
                 $this->filesystem->dirname($fullPath), 0755, true, true
             );
 
-            $this->filesystem->put($fullPath, '');
+            $this->filesystem->put($fullPath, BlockBuilder::build($this->config));
         }
 
         return true;

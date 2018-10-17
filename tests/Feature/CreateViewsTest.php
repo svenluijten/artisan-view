@@ -51,7 +51,7 @@ class CreateViewsTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_view_with_a_different_extension()
+    public function it_creates_a_view_with_a_different_extension(): void
     {
         $this->artisan(MakeView::class, [
             'name' => 'test',
@@ -62,7 +62,7 @@ class CreateViewsTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_all_four_restful_resource_views()
+    public function it_creates_all_four_restful_resource_views(): void
     {
         $this->artisan(MakeView::class, [
             'name' => 'posts',
@@ -77,7 +77,7 @@ class CreateViewsTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_resource_in_a_nested_folder()
+    public function it_creates_a_resource_in_a_nested_folder(): void
     {
         $this->artisan(MakeView::class, [
             'name' => 'admin.posts',
@@ -91,7 +91,7 @@ class CreateViewsTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_part_of_a_restful_resource()
+    public function it_creates_part_of_a_restful_resource(): void
     {
         $this->artisan(MakeView::class, [
             'name' => 'posts',
@@ -106,7 +106,7 @@ class CreateViewsTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_resource_with_a_custom_extension()
+    public function it_creates_a_resource_with_a_custom_extension(): void
     {
         $this->artisan(MakeView::class, [
             'name' => 'posts',
