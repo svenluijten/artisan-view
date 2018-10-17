@@ -67,7 +67,7 @@ class ScrapView extends Command
     {
         return [
             ['extension', null, InputOption::VALUE_REQUIRED, 'The extension of the view to scrap.', 'blade.php'],
-            ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be remove.'],
+            ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be removed.'],
             ['verb', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verb(s) to scrap views for.', ['index', 'show', 'create', 'edit']],
             ['force', null, InputOption::VALUE_NONE, 'Don\'t ask for confirmation before removing the view.'],
         ];
