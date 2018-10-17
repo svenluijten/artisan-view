@@ -23,22 +23,16 @@ class MakeView extends Command
      */
     protected $config;
 
-    /**
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $filesystem;
-
-    public function __construct(Repository $config, Filesystem $filesystem)
+    public function __construct(Repository $config)
     {
         $this->config = $config;
-        $this->filesystem = $filesystem;
 
         parent::__construct();
     }
 
-    public function handle(): int
+    public function handle(Filesystem $filesystem): int
     {
-        $manager = ViewManager::make($this->config(), $this->filesystem);
+        $manager = ViewManager::make($this->config(), $filesystem);
 
         $manager->create($this->argument('name'));
 
