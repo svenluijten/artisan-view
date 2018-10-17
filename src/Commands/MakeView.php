@@ -34,7 +34,7 @@ class MakeView extends Command
     {
         $manager = ViewManager::make($this->config(), $filesystem);
 
-        $manager->create($this->argument('name'));
+        $manager->create($this->argument('name'), $this->option('force'));
 
         return 0;
     }
@@ -44,7 +44,6 @@ class MakeView extends Command
         return Config::make()
             ->setExtension($this->option('extension'))
             ->setResource($this->option('resource'), $this->option('verb'))
-            ->setForce($this->option('force'))
             ->setLocation($this->path());
     }
 

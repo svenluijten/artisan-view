@@ -22,11 +22,6 @@ class Config
     protected $verbs;
 
     /**
-     * @var bool
-     */
-    protected $force;
-
-    /**
      * @var string
      */
     protected $location;
@@ -64,18 +59,6 @@ class Config
     public function getVerbs(): array
     {
         return $this->verbs;
-    }
-
-    public function setForce(bool $force): self
-    {
-        $this->force = $force;
-
-        return $this;
-    }
-
-    public function isForce(): bool
-    {
-        return $this->force;
     }
 
     public function setLocation(string $location): self
