@@ -15,6 +15,7 @@
         "illuminate/console": "^5.7"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.10.4",
         "graham-campbell/testbench": "^5.1",
         "mockery/mockery": "^1.0",
         "sven/laravel-testing-utils": "^1.3"
