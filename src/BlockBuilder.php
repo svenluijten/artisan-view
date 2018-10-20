@@ -24,7 +24,10 @@ class BlockBuilder
 
     protected function getBlocks(Config $config): array
     {
-        return $this->buildExtends($config) + $this->buildSections($config);
+        return array_merge(
+            $this->buildExtends($config),
+            $this->buildSections($config)
+        );
     }
 
     protected function buildExtends(Config $config): array
