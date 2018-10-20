@@ -21,9 +21,20 @@ jobs:
       - run: composer install --no-progress --no-interaction --prefer-dist
       - run: ./vendor/bin/phpunit
 
+  test_7.3:
+    working_directory: ~/artisan-view
+    docker:
+      - image: circleci/php:7.3
+    steps:
+      - checkout
+      - run: sudo composer self-update --no-progress --no-interaction
+      - run: composer install --no-progress --no-interaction --prefer-dist
+      - run: ./vendor/bin/phpunit
+
 workflows:
   version: 2
   test:
     jobs:
       - test_7.1
       - test_7.2
+      - test_7.3
