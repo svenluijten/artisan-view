@@ -2,7 +2,6 @@
 
 namespace Sven\ArtisanView\Tests\Feature;
 
-use Illuminate\Filesystem\Filesystem;
 use Sven\ArtisanView\Commands\MakeView;
 use Sven\ArtisanView\Tests\TestCase;
 use Sven\LaravelTestingUtils\InteractsWithViews;
