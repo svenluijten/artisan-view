@@ -34,7 +34,7 @@ class MakeView extends Command
     {
         $manager = ViewManager::make($this->config(), $filesystem);
 
-        $manager->create($this->argument('name'), $this->option('force'));
+        $manager->create($this->argument('name'));
 
         return 0;
     }
@@ -65,7 +65,6 @@ class MakeView extends Command
             ['extension', null, InputOption::VALUE_OPTIONAL, 'The extension of the generated view.', 'blade.php'],
             ['resource', 'r', InputOption::VALUE_NONE, 'Whether or not a RESTful resource should be created.'],
             ['verb', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The HTTP verb(s) to generate views for.', ['index', 'show', 'create', 'edit']],
-            ['force', 'F', InputOption::VALUE_NONE, 'Whether or not to force creating the view if it already exists'],
             ['section', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'The "@section" tags to pre-fill in the created view(s).'],
             ['extends', null, InputOption::VALUE_OPTIONAL, 'The view to "@extend" from the created view(s).'],
             ['with-yields', null, InputOption::VALUE_NONE, 'Whether or not to add all "@yield" sections from extended template (if "--extends" was provided)'],
