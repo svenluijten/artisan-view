@@ -28,7 +28,7 @@ class ViewManager
         return new self($config, $filesystem);
     }
 
-    public function create(string $view, bool $force = false): bool
+    public function create(string $view): bool
     {
         foreach ($this->getFileNames($view) as $filename) {
             $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
