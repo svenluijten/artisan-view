@@ -2,40 +2,27 @@
 
 namespace Sven\ArtisanView\Blocks;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Sven\ArtisanView\Config;
 
 class Section implements Block
 {
     /**
-     * @var array
+     * @var string
      */
-    protected $sections;
+    protected $contents;
 
-    public function __construct(Config $config)
+    public function __construct(?string $contents = '')
     {
-        $this->sections = $config->getSections();
+        $this->contents = $contents;
     }
 
     public function applicable(): bool
     {
-        return $this->applicableSections()->isNotEmpty();
+        return ! Str::contains($this->contents, ':');
     }
 
     public function render(): string
     {
-        return $this->applicableSections()
-            ->reduce(function (string $carry, string $section) {
-                return $carry."@section('$section')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL;
-            }, '');
-    }
-
-    protected function applicableSections(): Collection
-    {
-        return Collection::make($this->sections)
-            ->reject(function (string $section) {
-                return Str::contains($section, ':');
-            });
+        return "@section('$this->contents')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL;
     }
 }

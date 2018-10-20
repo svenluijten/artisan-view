@@ -2,28 +2,54 @@
 
 namespace Sven\ArtisanView;
 
-use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 use Sven\ArtisanView\Blocks\Block;
+use Sven\ArtisanView\Blocks\Extend;
+use Sven\ArtisanView\Blocks\InlineSection;
+use Sven\ArtisanView\Blocks\Section;
 
 class BlockBuilder
 {
-    protected static $blocks = [
-        Blocks\Extend::class,
-        Blocks\Section::class,
-        Blocks\InlineSection::class,
-    ];
-
-    public static function build(Config $config): string
+    public static function make(): self
     {
-        return Collection::make(self::$blocks)
-            ->map(function (string $block) use ($config) {
-                return new $block($config);
-            })
-            ->filter(function (Block $block) {
-                return $block->applicable();
-            })
-            ->reduce(function (string $carry, Block $block) {
-                return $carry.$block->render();
-            }, '');
+        return new self();
+    }
+
+    public function build(Config $config): string
+    {
+        return array_reduce($this->getBlocks($config), function (string $carry, Block $block) {
+            return $carry.$block->render();
+        }, '');
+    }
+
+    protected function getBlocks(Config $config): array
+    {
+        return $this->buildExtends($config) + $this->buildSections($config);
+    }
+
+    protected function buildExtends(Config $config): array
+    {
+        $block = new Extend($config->getExtends());
+
+        if ($block->applicable()) {
+            return [$block];
+        }
+
+        return [];
+    }
+
+    protected function buildSections(Config $config): array
+    {
+        return array_map([$this, 'getSectionBlock'], $config->getSections());
+    }
+
+    protected function getSectionBlock(string $contents): Block
+    {
+        $section = new Section($contents);
+        $inlineSection = new InlineSection($contents);
+
+        return Arr::first([$section, $inlineSection], function (Block $block) {
+            return $block->applicable();
+        });
     }
 }

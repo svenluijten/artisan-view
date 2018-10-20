@@ -37,7 +37,9 @@ class ViewManager
                 $this->filesystem->dirname($fullPath), 0755, true, true
             );
 
-            $this->filesystem->put($fullPath, BlockBuilder::build($this->config));
+            $contents = BlockBuilder::make()->build($this->config);
+
+            $this->filesystem->put($fullPath, $contents);
         }
 
         return true;
