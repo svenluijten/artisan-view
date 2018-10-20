@@ -11,7 +11,7 @@
          verbose="true"
 >
     <testsuites>
-        <testsuite name="Package Test Suite">
+        <testsuite name="Artisan View Test Suite">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
