@@ -35,12 +35,12 @@ class BlockBuilderTest extends TestCase
             ],
             'inline section without content' => [
                 Config::make()->setSections(['title:']),
-                "@section('title', '')".PHP_EOL.PHP_EOL
+                "@section('title', '')".PHP_EOL.PHP_EOL,
             ],
             'empty section' => [
                 Config::make()->setSections(['']),
                 "@section('')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL,
-            ]
+            ],
         ];
     }
 }
