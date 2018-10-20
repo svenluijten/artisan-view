@@ -2,18 +2,16 @@
 
 namespace Sven\ArtisanView\Blocks;
 
-use Sven\ArtisanView\Config;
-
 class Extend implements Block
 {
     /**
-     * @var string
+     * @var ?string
      */
     protected $extends;
 
-    public function __construct(Config $config)
+    public function __construct(?string $extends = null)
     {
-        $this->extends = $config->getExtends();
+        $this->extends = $extends;
     }
 
     public function applicable(): bool

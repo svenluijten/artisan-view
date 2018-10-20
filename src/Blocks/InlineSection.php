@@ -2,42 +2,29 @@
 
 namespace Sven\ArtisanView\Blocks;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Sven\ArtisanView\Config;
 
 class InlineSection implements Block
 {
     /**
-     * @var array
+     * @var string
      */
-    protected $sections;
+    protected $contents;
 
-    public function __construct(Config $config)
+    public function __construct(string $contents)
     {
-        $this->sections = $config->getSections();
+        $this->contents = $contents;
     }
 
     public function applicable(): bool
     {
-        return $this->applicableSections()->isNotEmpty();
+        return Str::contains($this->contents, ':');
     }
 
     public function render(): string
     {
-        return $this->applicableSections()
-            ->reduce(function (string $carry, string $section) {
-                [$name, $content] = explode(':', $section);
+        [$name, $content] = explode(':', $this->contents);
 
-                return $carry."@section('$name', '$content')".PHP_EOL.PHP_EOL;
-            }, '');
-    }
-
-    protected function applicableSections(): Collection
-    {
-        return Collection::make($this->sections)
-            ->filter(function (string $section) {
-                return Str::contains($section, ':');
-            });
+        return "@section('$name', '$content')".PHP_EOL.PHP_EOL;
     }
 }
