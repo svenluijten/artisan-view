@@ -35,8 +35,8 @@ $ composer require sven/artisan-view --dev
 ```
 
 ### Registering the service provider
-If you're using Laravel 5.5, you can skip this step. The service provider will have already been registered
-thanks to auto-discovery. 
+If you're using Laravel 5.5 or above, you can skip this step. The service provider will have already been 
+registered thanks to auto-discovery.
 
 Otherwise, register `Sven\ArtisanView\ServiceProvider::class` manually in your `AppServiceProvider`'s
 `register` method:
