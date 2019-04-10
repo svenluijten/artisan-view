@@ -16,11 +16,6 @@ to add to those templates, and more. All from the command line we know and love!
   - [Downloading](#downloading)
   - [Registering the service provider](#registering-the-service-provider)
 - [Usage](#usage)
-  - [Creating views](#creating-views)
-  - [Extending and sections](#extending-and-sections)
-  - [REST resources](#rest-resources)
-  - [Scrapping views](#scrapping-views)
-  - [Mix and match](#mix-and-match)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -38,117 +33,119 @@ composer require sven/artisan-view --dev
 If you're using Laravel 5.5 or above, you can skip this step. The service provider will have already been 
 registered thanks to auto-discovery.
 
-Otherwise, register `Sven\ArtisanView\ServiceProvider::class` manually in your `AppServiceProvider`'s
-`register` method:
-
-```php
-public function register()
-{
-    if ($this->app->environment() !== 'production') {
-        $this->app->register(\Sven\ArtisanView\ServiceProvider::class);
-    }    
-}
-```
-
 ## Usage
-If you now run `php artisan` you will see two new commands in the list:
-- `make:view`
-- `scrap:view`
+When running `php artisan` now, you will see two new commands in the list: `make:view` and `scrap:view`.
 
-### Creating views
-```bash
-# Create a view 'index.blade.php' in the default directory
-$ php artisan make:view index
-
-# Create a view 'index.blade.php' in a subdirectory ('pages')
-$ php artisan make:view pages.index
-
-# Create a view with a different file extension ('index.html')
-$ php artisan make:view index --extension=html
-```
-
-### Extending and sections
-```bash
-# Extend an existing view
-$ php artisan make:view index --extends=app
-
-# Add a section to the view
-$ php artisan make:view index --section=content
-
-# Add multiple sections to the view
-$ php artisan make:view index --section=title --section=content
-
-# Add an inline section to the view
-# Remember to add quotes around the section if you want to use spaces
-$ php artisan make:view index --section="title:Hello world"
-
-# Create sections for each @yield statement in the extended view
-$ php artisan make:view index --extends=app --with-yields
-
-# Add @push directives for each @stack statement in the extended view
-$ php artisan make:view index --extends=app --with-stacks
-```
-
-### REST resources
-```bash
-# Create a resource called 'products'
-$ php artisan make:view products --resource
-
-# Create a resource with only specific verbs
-$ php artisan make:view products --resource --verb=index --verb=create --verb=edit
-```
-
-### Scrapping views
-```bash
-# Remove the view 'index.blade.php'
-$ php artisan scrap:view index
-
-# Remove the view by dot notation
-$ php artisan scrap:view pages.index
-```
-
-This will ask you if you're sure. To skip this question, pass the `--force` flag:
+### Creating a view
+To create a single view file, you can invoke the `make:view` command:
 
 ```bash
-# Don't ask for confirmation
-$ php artisan scrap:view index --force
+$ php artisan make:view dashboard # Creates 'dashboard.blade.php'
+$ php artisan make:view users.create # Creates 'users/create.blade.php'
 ```
 
-### Scrapping a REST resource
-```bash
-# Remove the resource called 'products'
-$ php artisan scrap:view products --resource
-```
-
-This will remove the views `products.index`, `products.show`, `products.create`, and `products.edit`. If the directory
-`products/` is empty after doing that, it will also be deleted.
-
-You can scrap part of a resource by adding `--verb` flags:
+### The file extension
+This package defaults to using `.blade.php` as its file extension, but you may change that by specifying the
+`--extension` option:
 
 ```bash
-# Remove the 'products.create' and 'products.edit' views.
-$ php artisan scrap:view products --resource --verb=create --verb=edit
+$ php artisan make:view dashboard --extension=html.twig # Creates 'dashboard.html.twig'
 ```
 
-### Mix and match
-Of course, all the options work well together like you'd expect. So the following command...
+### Extending an existing view
+If you want to pre-fill the generated view file with an `@extends` tag, use the `--extends` option:
 
 ```bash
-$ php artisan make:view products --resource --extends=app --section="title:This is my title" --section=content
+$ php artisan make:view dashboard --extends=layouts.master
 ```
 
-... will put the following contents in `products/index.blade.php`, `products/edit.blade.php`, `products/create.blade.php`,
-and `products/show.blade.php`:
+<details>
+<summary>See result</summary>
+    
+```blade
+@extends('layouts.master')
+    
+```
+</details>
+
+### Adding sections
+To add sections to a view, you can use the `--section` option:
+
+```bash
+$ php artisan make:view posts.create --section=content
+```
+
+<details>
+<summary>See result</summary>
 
 ```blade
-@extends('app')
+@section('content')
 
-@section('title', 'This is my title')
+@endsection
+
+```
+</details>
+
+You can even add inline sections (and pre-fill them) by using a colon (`:`) in the
+name of the section:
+
+```bash
+$ php artisan make:view posts.create --section=title:Awesome
+$ php artisan make:view posts.edit --section="title:Edit the post" # Use quotes if you want to add spaces
+```
+
+<details>
+<summary>See result</summary>
+
+```blade
+@section('title', 'Awesome')
+
+```
+
+```blade
+@section('title', 'Edit the post')
+
+```
+</details>
+
+You can add multiple sections to the view by using the `--section` option multiple times:
+
+```bash
+$ php artisan make:view posts.show --section="title:Show an existing post" --section=content
+```
+
+<details>
+<summary>See result</summary>
+
+```blade
+@section('title', 'Show an existing post')
 
 @section('content')
 
 @endsection
+
 ```
+</details>
+
+### Creating RESTful resources
+You can use the `make:view` command to create 4 views (one for each logical RESTful verb) in one go. To do so, use the
+`--resource` option:
+
+```bash
+$ php artisan make:view posts --resource
+```
+
+This will create 4 views: `posts/index.blade.php`, `posts/show.blade.php`, `posts/create.blade.php`, and 
+`posts/edit.blade.php`. This command can be used in combination with the other options described above.
+
+You may want to only create a subset of the verbs. To do this, a `--verb` option is available. This is an array
+of names for the view to create:
+
+```bash
+$ php artisan make:view posts --resource --verb=index --verb=edit
+```
+
+This will only create 2 views: `posts/index.blade.php` and `posts/edit.blade.php`.
 
 ## Contributing
 All contributions (in the form on pull requests, issues and feature-requests) are
