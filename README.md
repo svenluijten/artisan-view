@@ -16,6 +16,11 @@ to add to those templates, and more. All from the command line we know and love!
   - [Downloading](#downloading)
   - [Registering the service provider](#registering-the-service-provider)
 - [Usage](#usage)
+  - [Creating a view](#creating-a-view)
+  - [The file extension](#the-file-extension)
+  - [Extending a view](#extending-a-view)
+  - [Adding sections](#adding-sections)
+  - [Creating RESTful resources](#creating-restful-resources)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -52,7 +57,7 @@ This package defaults to using `.blade.php` as its file extension, but you may c
 $ php artisan make:view dashboard --extension=html.twig # Creates 'dashboard.html.twig'
 ```
 
-### Extending an existing view
+### Extending a view
 If you want to pre-fill the generated view file with an `@extends` tag, use the `--extends` option:
 
 ```bash
