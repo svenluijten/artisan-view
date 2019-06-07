@@ -18,7 +18,7 @@ abstract class TestCase extends AbstractPackageTestCase
     /**
      * Tear down the testing environment.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         /** @var \Illuminate\View\FileViewFinder $viewFinder */
         $viewFinder = app('view.finder');
