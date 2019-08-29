@@ -10,6 +10,10 @@ class ServiceProvider extends LaravelServiceProvider
 
     public function register(): void
     {
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
+
         $this->commands([
             Commands\MakeView::class,
             Commands\ScrapView::class,
