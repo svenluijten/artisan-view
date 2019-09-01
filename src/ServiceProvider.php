@@ -10,7 +10,7 @@ class ServiceProvider extends LaravelServiceProvider
 
     public function register(): void
     {
-        if (!$this->app->runningInConsole()) {
+        if (! $this->app->runningInConsole()) {
             return;
         }
 
