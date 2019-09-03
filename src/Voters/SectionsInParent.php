@@ -2,6 +2,7 @@
 
 namespace Sven\ArtisanView\Voters;
 
+use Illuminate\Support\Str;
 use Sven\ArtisanView\Blocks\InlineSection;
 use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\BlockStack;
@@ -35,7 +36,7 @@ class SectionsInParent implements Voter
     public function run(InputInterface $input, BlockStack $blockStack)
     {
         foreach ((array) $input->getOption('section') as $section) {
-            if (str_contains($section, ':')) {
+            if (Str::contains($section, ':')) {
                 list($name, $title) = explode(':', $section);
 
                 $blockStack->add(new InlineSection($name, $title));
