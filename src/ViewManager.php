@@ -33,7 +33,10 @@ class ViewManager
     {
         $this->everyView($view, function ($file) {
             $this->filesystem->makeDirectory(
-                $this->filesystem->dirname($file), 0755, true, true
+                $this->filesystem->dirname($file),
+                0755,
+                true,
+                true
             );
 
             $contents = BlockBuilder::make()->build($this->config);
@@ -74,7 +77,9 @@ class ViewManager
     protected function getFileNames(string $view): array
     {
         $viewPaths = str_replace(
-            '.', DIRECTORY_SEPARATOR, $this->getViewNames($view)
+            '.',
+            DIRECTORY_SEPARATOR,
+            $this->getViewNames($view)
         );
 
         return array_map(function ($viewName) {
@@ -84,7 +89,7 @@ class ViewManager
 
     protected function getViewNames(string $view): array
     {
-        if (! $this->config->isResource()) {
+        if (!$this->config->isResource()) {
             return Arr::wrap($view);
         }
 

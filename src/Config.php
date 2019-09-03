@@ -27,7 +27,7 @@ class Config
     protected $location;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $extends;
 

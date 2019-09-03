@@ -37,11 +37,11 @@ abstract class TestCase extends AbstractPackageTestCase
 
     private function clearDirectory(string $path): void
     {
-        if (! is_dir($path)) {
+        if (!is_dir($path)) {
             return;
         }
 
-        foreach (scandir($path, SCANDIR_SORT_NONE) as $object) {
+        foreach ((array) scandir($path, SCANDIR_SORT_NONE) as $object) {
             if (in_array($object, ['..', '.', '.gitkeep'], false)) {
                 continue;
             }
