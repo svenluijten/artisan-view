@@ -11,14 +11,14 @@ class Section implements Block
      */
     protected $contents;
 
-    public function __construct(?string $contents = '')
+    public function __construct(string $contents = '')
     {
         $this->contents = $contents;
     }
 
     public function applicable(): bool
     {
-        return ! Str::contains($this->contents, ':');
+        return !Str::contains($this->contents, ':');
     }
 
     public function render(): string
