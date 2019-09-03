@@ -4,6 +4,7 @@ namespace Sven\ArtisanView;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class ViewManager
 {
@@ -30,28 +31,44 @@ class ViewManager
 
     public function create(string $view): bool
     {
-        foreach ($this->getFileNames($view) as $filename) {
-            $fullPath = $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
-
+        $this->everyView($view, function ($file) {
             $this->filesystem->makeDirectory(
-                $this->filesystem->dirname($fullPath), 0755, true, true
+                $this->filesystem->dirname($file), 0755, true, true
             );
 
             $contents = BlockBuilder::make()->build($this->config);
 
-            $this->filesystem->put($fullPath, $contents);
-        }
+            $this->filesystem->put($file, $contents);
+        });
 
         return true;
     }
 
     public function delete(string $view): bool
     {
-        // 1. Get the full path + name of the view(s) to delete.
-        // 2. Remove the view(s) from step #1.
-        // 3. Remove the folder the view(s) is / were in if it is empty.
+        $this->everyView($view, function ($file) {
+            $this->filesystem->delete($file);
+
+            $location = $this->filesystem->dirname($file);
+
+            $files = $this->filesystem->files($location);
+            $directories = $this->filesystem->directories($location);
+
+            if ($files === [] && $directories === []) {
+                $this->filesystem->deleteDirectory($location);
+            }
+        });
 
         return true;
+    }
+
+    protected function everyView(string $view, callable $callable): Collection
+    {
+        return Collection::make($this->getFileNames($view))
+            ->map(function ($filename) {
+                return $this->config->getLocation().DIRECTORY_SEPARATOR.$filename;
+            })
+            ->each($callable);
     }
 
     protected function getFileNames(string $view): array
