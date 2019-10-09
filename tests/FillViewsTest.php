@@ -16,7 +16,7 @@ class FillViewsTest extends TestCase
 
         $block = new Blocks\Extend('layouts.app');
 
-        $this->assertContains($block->render(), $this->view('pages.contact'));
+        $this->assertStringContainsString($block->render(), $this->view('pages.contact'));
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class FillViewsTest extends TestCase
 
         $block = new Blocks\Section('content');
 
-        $this->assertContains($block->render(), $this->view('index'));
+        $this->assertStringContainsString($block->render(), $this->view('index'));
     }
 
     /** @test */
@@ -43,7 +43,7 @@ class FillViewsTest extends TestCase
         $firstBlock = new Blocks\Section('content');
         $secondBlock = new Blocks\Section('footer');
 
-        $this->assertContains($firstBlock->render().$secondBlock->render(), $this->view('index'));
+        $this->assertStringContainsString($firstBlock->render().$secondBlock->render(), $this->view('index'));
     }
 
     /** @test */
@@ -56,7 +56,7 @@ class FillViewsTest extends TestCase
 
         $block = new Blocks\InlineSection('title', 'Hello world');
 
-        $this->assertContains($block->render(), $this->view('index'));
+        $this->assertStringContainsString($block->render(), $this->view('index'));
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class FillViewsTest extends TestCase
         $blockOne = new Blocks\Section('content');
         $blockTwo = new Blocks\Section('something');
 
-        $this->assertContains($blockOne->render().$blockTwo->render(), $this->view('index'));
+        $this->assertStringContainsString($blockOne->render().$blockTwo->render(), $this->view('index'));
     }
 
     /** @test */
@@ -89,7 +89,7 @@ class FillViewsTest extends TestCase
 
         $pushBlock = new Blocks\Push('javascripts');
 
-        $this->assertContains($pushBlock->render(), $this->view('index'));
+        $this->assertStringContainsString($pushBlock->render(), $this->view('index'));
     }
 
     /** @test */
@@ -102,7 +102,7 @@ class FillViewsTest extends TestCase
             '--with-stacks' => true,
         ]);
 
-        $this->assertNotContains('@section', $this->view('index'));
-        $this->assertNotContains('@push', $this->view('index'));
+        $this->assertStringNotContainsString('@section', $this->view('index'));
+        $this->assertStringNotContainsString('@push', $this->view('index'));
     }
 }
