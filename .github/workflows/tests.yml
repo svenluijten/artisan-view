@@ -3,17 +3,14 @@ on: [push, pull_request]
 
 jobs:
     tests:
-        name: Run PhpUnit tests
-        runs-on: ${{ matrix.os }}
         strategy:
-            # fail-fast: true
+            fail-fast: false
             matrix:
                 php: [7.2, 7.3, 7.4]
-                os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
-                composer_flags: ['--prefer-lowest', '']
-                include:
-                    - php: 7.4
-                      allow_failure: true
+                os: ['ubuntu-latest', 'windows-latest']
+                composer_flags: ['--prefer-lowest', '--prefer-stable']
+        name: PHP ${{ matrix.php }} ${{ matrix.os }} (${{ matrix.composer_flags }})
+        runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v1
 
@@ -25,8 +22,7 @@ jobs:
                   coverage: none
 
             - name: Install Composer dependencies
-              run: composer update --no-interaction --no-suggest --no-progress --prefer-dist ${{ matrix.composer_flags }}
+              run: composer update --no-interaction --no-ansi --no-suggest --prefer-dist ${{ matrix.composer_flags }}
 
             - name: Execute tests
               run: vendor/bin/phpunit
-              continue-on-error: ${{ matrix.allow_failure }}
