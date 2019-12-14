@@ -11,6 +11,9 @@ jobs:
                 php: [7.2, 7.3, 7.4]
                 os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
                 composer_flags: ['--prefer-lowest', '']
+                include:
+                    - php: 7.4
+                      allow_failure: true
         steps:
             - uses: actions/checkout@v1
 
@@ -23,6 +26,7 @@ jobs:
 
             - name: Install Composer dependencies
               run: composer update --no-interaction --no-suggest --no-progress --prefer-dist ${{ matrix.composer_flags }}
+              continue-on-error: ${{ matrix.allow_failure }}
 
             - name: Execute tests
               run: vendor/bin/phpunit
