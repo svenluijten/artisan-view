@@ -21,7 +21,6 @@ jobs:
         name: PHP ${{ matrix.php }} (${{ matrix.composer_flags }})
         runs-on: ubuntu-latest
         strategy:
-            fail-fast: false
             matrix:
                 php: [7.2, 7.3, 7.4]
                 composer_flags: ['--prefer-lowest', '--prefer-stable']
