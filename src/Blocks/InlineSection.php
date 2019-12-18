@@ -25,6 +25,6 @@ class InlineSection implements Block
     {
         [$name, $content] = explode(':', $this->contents);
 
-        return "@section('$name', '$content')".PHP_EOL.PHP_EOL;
+        return "@section('$name', '$content')";
     }
 }

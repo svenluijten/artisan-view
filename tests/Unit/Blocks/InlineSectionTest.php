@@ -13,7 +13,7 @@ class InlineSectionTest extends TestCase
         $block = new InlineSection('title:My Title');
 
         $this->assertTrue($block->applicable());
-        $this->assertEquals('@section(\'title\', \'My Title\')'.PHP_EOL.PHP_EOL, $block->render());
+        $this->assertEquals('@section(\'title\', \'My Title\')', $block->render());
     }
 
     /** @test */
