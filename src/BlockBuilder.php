@@ -18,7 +18,7 @@ class BlockBuilder
     public function build(Config $config): string
     {
         return array_reduce($this->getBlocks($config), function (string $carry, Block $block) {
-            return $carry.$block->render();
+            return $carry.$block->render().PHP_EOL.PHP_EOL;
         }, '');
     }
 

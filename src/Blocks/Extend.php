@@ -21,6 +21,6 @@ class Extend implements Block
 
     public function render(): string
     {
-        return "@extends('$this->extends')".PHP_EOL.PHP_EOL;
+        return "@extends('$this->extends')";
     }
 }

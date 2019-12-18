@@ -13,7 +13,7 @@ class SectionTest extends TestCase
         $block = new Section('content');
 
         $this->assertTrue($block->applicable());
-        $this->assertEquals('@section(\'content\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL, $block->render());
+        $this->assertEquals('@section(\'content\')'.PHP_EOL.PHP_EOL.'@endsection', $block->render());
     }
 
     /** @test */
@@ -30,6 +30,6 @@ class SectionTest extends TestCase
         $block = new Section();
 
         $this->assertTrue($block->applicable());
-        $this->assertEquals('@section(\'\')'.PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL, $block->render());
+        $this->assertEquals('@section(\'\')'.PHP_EOL.PHP_EOL.'@endsection', $block->render());
     }
 }

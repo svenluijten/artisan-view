@@ -13,7 +13,7 @@ class ExtendTest extends TestCase
         $block = new Extend('app.layout');
 
         $this->assertTrue($block->applicable());
-        $this->assertEquals('@extends(\'app.layout\')'.PHP_EOL.PHP_EOL, $block->render());
+        $this->assertEquals('@extends(\'app.layout\')', $block->render());
     }
 
     /** @test */
