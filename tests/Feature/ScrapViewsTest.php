@@ -74,4 +74,65 @@ class ScrapViewsTest extends TestCase
         $this->assertViewNotExists('posts.index');
         $this->assertDirectoryNotExists(__DIR__.'/../resources/views/posts');
     }
+
+    /** @test */
+    public function it_can_scrap_a_restful_resource(): void
+    {
+        $this->assertViewNotExists('posts.index');
+        $this->assertViewNotExists('posts.show');
+        $this->assertViewNotExists('posts.edit');
+        $this->assertViewNotExists('posts.create');
+
+        $this->artisan(MakeView::class, [
+            'name' => 'posts',
+            '--resource' => true,
+        ]);
+
+        $this->assertViewExists('posts.index');
+        $this->assertViewExists('posts.show');
+        $this->assertViewExists('posts.edit');
+        $this->assertViewExists('posts.create');
+
+        $this->artisan(ScrapView::class, [
+            'name' => 'posts',
+            '--force' => true,
+            '--resource' => true,
+        ]);
+
+        $this->assertViewNotExists('posts.index');
+        $this->assertViewNotExists('posts.show');
+        $this->assertViewNotExists('posts.edit');
+        $this->assertViewNotExists('posts.create');
+    }
+
+    /** @test */
+    public function it_can_scrap_only_part_of_a_restful_resource(): void
+    {
+        $this->assertViewNotExists('posts.index');
+        $this->assertViewNotExists('posts.show');
+        $this->assertViewNotExists('posts.edit');
+        $this->assertViewNotExists('posts.create');
+
+        $this->artisan(MakeView::class, [
+            'name' => 'posts',
+            '--resource' => true,
+        ]);
+
+        $this->assertViewExists('posts.index');
+        $this->assertViewExists('posts.show');
+        $this->assertViewExists('posts.edit');
+        $this->assertViewExists('posts.create');
+
+        $this->artisan(ScrapView::class, [
+            'name' => 'posts',
+            '--force' => true,
+            '--resource' => true,
+            '--verb' => ['index', 'show'],
+        ]);
+
+        $this->assertViewNotExists('posts.index');
+        $this->assertViewNotExists('posts.show');
+        $this->assertViewExists('posts.edit');
+        $this->assertViewExists('posts.create');
+    }
 }
