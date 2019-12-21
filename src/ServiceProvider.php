@@ -2,12 +2,11 @@
 
 namespace Sven\ArtisanView;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-class ServiceProvider extends LaravelServiceProvider
+class ServiceProvider extends LaravelServiceProvider implements DeferrableProvider
 {
-    protected $defer = true;
-
     public function register(): void
     {
         if (!$this->app->runningInConsole()) {
