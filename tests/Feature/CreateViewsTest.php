@@ -4,7 +4,6 @@ namespace Sven\ArtisanView\Tests\Feature;
 
 use InvalidArgumentException;
 use Sven\ArtisanView\Commands\MakeView;
-use Sven\ArtisanView\Commands\ScrapView;
 use Sven\ArtisanView\Tests\TestCase;
 use Sven\LaravelTestingUtils\InteractsWithViews;
 
