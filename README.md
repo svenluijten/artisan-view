@@ -4,8 +4,9 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-circleci]][link-circleci]
+[![Build Status][ico-tests]][link-tests]
 [![StyleCI][ico-styleci]][link-styleci]
+[![PhpStan][ico-phpstan]][link-phpstan]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
 project. Generate blade files that extend other views, scaffold out sections
@@ -208,13 +209,15 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 `sven/artisan-view` is licenced under the MIT License (MIT). Please see the
 [license file](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg?style=flat-square
-[ico-circleci]: https://img.shields.io/circleci/project/github/svenluijten/artisan-view.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/56054783/shield
+[ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg
+[ico-license]: https://img.shields.io/badge/license-MIT-green.svg
+[ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg
+[ico-tests]: https://github.com/svenluijten/artisan-view/workflows/Tests%20(PHP)/badge.svg
+[ico-styleci]: https://styleci.io/repos/56054783/shield?style=flat
+[ico-phpstan]: https://img.shields.io/badge/phpstan-enabled-blue.svg
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
-[link-circleci]: https://circleci.com/gh/svenluijten/artisan-view
+[link-tests]: https://github.com/svenluijten/artisan-view/actions?query=workflow%3ATests%20(PHP)
 [link-styleci]: https://styleci.io/repos/56054783
+[link-phpstan]: https://github.com/phpstan/phpstan
