@@ -14,25 +14,37 @@ class ScrapViewsTest extends TestCase
     /** @test */
     public function it_asks_the_user_if_they_are_sure_they_want_to_remove_the_view(): void
     {
-        $this->artisan(ScrapView::class, ['name' => 'index'])
-            ->expectsQuestion('Are you sure you want to remove that view / those views?', true)
-            ->assertExitCode(0);
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(ScrapView::class, ['name' => 'index']);
+
+        $command->assertExitCode(0)
+            ->expectsQuestion('Are you sure you want to remove that view / those views?', 'y');
     }
 
     /** @test */
     public function it_does_not_remove_the_view_if_no_is_answered(): void
     {
-        $this->artisan(ScrapView::class, ['name' => 'index'])
+        $this->artisan(MakeView::class, ['name' => 'index']);
+
+        $this->assertViewExists('index');
+
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(ScrapView::class, ['name' => 'index']);
+
+        $command->assertExitCode(0)
             ->expectsQuestion('Are you sure you want to remove that view / those views?', false)
-            ->expectsOutput('Okay, nothing was changed.')
-            ->assertExitCode(0);
+            ->expectsOutput('Okay, nothing was changed.');
+
+        $this->assertViewExists('index');
     }
 
     /** @test */
     public function it_does_not_ask_for_confirmation_if_the_force_flag_is_passed(): void
     {
-        $this->artisan(ScrapView::class, ['name' => 'index', '--force' => true])
-            ->assertExitCode(0);
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(ScrapView::class, ['name' => 'index', '--force' => true]);
+
+        $command->assertExitCode(0);
     }
 
     /** @test */
