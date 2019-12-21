@@ -6,6 +6,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-build]][link-build]
 [![StyleCI][ico-styleci]][link-styleci]
+[![PhpStan][ico-phpstan]][link-phpstan]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
 project. Generate blade files that extend other views, scaffold out sections
@@ -202,8 +203,10 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg?style=flat-square
 [ico-build]: https://img.shields.io/github/actions/workflow/status/svenluijten/artisan-view/tests.yml?style=flat-square
 [ico-styleci]: https://styleci.io/repos/56054783/shield
+[ico-phpstan]: https://img.shields.io/badge/phpstan-enabled-blue.svg
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
 [link-build]: https://github.com/svenluijten/artisan-view/actions/workflows/tests.yml
 [link-styleci]: https://styleci.io/repos/56054783
+[link-phpstan]: https://github.com/phpstan/phpstan
