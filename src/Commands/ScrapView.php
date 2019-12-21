@@ -63,6 +63,11 @@ class ScrapView extends Command
         return $this->config->get('view.paths', []);
     }
 
+    protected function exceptionMessage(): string
+    {
+        return 'There are no paths configured to remove the view(s) from.';
+    }
+
     protected function getOptions(): array
     {
         return [

@@ -2,6 +2,7 @@
 
 namespace Sven\ArtisanView\Tests\Feature;
 
+use InvalidArgumentException;
 use Sven\ArtisanView\Commands\MakeView;
 use Sven\ArtisanView\Commands\ScrapView;
 use Sven\ArtisanView\Tests\TestCase;
@@ -45,6 +46,38 @@ class ScrapViewsTest extends TestCase
         $command = $this->artisan(ScrapView::class, ['name' => 'index', '--force' => true]);
 
         $command->assertExitCode(0);
+    }
+
+    /** @test */
+    public function it_asks_where_the_view_should_be_scrapped_from_if_more_than_one_view_path_is_configured(): void
+    {
+        $this->app->make('config')->set('view.paths', [
+            __DIR__.'/../resources/views',
+            __DIR__.'/../resources/does-not-exist',
+        ]);
+
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(ScrapView::class, [
+            'name' => 'index',
+            '--force' => true,
+        ]);
+
+        $command->assertExitCode(0)
+            ->expectsQuestion('Where should the view be scrapped from?', __DIR__.'/../resources/views');
+    }
+
+    /** @test */
+    public function it_throws_an_exception_if_no_view_paths_are_configured_when_scrapping_a_view(): void
+    {
+        $this->app->make('config')->set('view.paths', []);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('There are no paths configured to remove the view(s) from.');
+
+        $this->artisan(ScrapView::class, [
+            'name' => 'index',
+            '--force' => true,
+        ]);
     }
 
     /** @test */

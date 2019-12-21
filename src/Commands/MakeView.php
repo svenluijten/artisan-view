@@ -59,6 +59,11 @@ class MakeView extends Command
         return $this->config->get('view.paths', []);
     }
 
+    protected function exceptionMessage(): string
+    {
+        return 'There are no paths configured to store the view(s) in.';
+    }
+
     protected function getOptions(): array
     {
         return [
