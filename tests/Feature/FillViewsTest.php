@@ -70,4 +70,22 @@ class FillViewsTest extends TestCase
 
         $this->assertViewEquals($contentSection."@section('title', 'My Title')".PHP_EOL.PHP_EOL, 'index');
     }
+
+    /** @test */
+    public function it_adds_an_extends_and_section_block_to_the_view(): void
+    {
+        $this->artisan(MakeView::class, [
+            'name' => 'index',
+            '--extends' => 'layouts.master',
+            '--section' => ['title:My Title', 'content'],
+        ]);
+
+        $expectedBlocks = [
+            "@extends('layouts.master')".PHP_EOL.PHP_EOL,
+            "@section('title', 'My Title')".PHP_EOL.PHP_EOL,
+            "@section('content')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL,
+        ];
+
+        $this->assertViewEquals(implode('', $expectedBlocks), 'index');
+    }
 }
