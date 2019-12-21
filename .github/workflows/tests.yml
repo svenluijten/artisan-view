@@ -17,7 +17,7 @@ on:
             - 'phpunit.xml.dist'
 
 jobs:
-    tests:
+    phpunit:
         name: PHP ${{ matrix.php }} (${{ matrix.composer_flags }})
         runs-on: ubuntu-latest
         strategy:
@@ -39,3 +39,21 @@ jobs:
 
             - name: Execute tests
               run: vendor/bin/phpunit
+
+    phpstan:
+        name: PhpStan
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Configure PHP
+              uses: shivammathur/setup-php@v1
+              with:
+                  php-version: latest
+                  extensions: mbstring
+                  coverage: none
+
+            - name: Install Composer dependencies
+              run: composer update --no-interaction --no-ansi --no-suggest --prefer-dist --prefer-stable
+
+            - name: Run PhpStan
+              run: vendor/bin/phpstan analyse src/ tests/ --level=7
