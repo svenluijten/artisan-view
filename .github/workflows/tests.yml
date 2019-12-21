@@ -9,6 +9,7 @@ on:
             - 'tests/**'
             - 'composer.json'
             - 'phpunit.xml.dist'
+            -  '.github/workflows/**'
     pull_request:
         paths:
             - 'src/**'
