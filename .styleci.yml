@@ -7,4 +7,4 @@ enabled:
   - phpdoc_separation
 
 disabled:
-  - length_ordered_imports
+    - not_operator_with_successor_space
