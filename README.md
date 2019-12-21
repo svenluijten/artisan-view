@@ -21,6 +21,8 @@ to add to those templates, and more. All from the command line we know and love!
   - [Extending a view](#extending-a-view)
   - [Adding sections](#adding-sections)
   - [Creating RESTful resources](#creating-restful-resources)
+  - [Scrapping a view](#scrapping-a-view)
+  - [Scrapping resources](#scrapping-resources)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -162,6 +164,41 @@ $ php artisan make:view posts --resource --verb=index --verb=edit
 ```
 
 This will only create 2 views: `posts/index.blade.php` and `posts/edit.blade.php`.
+
+### Scrapping a view
+You may use the `scrap:view` command to remove one or more views from your project:
+
+```bash
+$ php artisan scrap:view index # Removes 'index.blade.php'
+$ php artisan scrap:view posts.show # Removes 'posts/show.blade.php'
+```
+
+This will ask you for confirmation. If you are sure you want to remove the view, you
+can pass the `--force` flag: 
+
+```bash
+$ php artisan scrap:view index --force # Do not ask for confirmation before removing 'index.blade.php'
+```
+
+### Scrapping resources
+Just like with `make:view`, you can use the `--resource` and `--verb` flags to scrap (parts of) a RESTful
+resource of views:
+
+```bash
+$ php artisan scrap:view posts --resource
+```
+
+This will remove `index.blade.php`, `show.blade.php`, `edit.blade.php`, and `create.blade.php` from
+`posts/`. If this directory is empty after deleting these views, it will also be removed.
+
+You may wish to only remove part of a resource. You can do so with the `--verb` flag:
+
+```bash
+$ php artisan scrap:view posts --resource --verb=index --verb=show
+```
+
+This will remove `posts/index.blade.php` and `posts/show.blade.php`. If the `posts/` directory is
+empty after deleting these views, it will also be deleted.
 
 ## Contributing
 All contributions (in the form on pull requests, issues and feature-requests) are
