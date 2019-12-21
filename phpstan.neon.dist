@@ -4,7 +4,5 @@ parameters:
           paths:
               - %currentWorkingDirectory%/src/Commands/MakeView.php
               - %currentWorkingDirectory%/src/Commands/ScrapView.php
-        - message: '#Cannot call method (.+)\(\) on Illuminate\\Foundation\\Testing\\PendingCommand\|int\.#'
-          path: %currentWorkingDirectory%/tests/Feature/CreateViewsTest.php
-        - '#Cannot call method assertExitCode\(\) on Illuminate\\Foundation\\Testing\\PendingCommand\|int\.#'
         - '#Access to an undefined property Illuminate\\Contracts\\Foundation\\Application::.+\.#'
+        - '#Illuminate\\Foundation\\Testing\\PendingCommand::expectsQuestion\(\) expects string, .+ given.#'
