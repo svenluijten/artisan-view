@@ -11,7 +11,7 @@ trait ChoosesViewLocation
         $paths = $this->possibleLocations();
 
         if (count($paths) === 0) {
-            throw new InvalidArgumentException('There are no paths configured to store the views in.');
+            throw new InvalidArgumentException($this->exceptionMessage());
         }
 
         if (count($paths) === 1) {
@@ -24,4 +24,6 @@ trait ChoosesViewLocation
     abstract protected function pathQuestion(): string;
 
     abstract protected function possibleLocations(): array;
+
+    abstract protected function exceptionMessage(): string;
 }
