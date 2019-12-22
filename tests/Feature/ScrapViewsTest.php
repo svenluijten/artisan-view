@@ -44,7 +44,14 @@ class ScrapViewsTest extends TestCase
     {
         /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, ['name' => 'index', '--force' => true]);
+        $command->assertExitCode(0);
+    }
 
+    /** @test */
+    public function it_has_a_shorthand_for_the_force_flag(): void
+    {
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(ScrapView::class, ['name' => 'show', '-F' => true]);
         $command->assertExitCode(0);
     }
 
