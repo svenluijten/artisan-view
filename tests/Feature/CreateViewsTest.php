@@ -4,6 +4,7 @@ namespace Sven\ArtisanView\Tests\Feature;
 
 use InvalidArgumentException;
 use Sven\ArtisanView\Commands\MakeView;
+use Sven\ArtisanView\Exceptions\ViewAlreadyExists;
 use Sven\ArtisanView\Tests\TestCase;
 use Sven\LaravelTestingUtils\InteractsWithViews;
 
@@ -21,6 +22,32 @@ class CreateViewsTest extends TestCase
         unset($command);
 
         $this->assertViewExists('testing');
+    }
+
+    /** @test */
+    public function it_does_not_overwrite_an_existing_view_if_it_exists(): void
+    {
+        $this->artisan(MakeView::class, [
+            'name' => 'testing',
+            '--extends' => 'layouts.app',
+        ]);
+
+        $this->assertViewExists('testing');
+        $this->assertViewEquals("@extends('layouts.app')".PHP_EOL.PHP_EOL, 'testing');
+
+        $expectedPath = realpath(__DIR__.'/../resources/views/testing.blade.php');
+
+        $this->expectException(ViewAlreadyExists::class);
+        $this->expectExceptionMessage('A view already exists at "'.$expectedPath.'".');
+
+        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        $command = $this->artisan(MakeView::class, ['name' => 'testing']);
+
+        $command->assertExitCode(1);
+        unset($command);
+
+        $this->assertViewExists('testing');
+        $this->assertViewEquals("@extends('layouts.app')".PHP_EOL.PHP_EOL, 'testing');
     }
 
     /** @test */
