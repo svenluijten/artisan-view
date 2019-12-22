@@ -5,6 +5,7 @@ namespace Sven\ArtisanView;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Sven\ArtisanView\Exceptions\ViewAlreadyExists;
 
 class ViewManager
 {
@@ -38,6 +39,10 @@ class ViewManager
                 true,
                 true
             );
+
+            if ($this->filesystem->exists($file)) {
+                throw new ViewAlreadyExists('A view already exists at "'.$file.'".');
+            }
 
             $contents = BlockBuilder::make()->build($this->config);
 
