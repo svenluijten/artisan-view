@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "illuminate/console": "^6.0"
+        "illuminate/console": "^6.0 || ^7.0 || ^8.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.11",
