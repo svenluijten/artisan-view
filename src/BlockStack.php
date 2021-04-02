@@ -7,6 +7,7 @@ use Sven\ArtisanView\Voters\ExtendsParent;
 use Sven\ArtisanView\Voters\SectionsInParent;
 use Sven\ArtisanView\Voters\StacksFromParent;
 use Sven\ArtisanView\Voters\YieldsFromParent;
+use Sven\ArtisanView\Voters\InlineSectionsInParent;
 use Symfony\Component\Console\Input\InputInterface;
 
 class BlockStack
@@ -28,6 +29,7 @@ class BlockStack
             new ExtendsParent,
             new YieldsFromParent,
             new StacksFromParent,
+            new InlineSectionsInParent,
             new SectionsInParent,
         ];
 
