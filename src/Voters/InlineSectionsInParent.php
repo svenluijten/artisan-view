@@ -8,7 +8,7 @@ use Sven\ArtisanView\Blocks\Section;
 use Sven\ArtisanView\BlockStack;
 use Symfony\Component\Console\Input\InputInterface;
 
-class SectionsInParent implements Voter
+class InlineSectionsInParent implements Voter
 {
     /**
      * @var string
@@ -20,7 +20,7 @@ class SectionsInParent implements Voter
      */
     public function canHandle(InputInterface $input)
     {
-        return $input->hasOption('section');
+        return $input->hasOption('inline-section');
     }
 
     public function inPath($path)
@@ -35,14 +35,11 @@ class SectionsInParent implements Voter
      */
     public function run(InputInterface $input, BlockStack $blockStack)
     {
-        foreach ((array) $input->getOption('section') as $section) {
+        foreach ((array) $input->getOption('inline-section') as $section) {
             if (Str::contains($section, ':')) {
-                $section = explode(':', $section);
-                $name = $section[0];
-                unset($section[0]);
-                $content = join("", $section);
+                list($name, $title) = explode(':', $section);
 
-                $blockStack->add(new Section($name, $content));
+                $blockStack->add(new InlineSection($name, $title));
             }
         }
     }
