@@ -23,10 +23,10 @@ class BlocksTest extends TestCase
     /** @test */
     public function it_renders_a_section_block()
     {
-        $block = new Section('content');
+        $block = new Section('content', '<section></section>');
 
         $this->assertEquals(
-            "@section('content')".PHP_EOL.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL,
+            "@section('content')".PHP_EOL.'<section></section>'.PHP_EOL.'@endsection'.PHP_EOL.PHP_EOL,
             $block->render()
         );
     }
