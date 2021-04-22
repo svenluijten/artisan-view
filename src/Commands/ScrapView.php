@@ -18,15 +18,8 @@ class ScrapView extends Command
 
     protected $description = 'Scrap an existing view';
 
-    /**
-     * @var \Illuminate\Contracts\Config\Repository
-     */
-    protected $config;
-
-    public function __construct(Repository $config)
+    public function __construct(protected Repository $config)
     {
-        $this->config = $config;
-
         parent::__construct();
     }
 

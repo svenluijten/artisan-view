@@ -2,16 +2,11 @@
 
 namespace Sven\ArtisanView\Tests;
 
-use GrahamCampbell\TestBench\AbstractPackageTestCase;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Sven\ArtisanView\ServiceProvider;
 
-abstract class TestCase extends AbstractPackageTestCase
+abstract class TestCase extends OrchestraTestCase
 {
-    protected function getServiceProviderClass($app)
-    {
-        return ServiceProvider::class;
-    }
-
     protected function getEnvironmentSetUp($app)
     {
         @mkdir(__DIR__.'/resources/views', 0755, true);
@@ -20,7 +15,7 @@ abstract class TestCase extends AbstractPackageTestCase
             __DIR__.'/resources/views',
         ]);
 
-        parent::getEnvironmentSetUp($app);
+        $app->register(ServiceProvider::class);
     }
 
     protected function tearDown(): void

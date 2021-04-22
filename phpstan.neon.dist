@@ -1,8 +1,0 @@
-parameters:
-    ignoreErrors:
-        - message: '#Parameter \#\d \$(.+) of method Sven\\ArtisanView\\(ViewManager|Config)::.*\(\) expects (?:.+), array\|(bool\|)?string\|null given\.#'
-          paths:
-              - %currentWorkingDirectory%/src/Commands/MakeView.php
-              - %currentWorkingDirectory%/src/Commands/ScrapView.php
-        - '#Access to an undefined property Illuminate\\Contracts\\Foundation\\Application::.+\.#'
-        - '#Illuminate\\Foundation\\Testing\\PendingCommand::expectsQuestion\(\) expects string, .+ given.#'

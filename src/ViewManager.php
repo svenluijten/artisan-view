@@ -9,20 +9,8 @@ use Sven\ArtisanView\Exceptions\ViewAlreadyExists;
 
 class ViewManager
 {
-    /**
-     * @var \Sven\ArtisanView\Config
-     */
-    protected $config;
-
-    /**
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $filesystem;
-
-    private function __construct(Config $config, Filesystem $filesystem)
+    private function __construct(protected Config $config, protected Filesystem $filesystem)
     {
-        $this->config = $config;
-        $this->filesystem = $filesystem;
     }
 
     public static function make(Config $config, Filesystem $filesystem): self

@@ -4,7 +4,7 @@ namespace Sven\ArtisanView\Tests\Feature;
 
 use Sven\ArtisanView\Commands\MakeView;
 use Sven\ArtisanView\Tests\TestCase;
-use Sven\LaravelTestingUtils\InteractsWithViews;
+use Sven\LaravelViewAssertions\InteractsWithViews;
 
 class FillViewsTest extends TestCase
 {
