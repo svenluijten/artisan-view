@@ -22,14 +22,28 @@ composer require sven/artisan-view --dev
 ```
 
 ### Registering the service provider
-If you're using Laravel 5.5 or above, you can skip this step. The service provider will have already been 
-registered thanks to auto-discovery.
+Ensure `Sven\ArtisanView\ServiceProvider::class` is registered in the service container. For most people, this will have
+been done automatically thanks to auto-discovery. If you opted out of package auto-discovery, register it manually in
+one of your (non-deferred) service providers:
+
+```php
+public function register()
+{
+    if ($this->app->environment() !== 'production') {
+        $this->app->register(\Sven\ArtisanView\ServiceProvider::class);
+    }    
+}
+```
+
+Alternatively, you can use [`sven/env-providers`](https://github.com/svenluijten/env-providers) to only register Artisan
+View's service provider in the `development` environment.
 
 ## Usage
 When running `php artisan` now, you will see two new commands in the list: `make:view` and `scrap:view`.
 
 ### Creating a view
-To create a single view file, you can invoke the `make:view` command:
+To create a single view file, invoke the `make:view` command with the desired view name as the first argument. The view
+can be nested by using `dot.notation`:
 
 ```bash
 $ php artisan make:view dashboard # Creates 'dashboard.blade.php'
@@ -53,10 +67,12 @@ $ php artisan make:view dashboard --extends=layouts.master
 
 <details>
 <summary>See result</summary>
-    
+
+`dashboard.blade.php`:
+
 ```blade
 @extends('layouts.master')
-    
+
 ```
 </details>
 
@@ -69,6 +85,8 @@ $ php artisan make:view posts.create --section=content
 
 <details>
 <summary>See result</summary>
+
+`posts/create.blade.php`:
 
 ```blade
 @section('content')
@@ -89,10 +107,14 @@ $ php artisan make:view posts.edit --section="title:Edit the post" # Use quotes 
 <details>
 <summary>See result</summary>
 
+`posts/create.blade.php`:
+
 ```blade
 @section('title', 'Awesome')
 
 ```
+
+`posts/edit.blade.php`:
 
 ```blade
 @section('title', 'Edit the post')
@@ -108,6 +130,8 @@ $ php artisan make:view posts.show --section="title:Show an existing post" --sec
 
 <details>
 <summary>See result</summary>
+
+`posts/show.blade.php`:
 
 ```blade
 @section('title', 'Show an existing post')
