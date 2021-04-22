@@ -1,60 +1,31 @@
 name: Tests (PHP)
-on:
-    push:
-        branches:
-            - 'master'
-            - 'develop'
-        paths:
-            - 'src/**'
-            - 'tests/**'
-            - 'composer.json'
-            - 'phpunit.xml.dist'
-            -  '.github/workflows/**'
-    pull_request:
-        paths:
-            - 'src/**'
-            - 'tests/**'
-            - 'composer.json'
-            - 'phpunit.xml.dist'
+on: [push, pull_request]
 
 jobs:
     phpunit:
-        name: PHP ${{ matrix.php }} (${{ matrix.composer_flags }})
+        name: PHP ${{ matrix.php }} (${{ matrix.os }} with ${{ matrix.dependency-version }} deps)
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php: [7.2, 7.3, 7.4]
-                composer_flags: ['--prefer-lowest', '--prefer-stable']
+                os: [ubuntu-latest, windows-latest, macos-latest]
+                php: [8.0]
+                dependency-version: [highest, lowest]
+
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
 
             - name: Configure PHP
-              uses: shivammathur/setup-php@v1
+              uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
                   extensions: mbstring
                   coverage: none
 
-            - name: Install Composer dependencies
-              run: composer update --no-interaction --no-ansi --no-suggest --prefer-dist ${{ matrix.composer_flags }}
+            -   name: Install dependencies
+                uses: ramsey/composer-install@v1
+                with:
+                    dependency-versions: ${{ matrix.dependency-version }}
+                    composer-options: "--prefer-dist"
 
             - name: Execute tests
               run: vendor/bin/phpunit
-
-    phpstan:
-        name: PhpStan
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - name: Configure PHP
-              uses: shivammathur/setup-php@v1
-              with:
-                  php-version: latest
-                  extensions: mbstring
-                  coverage: none
-
-            - name: Install Composer dependencies
-              run: composer update --no-interaction --no-ansi --no-suggest --prefer-dist --prefer-stable
-
-            - name: Run PhpStan
-              run: vendor/bin/phpstan analyse src/ tests/ --level=7
