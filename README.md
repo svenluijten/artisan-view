@@ -193,11 +193,11 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 `sven/artisan-view` is licenced under the MIT License (MIT). Please see the
 [license file](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg
-[ico-license]: https://img.shields.io/badge/license-MIT-green.svg
-[ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg
+[ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg?style=flat-square
 [ico-tests]: https://img.shields.io/github/workflow/status/svenluijten/artisan-view/Tests%20(PHP)?style=flat-square
-[ico-styleci]: https://styleci.io/repos/56054783/shield?style=flat
+[ico-styleci]: https://styleci.io/repos/56054783/shield?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
