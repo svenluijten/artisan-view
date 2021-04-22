@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Sven\ArtisanView\Commands\MakeView;
 use Sven\ArtisanView\Commands\ScrapView;
 use Sven\ArtisanView\Tests\TestCase;
-use Sven\LaravelTestingUtils\InteractsWithViews;
+use Sven\LaravelViewAssertions\InteractsWithViews;
 
 class ScrapViewsTest extends TestCase
 {
@@ -112,7 +112,7 @@ class ScrapViewsTest extends TestCase
         $this->artisan(ScrapView::class, ['name' => 'posts.index', '--force' => true]);
 
         $this->assertViewNotExists('posts.index');
-        $this->assertDirectoryNotExists(__DIR__.'/../resources/views/posts');
+        $this->assertDirectoryDoesNotExist(__DIR__.'/../resources/views/posts');
     }
 
     /** @test */
