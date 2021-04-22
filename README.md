@@ -212,7 +212,7 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg
 [ico-license]: https://img.shields.io/badge/license-MIT-green.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg
-[ico-tests]: https://github.com/svenluijten/artisan-view/workflows/Tests%20(PHP)/badge.svg
+[ico-tests]: https://img.shields.io/github/workflow/status/svenluijten/artisan-view/Tests%20(PHP)?style=flat-square
 [ico-styleci]: https://styleci.io/repos/56054783/shield?style=flat
 [ico-phpstan]: https://img.shields.io/badge/phpstan-enabled-blue.svg
 
