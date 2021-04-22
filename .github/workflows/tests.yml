@@ -1,21 +1,5 @@
 name: Tests (PHP)
-on:
-    push:
-        branches:
-            - 'master'
-            - 'develop'
-        paths:
-            - 'src/**'
-            - 'tests/**'
-            - 'composer.json'
-            - 'phpunit.xml.dist'
-            -  '.github/workflows/**'
-    pull_request:
-        paths:
-            - 'src/**'
-            - 'tests/**'
-            - 'composer.json'
-            - 'phpunit.xml.dist'
+on: [push, pull_request]
 
 jobs:
   phpunit:
@@ -25,6 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         php: [8.1, 8.2]
+        dependency-version: [highest, lowest]
 
     steps:
       - uses: actions/checkout@v3
@@ -37,27 +22,10 @@ jobs:
           coverage: none
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v1
         with:
+          dependency-versions: ${{ matrix.dependency-version }}
           composer-options: "--prefer-dist"
 
       - name: Execute tests
         run: vendor/bin/phpunit
-
-  phpstan:
-    name: PhpStan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Configure PHP
-        uses: shivammathur/setup-php@v1
-        with:
-          php-version: latest
-          extensions: mbstring
-          coverage: none
-
-      - name: Install Composer dependencies
-        run: composer update --no-interaction --no-ansi --no-suggest --prefer-dist --prefer-stable
-
-      - name: Run PhpStan
-        run: vendor/bin/phpstan analyse src/ tests/ --level=7

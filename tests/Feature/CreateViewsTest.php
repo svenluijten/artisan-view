@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Sven\ArtisanView\Commands\MakeView;
 use Sven\ArtisanView\Exceptions\ViewAlreadyExists;
 use Sven\ArtisanView\Tests\TestCase;
-use Sven\LaravelTestingUtils\InteractsWithViews;
+use Sven\LaravelViewAssertions\InteractsWithViews;
 
 class CreateViewsTest extends TestCase
 {

@@ -1,13 +1,9 @@
 * text=auto
 
-/.circleci         export-ignore
 /tests             export-ignore
 /.editorconfig     export-ignore
 /.gitattributes    export-ignore
 /.gitignore        export-ignore
 /.styleci.yml      export-ignore
 /CONTRIBUTING.md   export-ignore
-/phpunit.xml       export-ignore
-/.php_cs           export-ignore
-/phpstan.neon.dist export-ignore
-
+/phpunit.xml.dist  export-ignore
