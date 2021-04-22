@@ -11,21 +11,6 @@ This package adds a handful of view-related commands to Artisan in your Laravel
 project. Generate blade files that extend other views, scaffold out sections
 to add to those templates, and more. All from the command line we know and love!
 
-## Index
-- [Installation](#installation)
-  - [Downloading](#downloading)
-  - [Registering the service provider](#registering-the-service-provider)
-- [Usage](#usage)
-  - [Creating a view](#creating-a-view)
-  - [The file extension](#the-file-extension)
-  - [Extending a view](#extending-a-view)
-  - [Adding sections](#adding-sections)
-  - [Creating RESTful resources](#creating-restful-resources)
-  - [Scrapping a view](#scrapping-a-view)
-  - [Scrapping resources](#scrapping-resources)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Installation
 You'll have to follow a couple of simple steps to install this package.
 
