@@ -23,8 +23,6 @@
     "require-dev": {
         "orchestra/testbench": "^6.8",
         "sven/laravel-view-assertions": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.15",
-        "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,9 +33,6 @@
         "psr-4": {
             "Sven\\ArtisanView\\Tests\\": "tests/"
         }
-    },
-    "scripts": {
-        "cs": "php-cs-fixer fix --verbose"
     },
     "extra": {
         "laravel": {
