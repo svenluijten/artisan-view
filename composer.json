@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^6.8",
-        "sven/laravel-view-assertions": "^1.0"
+        "sven/laravel-view-assertions": "^1.1"
     },
     "autoload": {
         "psr-4": {
