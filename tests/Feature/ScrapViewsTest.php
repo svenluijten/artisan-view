@@ -15,7 +15,7 @@ class ScrapViewsTest extends TestCase
     /** @test */
     public function it_asks_the_user_if_they_are_sure_they_want_to_remove_the_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, ['name' => 'index']);
 
         $command->assertExitCode(0)
@@ -29,7 +29,7 @@ class ScrapViewsTest extends TestCase
 
         $this->assertViewExists('index');
 
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, ['name' => 'index']);
 
         $command->assertExitCode(0)
@@ -42,7 +42,7 @@ class ScrapViewsTest extends TestCase
     /** @test */
     public function it_does_not_ask_for_confirmation_if_the_force_flag_is_passed(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, ['name' => 'index', '--force' => true]);
         $command->assertExitCode(0);
     }
@@ -50,7 +50,7 @@ class ScrapViewsTest extends TestCase
     /** @test */
     public function it_has_a_shorthand_for_the_force_flag(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, ['name' => 'show', '-F' => true]);
         $command->assertExitCode(0);
     }
@@ -63,7 +63,7 @@ class ScrapViewsTest extends TestCase
             __DIR__.'/../resources/does-not-exist',
         ]);
 
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(ScrapView::class, [
             'name' => 'index',
             '--force' => true,
