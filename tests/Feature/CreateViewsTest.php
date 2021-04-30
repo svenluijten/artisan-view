@@ -91,10 +91,7 @@ class CreateViewsTest extends TestCase
         unset($command);
 
         $this->assertDirectoryExists(__DIR__.'/../resources/views/posts');
-        $this->assertViewExists('posts.index');
-        $this->assertViewExists('posts.show');
-        $this->assertViewExists('posts.create');
-        $this->assertViewExists('posts.edit');
+        $this->assertViewsExist(['posts.index', 'posts.show', 'posts.create', 'posts.edit']);
     }
 
     /** @test */
@@ -109,10 +106,7 @@ class CreateViewsTest extends TestCase
         $command->assertExitCode(0);
         unset($command);
 
-        $this->assertViewExists('admin.posts.index');
-        $this->assertViewExists('admin.posts.show');
-        $this->assertViewExists('admin.posts.create');
-        $this->assertViewExists('admin.posts.edit');
+        $this->assertViewsExist(['admin.posts.index', 'admin.posts.show', 'admin.posts.create', 'admin.posts.edit']);
     }
 
     /** @test */
@@ -128,10 +122,8 @@ class CreateViewsTest extends TestCase
         $command->assertExitCode(0);
         unset($command);
 
-        $this->assertViewExists('posts.index');
-        $this->assertViewExists('posts.show');
-        $this->assertViewNotExists('posts.create');
-        $this->assertViewNotExists('posts.edit');
+        $this->assertViewsExist(['posts.index', 'posts.show']);
+        $this->assertViewsDoNotExist(['posts.create', 'posts.edit']);
     }
 
     /** @test */
