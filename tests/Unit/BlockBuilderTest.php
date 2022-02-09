@@ -9,8 +9,8 @@ use Sven\ArtisanView\Tests\TestCase;
 class BlockBuilderTest extends TestCase
 {
     /**
-     * @param \Sven\ArtisanView\Config $config
-     * @param string                   $contents
+     * @param  \Sven\ArtisanView\Config  $config
+     * @param  string  $contents
      *
      * @test
      * @dataProvider orderProvider
