@@ -2,9 +2,5 @@ preset: laravel
 
 risky: false
 
-enabled:
-  - phpdoc_order
-  - phpdoc_separation
-
 disabled:
     - not_operator_with_successor_space
