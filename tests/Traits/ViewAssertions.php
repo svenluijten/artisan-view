@@ -17,6 +17,6 @@ trait ViewAssertions
      */
     public static function assertViewNotExists($name)
     {
-        self::assertFileNotExists(base_path('resources/views/'.$name));
+        self::assertFileDoesNotExist(base_path('resources/views/'.$name));
     }
 }
