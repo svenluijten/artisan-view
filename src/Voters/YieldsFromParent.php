@@ -49,8 +49,7 @@ class YieldsFromParent implements Voter
     /**
      * Get the contents of one of the view with the given name.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function file($name)

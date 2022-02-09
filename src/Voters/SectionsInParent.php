@@ -37,7 +37,7 @@ class SectionsInParent implements Voter
     {
         foreach ((array) $input->getOption('section') as $section) {
             if (Str::contains($section, ':')) {
-                list($name, $title) = explode(':', $section);
+                [$name, $title] = explode(':', $section);
 
                 $blockStack->add(new InlineSection($name, $title));
             } else {

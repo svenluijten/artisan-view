@@ -5,7 +5,7 @@ namespace Sven\ArtisanView\Tests\Traits;
 trait ViewAssertions
 {
     /**
-     * @param string $name
+     * @param  string  $name
      */
     public static function assertViewExists($name)
     {
@@ -13,7 +13,7 @@ trait ViewAssertions
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      */
     public static function assertViewNotExists($name)
     {

@@ -31,11 +31,11 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
-     * @param string $path
+     * @param  string  $path
      */
     protected function clearDirectory($path)
     {
-        if (! is_dir($path)) {
+        if (!is_dir($path)) {
             return;
         }
 
@@ -54,8 +54,7 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function view($name)
@@ -64,8 +63,7 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return string
      */
     protected function getServiceProviderClass($app)
@@ -74,8 +72,8 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
-     * @param string $name
-     * @param string $contents
+     * @param  string  $name
+     * @param  string  $contents
      */
     protected function makeView($name, $contents = '')
     {
@@ -85,8 +83,7 @@ abstract class TestCase extends AbstractPackageTestCase
     }
 
     /**
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function pathToView($name)
