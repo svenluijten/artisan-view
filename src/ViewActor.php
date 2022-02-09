@@ -12,8 +12,8 @@ abstract class ViewActor
     /**
      * ViewActor constructor.
      *
-     * @param \Sven\ArtisanView\Config $config
-     * @param string $path
+     * @param  \Sven\ArtisanView\Config  $config
+     * @param  string  $path
      */
     public function __construct(Config $config, $path)
     {
@@ -26,7 +26,7 @@ abstract class ViewActor
      */
     protected function getViews()
     {
-        if (! $this->config->isResource()) {
+        if (!$this->config->isResource()) {
             return [$this->config->getName()];
         }
 
@@ -36,8 +36,7 @@ abstract class ViewActor
     }
 
     /**
-     * @param array $names
-     *
+     * @param  array  $names
      * @return array
      */
     protected function getViewNames(array $names)

@@ -7,8 +7,7 @@ use Sven\ArtisanView\Blocks\Block;
 class BlockBuilder
 {
     /**
-     * @param \Sven\ArtisanView\Blocks\Block[] $blocks
-     *
+     * @param  \Sven\ArtisanView\Blocks\Block[]  $blocks
      * @return string
      */
     public static function build($blocks)

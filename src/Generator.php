@@ -5,7 +5,7 @@ namespace Sven\ArtisanView;
 class Generator extends ViewActor
 {
     /**
-     * @param \Sven\ArtisanView\BlockStack $blockStack
+     * @param  \Sven\ArtisanView\BlockStack  $blockStack
      */
     public function generate(BlockStack $blockStack)
     {
@@ -17,8 +17,8 @@ class Generator extends ViewActor
     }
 
     /**
-     * @param array                            $names
-     * @param \Sven\ArtisanView\Blocks\Block[] $blocks
+     * @param  array  $names
+     * @param  \Sven\ArtisanView\Blocks\Block[]  $blocks
      */
     protected function makeViews(array $names, array $blocks)
     {
