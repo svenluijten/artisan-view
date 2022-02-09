@@ -1,10 +1,10 @@
-name: Tests (PHP)
-on: [push, pull_request]
+name: Tests
+on: [push]
 
 jobs:
     phpunit:
         name: PHP ${{ matrix.php }} (${{ matrix.os }} with ${{ matrix.dependency-version }} deps)
-        runs-on: ubuntu-latest
+        runs-on: ${{ matrix.os }}
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest, macos-latest]
