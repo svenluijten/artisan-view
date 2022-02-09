@@ -17,7 +17,7 @@ class Destroyer extends ViewActor
     }
 
     /**
-     * @param array $names
+     * @param  array  $names
      */
     protected function destroyViews(array $names)
     {
@@ -33,7 +33,7 @@ class Destroyer extends ViewActor
     }
 
     /**
-     * @param string $path
+     * @param  string  $path
      */
     protected function removeParentDirectory($path)
     {

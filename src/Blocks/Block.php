@@ -15,8 +15,8 @@ abstract class Block
     protected $contents;
 
     /**
-     * @param string $name
-     * @param string $contents
+     * @param  string  $name
+     * @param  string  $contents
      */
     public function __construct($name, $contents = '')
     {
