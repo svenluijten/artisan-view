@@ -1,7 +1,13 @@
 {
     "name": "sven/artisan-view",
     "description": "Manage your views in Laravel projects through artisan",
-    "keywords": ["artisan", "laravel", "views", "templates", "blade"],
+    "keywords": [
+        "artisan",
+        "laravel",
+        "views",
+        "templates",
+        "blade"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +18,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^8.0 || ^9.0"
+        "laravel/framework": "^8.0 || ^9.0|^10.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0 || ^10.0",
