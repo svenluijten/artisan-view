@@ -1,0 +1,31 @@
+name: Tests (PHP)
+on: [push, pull_request]
+
+jobs:
+  phpunit:
+    name: PHP ${{ matrix.php }} (${{ matrix.os }} with ${{ matrix.dependency-version }} deps)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        php: [8.0, 8.1, 8.2]
+        dependency-version: [highest, lowest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring
+          coverage: none
+
+      -   name: Install dependencies
+          uses: ramsey/composer-install@v2
+          with:
+            dependency-versions: ${{ matrix.dependency-version }}
+            composer-options: "--prefer-dist"
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
