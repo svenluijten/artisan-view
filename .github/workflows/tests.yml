@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        php: [8.0, 8.1, 8.2]
+        php: [8.1, 8.2]
         dependency-version: [highest, lowest]
 
     steps:
@@ -21,11 +21,11 @@ jobs:
           extensions: mbstring
           coverage: none
 
-      -   name: Install dependencies
-          uses: ramsey/composer-install@v2
-          with:
-            dependency-versions: ${{ matrix.dependency-version }}
-            composer-options: "--prefer-dist"
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependency-version }}
+          composer-options: "--prefer-dist"
 
       - name: Execute tests
         run: vendor/bin/phpunit
