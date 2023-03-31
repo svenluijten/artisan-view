@@ -31,7 +31,7 @@ You'll have to follow a couple of simple steps to install this package.
 Via [composer](http://getcomposer.org):
 
 ```bash
-$ composer require sven/artisan-view --dev
+composer require sven/artisan-view --dev
 ```
 
 ### Registering the service provider
