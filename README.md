@@ -98,6 +98,15 @@ $ php artisan make:view products --resource
 $ php artisan make:view products --resource --verb=index --verb=create --verb=edit
 ```
 
+### Generate views (with bootstrap only)
+```bash
+# Create a resource called 'products' with generated views using bootstrap ui extending layout.php
+$ php artisan make:view products --resource --generate product --ui bootstrap --extends layout.php
+
+# Create and generate edit and index views based on Product model using bootstrap ui extending layout.php
+$ php artisan make:view products --verb=edit --verb=index --generate product --ui bootstrap --extends layout.php
+```
+
 ### Scrapping views
 ```bash
 # Remove the view 'index.blade.php'

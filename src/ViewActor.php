@@ -5,15 +5,15 @@ namespace Sven\ArtisanView;
 abstract class ViewActor
 {
     /**
-     * @var \Sven\ArtisanView\Config
+     * @var Config
      */
     protected $config;
 
     /**
      * ViewActor constructor.
      *
-     * @param  \Sven\ArtisanView\Config  $config
-     * @param  string  $path
+     * @param Config $config
+     * @param string $path
      */
     public function __construct(Config $config, $path)
     {
@@ -31,12 +31,12 @@ abstract class ViewActor
         }
 
         return array_map(function ($view) {
-            return $this->config->getName().'.'.$view;
+            return $this->config->getName() . '.' . $view;
         }, $this->config->getVerbs());
     }
 
     /**
-     * @param  array  $names
+     * @param array $names
      * @return array
      */
     protected function getViewNames(array $names)
@@ -44,7 +44,15 @@ abstract class ViewActor
         return array_map(function ($name) {
             $name = str_replace('.', '/', $name);
 
-            return $name.$this->config->getExtension();
+            return $name . $this->config->getExtension();
         }, $names);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isGenerated(): bool
+    {
+        return !empty($this->config->getGenerate());
     }
 }

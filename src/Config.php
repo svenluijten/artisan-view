@@ -24,7 +24,7 @@ class Config
     /**
      * @var array
      */
-    protected $verbs = ['index', 'create', 'edit', 'show'];
+    protected $verbs = ['index', 'create', 'edit', 'show', 'delete'];
 
     /**
      * @var bool
@@ -37,15 +37,14 @@ class Config
     protected $path;
 
     /**
-     * @param  string  $name
-     * @return \Sven\ArtisanView\Config
+     * @var string
      */
-    public function setName($name)
-    {
-        $this->name = $name;
+    protected $generate;
 
-        return $this;
-    }
+    /**
+     * @var string
+     */
+    protected $ui;
 
     /**
      * @return string
@@ -56,16 +55,12 @@ class Config
     }
 
     /**
-     * @param  string  $extension
-     * @return \Sven\ArtisanView\Config
+     * @param string $name
+     * @return Config
      */
-    public function setExtension($extension)
+    public function setName($name)
     {
-        if (!Str::startsWith($extension, '.')) {
-            $extension = ".$extension";
-        }
-
-        $this->extension = $extension;
+        $this->name = $name;
 
         return $this;
     }
@@ -79,12 +74,16 @@ class Config
     }
 
     /**
-     * @param  bool  $resource
-     * @return \Sven\ArtisanView\Config
+     * @param string $extension
+     * @return Config
      */
-    public function setResource($resource)
+    public function setExtension($extension)
     {
-        $this->resource = $resource;
+        if (!Str::startsWith($extension, '.')) {
+            $extension = ".$extension";
+        }
+
+        $this->extension = $extension;
 
         return $this;
     }
@@ -98,12 +97,12 @@ class Config
     }
 
     /**
-     * @param  mixed  ...$verbs
-     * @return \Sven\ArtisanView\Config
+     * @param bool $resource
+     * @return Config
      */
-    public function setVerbs(...$verbs)
+    public function setResource($resource)
     {
-        $this->verbs = $verbs;
+        $this->resource = $resource;
 
         return $this;
     }
@@ -117,6 +116,17 @@ class Config
     }
 
     /**
+     * @param mixed ...$verbs
+     * @return Config
+     */
+    public function setVerbs(...$verbs)
+    {
+        $this->verbs = $verbs;
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isForce()
@@ -125,8 +135,8 @@ class Config
     }
 
     /**
-     * @param  bool  $force
-     * @return \Sven\ArtisanView\Config
+     * @param bool $force
+     * @return Config
      */
     public function setForce(bool $force)
     {
@@ -143,6 +153,30 @@ class Config
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getGenerate()
+    {
+        return $this->generate;
+    }
+
+    public function setGenerate($generate)
+    {
+        $this->generate = $generate;
+
+        return $this;
+    }
+
+    public function getUi()
+    {
+        return $this->ui;
+    }
+
+    public function setUi($ui)
+    {
+        $this->ui = $ui;
 
         return $this;
     }

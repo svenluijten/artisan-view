@@ -34,7 +34,7 @@ class ConfigTest extends TestCase
         $config = (new Config)->setName('products')->setResource(true);
 
         $this->assertTrue($config->isResource());
-        $this->assertCount(4, $config->getVerbs());
+        $this->assertCount(5, $config->getVerbs());
     }
 
     /** @test */
@@ -42,8 +42,8 @@ class ConfigTest extends TestCase
     {
         $config = (new Config)->setName('index');
 
-        $config->setResource(true)->setVerbs('index', 'create', 'edit');
+        $config->setResource(true)->setVerbs('index', 'create', 'edit', 'delete');
 
-        $this->assertEquals(['index', 'create', 'edit'], $config->getVerbs());
+        $this->assertEquals(['index', 'create', 'edit', 'delete'], $config->getVerbs());
     }
 }
