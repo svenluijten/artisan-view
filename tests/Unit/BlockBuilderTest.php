@@ -23,7 +23,7 @@ class BlockBuilderTest extends TestCase
         $this->assertEquals($contents, $builder->build($config));
     }
 
-    public function orderProvider(): array
+    public static function orderProvider(): array
     {
         return [
             'extend, section, and inline section' => [
