@@ -15,7 +15,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_a_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, ['name' => 'testing']);
 
         $command->assertExitCode(0);
@@ -40,7 +40,7 @@ class CreateViewsTest extends TestCase
         $this->expectException(ViewAlreadyExists::class);
         $this->expectExceptionMessage('A view already exists at "'.$expectedPath.'".');
 
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, ['name' => 'testing']);
 
         $command->assertExitCode(1);
@@ -53,7 +53,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_makes_a_view_in_a_nested_folder(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, ['name' => 'foo.bar']);
 
         $command->assertExitCode(0);
@@ -66,7 +66,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_a_view_with_a_different_extension(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'test',
             '--extension' => 'html.twig',
@@ -81,7 +81,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_all_four_restful_resource_views(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'posts',
             '--resource' => true,
@@ -100,7 +100,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_a_resource_in_a_nested_folder(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'admin.posts',
             '--resource' => true,
@@ -118,7 +118,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_part_of_a_restful_resource(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'posts',
             '--resource' => true,
@@ -137,7 +137,7 @@ class CreateViewsTest extends TestCase
     /** @test */
     public function it_creates_a_resource_with_a_custom_extension(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'posts',
             '--resource' => true,
@@ -161,7 +161,7 @@ class CreateViewsTest extends TestCase
             __DIR__.'/../resources/does-not-exist',
         ]);
 
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
         ]);

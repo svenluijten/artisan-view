@@ -4,10 +4,7 @@ namespace Sven\ArtisanView\Blocks;
 
 class Extend implements Block
 {
-    /**
-     * @var ?string
-     */
-    protected $extends;
+    protected ?string $extends;
 
     public function __construct(?string $extends = null)
     {

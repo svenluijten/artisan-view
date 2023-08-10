@@ -6,10 +6,7 @@ use Illuminate\Support\Str;
 
 class Section implements Block
 {
-    /**
-     * @var string
-     */
-    protected $contents;
+    protected string $contents;
 
     public function __construct(string $contents = '')
     {

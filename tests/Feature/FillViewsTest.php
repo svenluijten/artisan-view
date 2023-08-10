@@ -13,7 +13,7 @@ class FillViewsTest extends TestCase
     /** @test */
     public function it_adds_the_extends_tag_to_the_generated_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
             '--extends' => 'layouts.master',
@@ -29,7 +29,7 @@ class FillViewsTest extends TestCase
     /** @test */
     public function it_adds_a_section_to_the_generated_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
             '--section' => ['content'],
@@ -44,7 +44,7 @@ class FillViewsTest extends TestCase
     /** @test */
     public function it_adds_multiple_sections_to_the_generated_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
             '--section' => ['content', 'scripts'],
@@ -62,7 +62,7 @@ class FillViewsTest extends TestCase
     /** @test */
     public function it_adds_an_inline_section_to_the_generated_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
             '--section' => ['title:My Title'],
@@ -77,7 +77,7 @@ class FillViewsTest extends TestCase
     /** @test */
     public function it_adds_a_normal_an_an_inline_section_to_the_generated_view(): void
     {
-        /** @var \Illuminate\Foundation\Testing\PendingCommand $command */
+        /** @var \Illuminate\Testing\PendingCommand $command */
         $command = $this->artisan(MakeView::class, [
             'name' => 'index',
             '--section' => ['content', 'title:My Title'],

@@ -7,7 +7,7 @@ use Sven\ArtisanView\ServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         @mkdir(__DIR__.'/resources/views', 0755, true);
 

@@ -6,35 +6,23 @@ use Illuminate\Support\Str;
 
 class Config
 {
-    /**
-     * @var string
-     */
-    protected $extension;
+    protected string $extension;
+
+    protected bool $isResource;
 
     /**
-     * @var bool
+     * @var array<string>
      */
-    protected $isResource;
+    protected array $verbs;
+
+    protected string $location;
+
+    protected ?string $extends;
 
     /**
-     * @var array
+     * @var array<string>
      */
-    protected $verbs;
-
-    /**
-     * @var string
-     */
-    protected $location;
-
-    /**
-     * @var string|null
-     */
-    protected $extends;
-
-    /**
-     * @var array
-     */
-    protected $sections;
+    protected array $sections;
 
     public static function make(): self
     {

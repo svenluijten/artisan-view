@@ -6,10 +6,7 @@ use Illuminate\Support\Str;
 
 class InlineSection implements Block
 {
-    /**
-     * @var string
-     */
-    protected $contents;
+    protected string $contents;
 
     public function __construct(string $contents)
     {
