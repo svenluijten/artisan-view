@@ -17,7 +17,7 @@ class Config
 
     protected string $location;
 
-    protected ?string $extends;
+    protected ?string $extends = null;
 
     /**
      * @var array<string>
