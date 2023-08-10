@@ -12,7 +12,7 @@ abstract class TestCase extends OrchestraTestCase
         @mkdir(__DIR__.'/resources/views', 0755, true);
 
         $app->config->set('view.paths', [
-            __DIR__.'/resources/views',
+            __DIR__.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'views',
         ]);
 
         $app->register(ServiceProvider::class);
