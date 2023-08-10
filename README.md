@@ -4,7 +4,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-circleci]][link-circleci]
+[![Build Status][ico-build]][link-build]
 [![StyleCI][ico-styleci]][link-styleci]
 
 This package adds a handful of view-related commands to Artisan in your Laravel
@@ -161,10 +161,10 @@ welcome. See the [contributors page](../../graphs/contributors) for all contribu
 [ico-version]: https://img.shields.io/packagist/v/sven/artisan-view.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/sven/artisan-view.svg?style=flat-square
-[ico-circleci]: https://img.shields.io/circleci/project/github/svenluijten/artisan-view.svg?style=flat-square
+[ico-build]: https://img.shields.io/github/actions/workflow/status/svenluijten/artisan-view/tests.yml?style=flat-square
 [ico-styleci]: https://styleci.io/repos/56054783/shield
 
 [link-packagist]: https://packagist.org/packages/sven/artisan-view
 [link-downloads]: https://packagist.org/packages/sven/artisan-view
-[link-circleci]: https://circleci.com/gh/svenluijten/artisan-view
+[link-build]: https://github.com/svenluijten/artisan-view/actions/workflows/tests.yml
 [link-styleci]: https://styleci.io/repos/56054783
