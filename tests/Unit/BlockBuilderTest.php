@@ -13,6 +13,7 @@ class BlockBuilderTest extends TestCase
      * @param  string  $contents
      *
      * @test
+     *
      * @dataProvider orderProvider
      */
     public function it_renders_out_the_blocks_in_the_right_order(Config $config, string $contents): void
