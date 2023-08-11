@@ -90,7 +90,7 @@ class ScrapViewsTest extends TestCase
     /** @test */
     public function it_can_scrap_a_single_view(): void
     {
-        $this->assertViewNotExists('testing');
+        $this->assertViewDoesNotExist('testing');
 
         $this->artisan(MakeView::class, ['name' => 'testing']);
 
@@ -98,7 +98,7 @@ class ScrapViewsTest extends TestCase
 
         $this->artisan(ScrapView::class, ['name' => 'testing', '--force' => true]);
 
-        $this->assertViewNotExists('testing', 'A view with that name does not exist');
+        $this->assertViewDoesNotExist('testing', 'A view with that name does not exist');
     }
 
     /** @test */
@@ -111,27 +111,21 @@ class ScrapViewsTest extends TestCase
 
         $this->artisan(ScrapView::class, ['name' => 'posts.index', '--force' => true]);
 
-        $this->assertViewNotExists('posts.index');
+        $this->assertViewDoesNotExist('posts.index');
         $this->assertDirectoryDoesNotExist(__DIR__.'/../resources/views/posts');
     }
 
     /** @test */
     public function it_can_scrap_a_restful_resource(): void
     {
-        $this->assertViewNotExists('posts.index');
-        $this->assertViewNotExists('posts.show');
-        $this->assertViewNotExists('posts.edit');
-        $this->assertViewNotExists('posts.create');
+        $this->assertViewsDoNotExist(['posts.index', 'posts.show', 'posts.edit', 'posts.create']);
 
         $this->artisan(MakeView::class, [
             'name' => 'posts',
             '--resource' => true,
         ]);
 
-        $this->assertViewExists('posts.index');
-        $this->assertViewExists('posts.show');
-        $this->assertViewExists('posts.edit');
-        $this->assertViewExists('posts.create');
+        $this->assertViewsExist(['posts.index', 'posts.show', 'posts.edit', 'posts.create']);
 
         $this->artisan(ScrapView::class, [
             'name' => 'posts',
@@ -139,29 +133,20 @@ class ScrapViewsTest extends TestCase
             '--resource' => true,
         ]);
 
-        $this->assertViewNotExists('posts.index');
-        $this->assertViewNotExists('posts.show');
-        $this->assertViewNotExists('posts.edit');
-        $this->assertViewNotExists('posts.create');
+        $this->assertViewsDoNotExist(['posts.index', 'posts.show', 'posts.edit', 'posts.create']);
     }
 
     /** @test */
     public function it_can_scrap_only_part_of_a_restful_resource(): void
     {
-        $this->assertViewNotExists('posts.index');
-        $this->assertViewNotExists('posts.show');
-        $this->assertViewNotExists('posts.edit');
-        $this->assertViewNotExists('posts.create');
+        $this->assertViewsDoNotExist(['posts.index', 'posts.show', 'posts.edit', 'posts.create']);
 
         $this->artisan(MakeView::class, [
             'name' => 'posts',
             '--resource' => true,
         ]);
 
-        $this->assertViewExists('posts.index');
-        $this->assertViewExists('posts.show');
-        $this->assertViewExists('posts.edit');
-        $this->assertViewExists('posts.create');
+        $this->assertViewsExist(['posts.index', 'posts.show', 'posts.edit', 'posts.create']);
 
         $this->artisan(ScrapView::class, [
             'name' => 'posts',
@@ -170,9 +155,7 @@ class ScrapViewsTest extends TestCase
             '--verb' => ['index', 'show'],
         ]);
 
-        $this->assertViewNotExists('posts.index');
-        $this->assertViewNotExists('posts.show');
-        $this->assertViewExists('posts.edit');
-        $this->assertViewExists('posts.create');
+        $this->assertViewsDoNotExist(['posts.index', 'posts.show']);
+        $this->assertViewsExist(['posts.edit', 'posts.create']);
     }
 }
