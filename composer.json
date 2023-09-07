@@ -41,5 +41,6 @@
                 "Sven\\ArtisanView\\ServiceProvider"
             ]
         }
-    }
+    },
+    "abandoned": "laravel/framework"
 }
