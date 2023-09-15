@@ -7,6 +7,12 @@
 [![Build Status][ico-build]][link-build]
 [![StyleCI][ico-styleci]][link-styleci]
 
+> [!WARNING]
+> This package has been **abandoned**. The `make:view` command is a part of Laravel 
+> since [v10.23.0](https://github.com/laravel/framework/releases/tag/v10.23.0), you
+> should use that instead. You will still be able to install this package when using
+> Laravel versions before `v10.23.0`.
+
 This package adds a handful of view-related commands to Artisan in your Laravel
 project. Generate blade files that extend other views, scaffold out sections
 to add to those templates, and more. All from the command line we know and love!
